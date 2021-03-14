@@ -1,0 +1,129 @@
+.reset-password-outer-div {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+}
+
+/* SLider */
+
+.slider-outer-div {
+  background-color: white;
+  width: 35%;
+  height: 60%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 400px;
+}
+.slides {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  transition: all 0.3s;
+}
+
+.slides > * {
+  flex-basis: 100%;
+}
+
+.slides-left-slide {
+  transform: translate(0);
+}
+.slides-right-slide {
+  transform: translate(-50%);
+}
+
+/*  */
+
+.screens-div {
+  background-color: tomato;
+  /* padding: 1rem; */
+  width: 300px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.screen {
+  background-color: turquoise;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.reset-password-div {
+  /* background-color: white; */
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
+  /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+  padding: 3.5rem;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  /* width: 100%; */
+}
+
+.reset-password-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 200px;
+}
+
+.password-input-box {
+  width: 100%;
+}
+
+.reset-password-btn {
+  background-color: rgb(51, 104, 198);
+  color: white;
+  padding: 14px 14px;
+  border: 1px solid rgb(51, 104, 198);
+  outline: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.reset-password-btn:hover {
+  background-color: rgb(3, 27, 78);
+}
+
+/* reset-response-div */
+.reset-response-div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.reset-response-div > h3 {
+  font-family: "Poppins";
+  font-size: 1.5rem;
+}
+.reset-response-div > p {
+  font-family: "Poppins";
+  color: #acacac;
+  margin-top: 0.3rem;
+}
+.reset-response-div > a {
+  font-family: "Poppins";
+  margin-top: 2rem;
+  text-decoration: none;
+  color: rgb(51, 104, 198);
+  /* align-self: flex-end; */
+}
+.response-icon {
+  color: rgb(51, 104, 198);
+}
+
+@media only screen and (max-width: 450px) {
+  .slider-outer-div {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+  }
+}

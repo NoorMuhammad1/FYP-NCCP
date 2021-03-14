@@ -1,0 +1,28 @@
+.email-verify-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.email-verify-modal-content-div {
+  background-color: white;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 450px;
+  height: 300px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.email-verify-modal-icon {
+  color: rgb(51, 104, 198);
+}
+.email-verify-modal-content-div > a {
+  color: rgb(51, 104, 198);
+  text-decoration: none;
+}

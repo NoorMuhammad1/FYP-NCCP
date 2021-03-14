@@ -1,0 +1,242 @@
+/* sidebar */
+.sidebar {
+  display: none;
+}
+.sidebar-active {
+  background-color: rgb(51, 104, 198);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+/* sidebar upper div*/
+
+.sidebar-upper-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.sidebar-upper-div svg {
+  color: white;
+}
+.sidebar-upper-div-options {
+  display: flex;
+  align-items: center;
+}
+.sidebar-upper-div-options svg {
+  fill: white;
+}
+
+.sidebar-upper-div-options span {
+  font-weight: 500;
+  color: white;
+}
+
+.sidebar-upper-div-options > * {
+  margin: 0 0.5rem;
+  color: white;
+}
+.sidebar-upper-div-options > a {
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-decoration: none;
+  /* cursor: pointer; */
+}
+
+/* sidebar links */
+.sidebar-links {
+  flex: 90%;
+}
+
+.sidebar-links-list {
+  height: 100%;
+}
+.sidebar-links-list-item {
+  color: white;
+}
+
+.sidebar-links-list-item-link {
+  display: flex;
+  padding: 1rem;
+
+  justify-content: center;
+  /* background-color: violet; */
+  margin-top: 1rem;
+  font-weight: 700;
+  transition: all ease 0.2s;
+}
+.sidebar-links-list-item-link:hover {
+  background-color: rgb(3, 27, 78);
+  color: white;
+}
+
+.sidebar-footer {
+  flex: 10%;
+  /* border-top: 1px solid rgba(58, 40, 160, 0.493); */
+}
+
+.sidebar-footer-list {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.sidebar-footer-list-items {
+  flex: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar-footer-list-item {
+  color: white;
+  transition: all ease 0.2s;
+}
+
+.sidebar-footer-list-item:hover {
+  color: rgb(3, 27, 78);
+}
+
+/* upper ticker */
+
+.upper-ticker {
+  background-color: rgb(51, 104, 198);
+  height: 50px;
+}
+
+.upper-ticker-content {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+  color: white;
+}
+
+.upper-ticker-content span {
+  font-size: 12px;
+}
+
+.upper-ticker-contacts {
+  display: flex;
+}
+
+.upper-ticker-contacts > * {
+  margin-right: 0.5rem;
+}
+
+.upper-ticker-contact-number {
+  border-right: 1px solid gainsboro;
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* stickable navbar */
+.stickable-navbar-content {
+  height: 107px;
+  display: flex;
+  align-items: center;
+}
+.stickable-navbar-logo {
+  flex: 30%;
+}
+.stickable-navbar-links {
+  flex: 70%;
+  display: flex;
+  align-items: baseline;
+}
+
+.stickable-navbar-hamburger-menu {
+  display: none;
+}
+.stickable-navbar-hamburger-menu svg {
+  fill: rgb(51, 104, 198);
+}
+.stickable-navbar-link {
+  flex: 8%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: rgb(51, 104, 198);
+  justify-content: center;
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+}
+.stickable-navbar-link:hover {
+  color: #031b4e;
+  text-decoration: none;
+}
+.stickable-navbar-operations {
+  flex: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.stickable-navbar-operation-sign-in {
+  background-color: #f5f9fd;
+  border: 1px solid #eaeff5;
+  padding: 10px 18px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: right;
+  font-family: Roboto, sans-serif;
+  transition: all ease 0.3s;
+}
+.stickable-navbar-operation-sign-in a {
+  text-decoration: none;
+}
+.stickable-navbar-operation-sign-in:hover {
+  color: white;
+  background-color: rgb(3, 27, 78);
+}
+
+.stickable-navbar-operation-sign-in:hover a {
+  color: white;
+}
+.stickable-navbar-operation-cart,
+.stickable-navbar-operation-search {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 3px;
+  background-color: #f5f9fd;
+  border: 1px solid #eaeff5;
+  text-align: center;
+  transition: background-color 0.5s;
+}
+.stickable-navbar-operation-search {
+  background-color: rgb(51, 104, 198);
+}
+.stickable-navbar-operation-search svg {
+  fill: white;
+}
+
+.stickable-navbar-operation-cart:hover,
+.stickable-navbar-operation-search:hover {
+  background-color: rgb(3, 27, 78);
+}
+.stickable-navbar-operation-cart:hover *,
+.stickable-navbar-operation-search:hover * {
+  fill: white;
+}
+
+@media only screen and (max-width: 765px) {
+  .upper-ticker {
+    display: none;
+  }
+
+  .stickable-navbar-hamburger-menu {
+    display: block;
+  }
+  .stickable-navbar-links {
+    display: none;
+  }
+}

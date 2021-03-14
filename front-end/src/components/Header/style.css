@@ -1,0 +1,27 @@
+#shopping-cart-box {
+  display: flex;
+}
+#shopping-cart-icon {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+#shopping-cart-number {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 100%;
+  font-size: 12px;
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  text-align: center;
+  margin-top: -0.3rem;
+  margin-left: 0.8rem;
+}
+
+#shopping-cart-box:hover #shopping-cart-icon {
+  fill: rgba(255, 255, 255, 0.75);
+}
+#shopping-cart-box:hover #shopping-cart-number {
+  background-color: rgba(255, 255, 255, 0.75);
+  color: rgba(0, 0, 0, 1);
+}

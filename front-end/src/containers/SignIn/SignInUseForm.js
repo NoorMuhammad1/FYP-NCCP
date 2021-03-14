@@ -1,0 +1,34 @@
+import React, { useEffect, useState } from "react";
+import SignInValidator from "./SignInValidator";
+const useSignInForm = (handleSubmission, SignInValidator) => {
+  const [signInValue, setSignInValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [signInErrors, setSignInErrors] = useState({});
+  const [isSubmitting, setSubmitting] = useState(false);
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    setSignInErrors(SignInValidator(signInValue));
+    setSubmitting(true);
+  };
+
+  useEffect(() => {
+    if (Object.keys(signInErrors).length === 0 && isSubmitting) {
+      handleSubmission();
+    }
+  }, [signInErrors]);
+
+  const updateSignInValue = (e) => {
+    setSignInValue({
+      ...signInValue,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return { signInValue, handleSignInSubmit, updateSignInValue, signInErrors };
+};
+
+export default useSignInForm;

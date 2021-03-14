@@ -1,0 +1,35 @@
+.admin-dashboard {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  column-gap: 0.5rem;
+  /* row-gap: 1rem; */
+}
+
+.component-heading {
+  line-height: 200%;
+  grid-column: 1/2;
+}
+
+.dashboard-dates {
+  display: flex;
+  grid-column: 3/5;
+  justify-content: flex-end;
+}
+.dashboard-dates * {
+  margin-left: 0.5rem;
+}
+.card {
+  grid-row: 2;
+  background-color: cornflowerblue;
+}
+/* 
+.total-count-cards {
+  grid-column: 1/3;
+  display: flex;
+  justify-content: space-between;
+} */
+.top-selling-div {
+  grid-column: 3/5;
+  background-color: coral;
+}
