@@ -65,7 +65,7 @@ exports.signup = (req, res) => {
     const token = jwt.sign({ data }, process.env.SECRET_TOKEN, {
       expiresIn: "20m",
     });
-
+    console.log(req.body.email);
     transporter.sendMail({
       from: "FA17-BCS-075@isbstudent.comsats.edu.pk",
       to: req.body.email,
@@ -92,7 +92,7 @@ Verify Email
     </a>
 </div>
       `,
-    });
+    }).then(()=>console.log('sent'));
 
     res.status(200).json({
       message: "Account verification email sent successfully",
