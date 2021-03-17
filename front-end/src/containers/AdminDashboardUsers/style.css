@@ -33,8 +33,7 @@
 }
 
 .div__three {
-  overflow-y: scroll;
-  height: 430px;
+  height: 100%;
 }
 
 .add__user__button {

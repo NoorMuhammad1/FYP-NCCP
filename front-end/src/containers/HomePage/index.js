@@ -102,7 +102,7 @@ const HomePage = (props) => {
               className="carousel-images"
             />
             <Carousel.Caption className="carousel-data">
-              <h2>Welcome to</h2>
+              <h1>Welcome</h1>
               <h1>National Culture Collection</h1>
               <h1>Pakistan (NCCP)</h1>
             </Carousel.Caption>
@@ -114,7 +114,7 @@ const HomePage = (props) => {
               className="carousel-images"
             />
             <Carousel.Caption className="carousel-data">
-              <h2>Welcome to</h2>
+              <h1>Welcome to</h1>
               <h1>National Culture Collection</h1>
               <h1>Pakistan (NCCP)</h1>
             </Carousel.Caption>

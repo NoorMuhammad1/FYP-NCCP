@@ -35,11 +35,11 @@ export const sidebarData = [
     icon: <MonetizationOnIcon />,
     link: "/adminDashboard/payments",
   },
-  {
-    title: "Reports",
-    icon: <AssessmentIcon />,
-    link: "/adminDashboard/reports",
-  },
+  // {
+  //   title: "Reports",
+  //   icon: <AssessmentIcon />,
+  //   link: "/adminDashboard/reports",
+  // },
 
   {
     title: "Settings",
