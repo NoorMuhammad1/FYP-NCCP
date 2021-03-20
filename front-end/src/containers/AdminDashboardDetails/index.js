@@ -1,10 +1,11 @@
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Avatar } from "@material-ui/core";
 import React, { useState } from "react";
 import SideBar from "../../components/SideBar";
 import ReactApexChart from 'react-apexcharts';
 import TodayIcon from '@material-ui/icons/Today';
 import "./style.css";
 import { Link } from "react-router-dom";
+import Status from "../../components/Status";
 const AdminDashboardDetails = () => {
   const [rangeDates, setRangeDates] = useState({
     start: new Date().toISOString().substr(0, 10),
@@ -183,7 +184,6 @@ const AdminDashboardDetails = () => {
   return (
     <SideBar active="Dashboard">
       <div className="admin-dashboard">
-
         <h3 className="component-heading">Main Dashboard</h3>
         <div className="dashboard-dates">
           <TextField
@@ -226,7 +226,7 @@ const AdminDashboardDetails = () => {
 
         <div className="top-selling-div card">
           <h4 className="card-title">Top Selling</h4>
-          <hr/>
+          <hr />
           <div className="product-details">
             <div className="product-name">
               <span>Bacillus Pakistaneasis</span>
@@ -440,7 +440,85 @@ const AdminDashboardDetails = () => {
           <h4 className="card-title">Popular Categories</h4>
           <ReactApexChart className="popular-categories-chart" height="90%" options={popularCategoriesChartData.options} series={popularCategoriesChartData.series} type="donut" /></div>
         {/* <div className="deposit-periods card">Deposits in Periods</div> */}
-        <div className="recent-orders card">Recent Orders</div>
+        <div className="recent-orders card">
+          <h4 className="card-title">Recent Orders</h4>
+          <hr />
+          <div className="recent-order-headers">
+            <span className="date-header">Date</span>
+            <span className="customer-header">Customer</span>
+            <span className="status-header">Status</span>
+            <span className="total-header">Total</span>
+          </div>
+          <hr />
+          <div>
+            <div className="recent-order-data">
+              <span className="date-data">01 Jun 2020 17:56 AM</span>
+              <span className="customer-data">
+                <Avatar className="order-customer-image" />
+                Paulie Allen
+              </span>
+              <span className="status-data">
+                <Status status="Completed"/>
+                {/* Completed */}
+              </span>
+              <span className="total-data">
+
+                $104.98
+              </span>
+            </div>
+            <hr />
+            <div className="recent-order-data">
+              <span className="date-data">01 Jun 2020 17:56 AM</span>
+              <span className="customer-data">
+                <Avatar className="order-customer-image" />
+                Paulie Allen
+              </span>
+              <span className="status-data">
+              <Status status="Pending"/>
+              </span>
+              <span className="total-data">
+                $104.98
+              </span>
+            </div>
+            <hr />
+            <div className="recent-order-data">
+              <span className="date-data">01 Jun 2020 17:56 AM</span>
+              <span className="customer-data">
+                <Avatar className="order-customer-image" />
+                Paulie Allen
+              </span>
+              <span className="status-data">
+              <Status status="Cancelled"/>
+              </span>
+              <span className="total-data">
+                $104.98
+              </span>
+            </div>
+            <hr />
+            <div className="recent-order-data">
+              <span className="date-data">01 Jun 2020 17:56 AM</span>
+              <span className="customer-data">
+                <Avatar className="order-customer-image" />
+                Paulie Allen
+              </span>
+              <span className="status-data">
+              <Status status="Cancelled"/>
+              </span>
+              <span className="total-data">
+                $104.98
+              </span>
+            </div>
+            <hr />
+          </div>
+          <Button variant="contained" className="see-all-button" style={{ marginRight: "4rem" }}>
+            <Link
+              to="/dashboard/addUser"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              See All
+          </Link>
+          </Button>
+        </div>
         <div className="city-order-statistics card">City Order Statistics</div>
       </div>
     </SideBar>
