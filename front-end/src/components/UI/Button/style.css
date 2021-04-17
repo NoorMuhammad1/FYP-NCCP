@@ -1,0 +1,11 @@
+.ui-button {
+  display: flex;
+  width: fit-content;
+  padding: 10px 20px;
+  font-family: "Poppins";
+  border-radius: 3px;
+}
+
+.ui-button:hover {
+  cursor: pointer;
+}

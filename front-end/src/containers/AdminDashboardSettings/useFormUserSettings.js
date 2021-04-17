@@ -1,39 +1,50 @@
 import React, { useEffect, useState } from "react";
-const useFormSignUp = (handleSubmission, SignUpValidator) => {
-  const [signUpValue, setSignUpValue] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    type: "Student",
-    affiliation: "",
-    description: "",
-    password: "",
-    confirm_password: "",
+import { useSelector } from "react-redux";
+const useFormUserSettings = (handleSubmission, UserSettingsValidator) => {
+  const user = useSelector((state) => state.auth.user);
+  console.log(user);
+  const [UserSettingsValue, setUserSettingsValue] = useState({
+    firstname: user.firstname || "",
+    lastname: user.lastname || "",
+    email: user.email || "",
+    contactNumber: user.contactNumber === null ? "" : user.contactNumber,
+    profilePicture: user.profilePicture || undefined,
   });
 
-  const [signUpErrors, setSignUpErrors] = useState({});
+  const [UserSettingsErrors, setUserSettingsErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
 
-  const handleSignUpSubmit = (e) => {
+  const handleUserSettingsSubmit = (e) => {
     e.preventDefault();
-    setSignUpErrors(SignUpValidator(signUpValue));
+    setUserSettingsErrors(UserSettingsValidator(UserSettingsValue));
     setSubmitting(true);
   };
 
   useEffect(() => {
-    if (Object.keys(signUpErrors).length === 0 && isSubmitting) {
+    if (Object.keys(UserSettingsErrors).length === 0 && isSubmitting) {
       handleSubmission();
     }
-  }, [signUpErrors]);
+  }, [UserSettingsErrors]);
 
-  const updateSignUpValue = (e) => {
-    setSignUpValue({
-      ...signUpValue,
-      [e.target.name]: e.target.value,
+  const updateUserSettingsValue = (e) => {
+    // let value = "";
+    // if (e.target.type === "file") {
+    //   value = e.target.files[0];
+    // } else {
+    //   value = e.target.value;
+    // }
+    setUserSettingsValue({
+      ...UserSettingsValue,
+      [e.target.name]: e.target.files[0],
     });
   };
 
-  return { handleSignUpSubmit, signUpValue, updateSignUpValue, signUpErrors };
+  return {
+    handleUserSettingsSubmit,
+    UserSettingsValue,
+    updateUserSettingsValue,
+    UserSettingsErrors,
+  };
 };
 
-export default useFormSignUp;
+export default useFormUserSettings;

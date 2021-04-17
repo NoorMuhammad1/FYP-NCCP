@@ -33,6 +33,12 @@ export default (state = initialState, action) => {
         authenticating: false,
       };
       break;
+    case authConstants.USER_DATA_UPDATE:
+      state = {
+        ...state,
+        user: action.payload.user,
+      };
+      break;
     case authConstants.LOGIN_FAILURE:
       state = {
         ...initialState,

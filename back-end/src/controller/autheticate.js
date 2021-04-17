@@ -10,6 +10,7 @@ const User = require("../models/user");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 var { cloudinary } = require("../common-used/cloudinary");
+const { uploadFile } = require("../common-used");
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
@@ -66,11 +67,12 @@ exports.signup = (req, res) => {
       expiresIn: "20m",
     });
     console.log(req.body.email);
-    transporter.sendMail({
-      from: "FA17-BCS-075@isbstudent.comsats.edu.pk",
-      to: req.body.email,
-      subject: "Account Verification",
-      html: `
+    transporter
+      .sendMail({
+        from: "FA17-BCS-075@isbstudent.comsats.edu.pk",
+        to: req.body.email,
+        subject: "Account Verification",
+        html: `
       <div style="
       height:200px;
             text-align:center;
@@ -92,7 +94,8 @@ Verify Email
     </a>
 </div>
       `,
-    }).then(()=>console.log('sent'));
+      })
+      .then(() => console.log("sent"));
 
     res.status(200).json({
       message: "Account verification email sent successfully",
@@ -307,6 +310,29 @@ exports.userData = (req, res) => {
       res.status(200).json(data);
     }
   });
+};
+
+exports.updateUser = async (req, res) => {
+  const { user_id } = req.body;
+  const profilePicture = req.files[0];
+  const uploadedImage = await uploadFile(profilePicture, "userImages");
+  User.findByIdAndUpdate(
+    user_id,
+    { profilePicture: uploadedImage.url },
+    { new: true },
+    (error, data) => {
+      if (error) {
+        return res.status(400).json({
+          error,
+        });
+      }
+      if (data) {
+        return res.status(200).json({
+          ...data,
+        });
+      }
+    }
+  );
 };
 
 exports.updateUserInfo = (req, res) => {

@@ -1,5 +1,5 @@
 const express = require("express");
-const { RequireSignin } = require("../common-used");
+const { RequireSignin, unpackFormRequest } = require("../common-used");
 const {
   signup,
   signin,
@@ -12,6 +12,7 @@ const {
   forgetPassword,
   verifyEmail,
   resetPassword,
+  updateUser,
 } = require("../controller/autheticate");
 const router = express.Router();
 const {
@@ -25,7 +26,12 @@ const { checkPermission } = require("../validators/checkPermission");
 var multer = require("multer");
 var upload = multer({ dest: "uploads/" });
 
-router.post("/signin", isHuman, validateSignin, signin);
+router.post(
+  "/signin",
+  //  isHuman,
+  validateSignin,
+  signin
+);
 router.post("/forget-password", forgetPassword);
 router.post("/resetPassword", resetPassword);
 router.post("/signup", validateSignup, signup);
@@ -48,5 +54,7 @@ router.post(
   validateAddUser,
   addUser
 );
+
+router.post("/updateUserInfo", unpackFormRequest("profilePicture"), updateUser);
 
 module.exports = router;

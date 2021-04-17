@@ -33,54 +33,76 @@ export const getUsers = (token) => {
     }
   };
 };
-export const getUserData = (id, token) => {
+export const getUserData = (id) => {
   return async (dispatch) => {
-    if (token) {
-      console.log("fetching user data");
-      dispatch({ type: authConstants.USER_DATA_REQUEST });
-      const res = await axios.post(
-        "/userData",
-        { id }
-        // { headers: { authorization: token } }
-      );
-      dispatch({
-        type: authConstants.USER_DATA_SUCCESS,
-        payload: { user: res.data },
+    // if (token) {
+    console.log("fetching user data");
+    dispatch({ type: authConstants.USER_DATA_REQUEST });
+    const res = await axios.post(
+      "/userData",
+      { id }
+      // { headers: { authorization: token } }
+    );
+    dispatch({
+      type: authConstants.USER_DATA_SUCCESS,
+      payload: { user: res.data },
+    });
+    // }
+  };
+};
+
+export const updateUserProfilePicture = (data) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post("/updateUserInfo", data, {
+        "content-type": "multipart/form-data",
       });
+      if (res.status === 200) {
+        dispatch({
+          type: authConstants.USER_DATA_UPDATE,
+          payload: {
+            user: res.data._doc,
+          },
+        });
+      }
+    } catch (error) {
+      alert(error);
     }
   };
 };
 
-export const updateUserInfo = (data, token) => {
+export const updateUserInfo = (data) => {
   return async (dispatch) => {
-    if (token) {
-      dispatch({
-        type: authConstants.UPDATING_USER_REQUEST,
-        payload: { data: data },
-      });
+    dispatch({
+      type: authConstants.UPDATING_USER_REQUEST,
+      payload: { data: data },
+    });
 
-      try {
-        const res = await axios.post(
-          "/updateUser",
-          { data }
-          // {
-          //   headers: { authorization: token },
-          // }
-        );
+    try {
+      const res = await axios.post(
+        "/updateUser",
+        { data }
+        // {
+        //   headers: { authorization: token },
+        // }
+      );
 
-        if (res.status == 200) {
-          dispatch({
-            type: authConstants.UPDATING_USER_SUCCESS,
-            payload: {
-              status_code: res.status,
-              message: res.data.message,
-            },
-          });
-          dispatch(getUsers(token));
-        }
-      } catch (error) {
-        console.log(error.data);
+      if (res.status == 200) {
+        dispatch({
+          type: authConstants.UPDATING_USER_SUCCESS,
+          payload: {
+            status_code: res.status,
+            message: res.data.message,
+          },
+        });
+        dispatch({
+          type: authConstants.USER_DATA_UPDATE,
+          payload: { data: res.data._doc },
+        });
+        // dispatch(getUsers(token));
       }
+    } catch (error) {
+      console.log(error.data);
     }
   };
 };

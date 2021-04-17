@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoutes = require("./src/routes/user");
+const orderRouter = require("./src/routes/orders");
 const microorganismRouter = require("./src/routes/microorganism");
 const dashboardRouter = require("./src/routes/dashboard");
 env.config();
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use("/api", userRoutes);
 app.use("/api", microorganismRouter);
 app.use("/api", dashboardRouter);
+app.use("/api", orderRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

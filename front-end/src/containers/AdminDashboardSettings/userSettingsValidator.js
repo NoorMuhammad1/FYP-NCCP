@@ -20,17 +20,8 @@ const userSettingsValidator = (value) => {
   } else if (!emailValidator.test(value.email.trim())) {
     errors.email = "must be of form: name@gmail.com";
   }
-
-  if (!value.password.trim()) {
-    errors.password = "Password cannot be empty";
-  } else if (!passwordValidator.test(value.password.trim())) {
-    errors.password =
-      "Password should be atleast 6 characters long and have atleast one capital letter in it.";
-  }
-  if (!value.confirm_password.trim()) {
-    errors.confirm_password = "Confirm Password cannot be empty";
-  } else if (!(value.password === value.confirm_password)) {
-    errors.confirm_password = "Password don't match";
+  if (!value.contactNumber.trim()) {
+    errors.contactNumber = "Contact number cannot be empty";
   }
 
   return errors;
