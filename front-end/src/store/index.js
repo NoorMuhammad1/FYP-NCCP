@@ -1,15 +1,16 @@
-import { applyMiddleware, createStore, compose } from "redux";
-import rootReducer from "../reducers";
-import thunk from "redux-thunk";
+import { applyMiddleware, compose, createStore } from 'redux';
+import thunk                                     from 'redux-thunk';
+import rootReducer                               from '../reducers';
 
 const saveToLocalStorage = (state) => {
   //console.log("saving state to store");
   //   console.log(state);
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem("state", serializedState);
+    localStorage.setItem('state', serializedState);
     //console.log(localStorage.getItem("state"));
-  } catch (e) {
+  }
+  catch (e) {
     // console.log(e);
   }
 };
@@ -17,12 +18,15 @@ const saveToLocalStorage = (state) => {
 const loadFromLocalStorage = () => {
   //console.log("loading state from localstorage");
   try {
-    const serializedState = localStorage.getItem("state");
-    if (serializedState === null) return undefined;
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return undefined;
+    }
     //console.log("The state being returned is: ");
     //console.log(JSON.parse(serializedState));
     return JSON.parse(serializedState);
-  } catch (e) {
+  }
+  catch (e) {
     //console.log(e);
     return undefined;
   }

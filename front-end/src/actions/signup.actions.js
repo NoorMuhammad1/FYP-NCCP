@@ -1,27 +1,27 @@
-import axios from "../helpers/axios";
-import { authConstants } from "./constants";
+import axios             from '../helpers/axios';
+import { authConstants } from './constants';
 
-export const signup = (userData) => {
+const signup = (userData) => {
   return async (dispatch) => {
-    console.log("Sending signup request");
+    console.log('Sending signup request');
     dispatch({
-      type: authConstants.SIGNUP_REQUEST,
-    });
+               type: authConstants.SIGNUP_REQUEST,
+             });
 
     await axios
-      .post("/signup", { ...userData })
+      .post('/signup', { ...userData })
       .then((response) => {
         dispatch({ type: authConstants.SIGNUP_SUCCESS });
       })
       .catch((error) => {
         const { response } = error;
         dispatch({
-          type: authConstants.SIGNUP_FAILURE,
-          payload: {
-            status_code: response.status,
-            message: response.data.message,
-          },
-        });
+                   type   : authConstants.SIGNUP_FAILURE,
+                   payload: {
+                     status_code: response.status,
+                     message    : response.data.message,
+                   },
+                 });
       });
     // if (res.status === 200) {
     //   alert(res.data.message);
@@ -106,16 +106,16 @@ export const signup = (userData) => {
   };
 };
 
-export const resetSignUpStore = () => {
+const resetSignUpStore = () => {
   return async (dispatch) => {
     dispatch({ type: authConstants.SIGNUP_STORE_RESET });
   };
 };
 
-export const verifyEmail = (data) => {
+const verifyEmail = (data) => {
   return async (dispatch) => {
     await axios
-      .post("/verifyEmail", data)
+      .post('/verifyEmail', data)
       .then((response) => {
         console.log(response);
       })
@@ -123,4 +123,10 @@ export const verifyEmail = (data) => {
         console.log(response);
       });
   };
+};
+
+export {
+  signup,
+  resetSignUpStore,
+  verifyEmail
 };

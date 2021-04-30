@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepNineValidator from "./StepNineValidator";
-import useStepNineForm from "./useStepNineForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepNineValidator           from './StepNineValidator';
+import useStepNineForm             from './useStepNineForm';
 
 function Step9(props) {
   const handleSubmission = () => {
     props.next({
-      GenotypeAndGenetics: value,
-    });
+                 GenotypeAndGenetics: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepNineForm(
@@ -28,7 +28,7 @@ function Step9(props) {
           value={value.Genotype}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Genotype && <p style={{ color: "red" }}>{errors.Genotype}</p>}
+        {errors.Genotype && <p style={{ color: 'red' }}>{errors.Genotype}</p>}
         <Input
           label="Phenotype"
           type="text"
@@ -37,7 +37,7 @@ function Step9(props) {
           value={value.Phenotype}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Phenotype && <p style={{ color: "red" }}>{errors.Phenotype}</p>}
+        {errors.Phenotype && <p style={{ color: 'red' }}>{errors.Phenotype}</p>}
         <Input
           label="MatingType"
           type="text"
@@ -47,7 +47,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MatingType && (
-          <p style={{ color: "red" }}>{errors.MatingType}</p>
+          <p style={{ color: 'red' }}>{errors.MatingType}</p>
         )}
         <Input
           label="Sexual Reproduction"
@@ -58,7 +58,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SexualReproduction && (
-          <p style={{ color: "red" }}>{errors.SexualReproduction}</p>
+          <p style={{ color: 'red' }}>{errors.SexualReproduction}</p>
         )}
         <Input
           label="GC Content of DNA"
@@ -69,7 +69,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.GCContentOfDNA && (
-          <p style={{ color: "red" }}>{errors.GCContentOfDNA}</p>
+          <p style={{ color: 'red' }}>{errors.GCContentOfDNA}</p>
         )}
         <Input
           label="Other Strains Hybridization"
@@ -80,7 +80,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OtherStrainsHybridization && (
-          <p style={{ color: "red" }}>{errors.OtherStrainsHybridization}</p>
+          <p style={{ color: 'red' }}>{errors.OtherStrainsHybridization}</p>
         )}
         <Input
           label="Hybridization Strain Number"
@@ -91,7 +91,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.HybridizationStrainNumber && (
-          <p style={{ color: "red" }}>{errors.HybridizationStrainNumber}</p>
+          <p style={{ color: 'red' }}>{errors.HybridizationStrainNumber}</p>
         )}
         <Input
           label="Type of DNA or RNA"
@@ -102,7 +102,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.TypeOfDNAOrRNA && (
-          <p style={{ color: "red" }}>{errors.TypeOfDNAOrRNA}</p>
+          <p style={{ color: 'red' }}>{errors.TypeOfDNAOrRNA}</p>
         )}
         <Input
           label="Percentage"
@@ -113,7 +113,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.Percentage && (
-          <p style={{ color: "red" }}>{errors.Percentage}</p>
+          <p style={{ color: 'red' }}>{errors.Percentage}</p>
         )}
         <Input
           label="Temperature of Hybridization"
@@ -124,7 +124,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.TemperatureOfHybridization && (
-          <p style={{ color: "red" }}>{errors.TemperatureOfHybridization}</p>
+          <p style={{ color: 'red' }}>{errors.TemperatureOfHybridization}</p>
         )}
         <Input
           label="Mutants"
@@ -134,7 +134,7 @@ function Step9(props) {
           value={value.Mutants}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Mutants && <p style={{ color: "red" }}>{errors.Mutants}</p>}
+        {errors.Mutants && <p style={{ color: 'red' }}>{errors.Mutants}</p>}
         <Input
           label="Mutation Methods"
           type="text"
@@ -144,7 +144,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MutationMethods && (
-          <p style={{ color: "red" }}>{errors.MutationMethods}</p>
+          <p style={{ color: 'red' }}>{errors.MutationMethods}</p>
         )}
         <Input
           label="Hybrids"
@@ -154,7 +154,7 @@ function Step9(props) {
           value={value.Hybrids}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Hybrids && <p style={{ color: "red" }}>{errors.Hybrids}</p>}
+        {errors.Hybrids && <p style={{ color: 'red' }}>{errors.Hybrids}</p>}
         <Input
           label="Plasmid"
           type="text"
@@ -163,7 +163,7 @@ function Step9(props) {
           value={value.Plasmid}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Plasmid && <p style={{ color: "red" }}>{errors.Plasmid}</p>}
+        {errors.Plasmid && <p style={{ color: 'red' }}>{errors.Plasmid}</p>}
         <Input
           label="Killer Properties Of Yeast"
           type="text"
@@ -173,7 +173,7 @@ function Step9(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.KillerPropertiesOfYeast && (
-          <p style={{ color: "red" }}>{errors.KillerPropertiesOfYeast}</p>
+          <p style={{ color: 'red' }}>{errors.KillerPropertiesOfYeast}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

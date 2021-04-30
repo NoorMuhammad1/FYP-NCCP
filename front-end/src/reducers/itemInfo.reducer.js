@@ -1,12 +1,12 @@
-import { authConstants } from "../actions/constants";
+import { authConstants } from '../actions/constants';
 
 const initialState = {
-  details: {},
+  details : {},
   fetching: false,
-  fetched: false,
-  error: {
-    code: 0,
-    message: "",
+  fetched : false,
+  error   : {
+    code   : 0,
+    message: '',
   },
 };
 
@@ -21,23 +21,23 @@ export default (state = initialState, action) => {
     case authConstants.CATALOGUE_ITEM_SUCCESS:
       state = {
         ...state,
-        details: action.payload.data,
-        fetched: true,
+        details : action.payload.data,
+        fetched : true,
         fetching: false,
       };
-      console.log("Successfully updated the state");
+      console.log('Successfully updated the state');
       break;
     case authConstants.CATALOGUE_ITEM_FAILURE:
       state = {
         ...state,
-        fetched: false,
+        fetched : false,
         fetching: false,
-        error: {
-          code: action.payload.status_code,
+        error   : {
+          code   : action.payload.status_code,
           message: action.payload.message,
         },
       };
-      console.log("State updated for error recieved");
+      console.log('State updated for error recieved');
       break;
     default:
       state = initialState;

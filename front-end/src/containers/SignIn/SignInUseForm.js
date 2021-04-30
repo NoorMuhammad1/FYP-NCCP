@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import SignInValidator from "./SignInValidator";
+import React, { useEffect, useState } from 'react';
+
 const useSignInForm = (handleSubmission, SignInValidator) => {
   const [signInValue, setSignInValue] = useState({
-    email: "",
-    password: "",
-  });
+                                                   email   : '',
+                                                   password: '',
+                                                 });
 
   const [signInErrors, setSignInErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
@@ -23,9 +23,9 @@ const useSignInForm = (handleSubmission, SignInValidator) => {
 
   const updateSignInValue = (e) => {
     setSignInValue({
-      ...signInValue,
-      [e.target.name]: e.target.value,
-    });
+                     ...signInValue,
+                     [e.target.name]: e.target.value,
+                   });
   };
 
   return { signInValue, handleSignInSubmit, updateSignInValue, signInErrors };

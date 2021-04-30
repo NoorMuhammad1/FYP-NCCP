@@ -1,23 +1,24 @@
-import React, { useState } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton          from '@material-ui/core/IconButton';
+import Menu                from '@material-ui/core/Menu';
+import MenuItem            from '@material-ui/core/MenuItem';
+import DeleteIcon          from '@material-ui/icons/Delete';
+import MoreVertIcon        from '@material-ui/icons/MoreVert';
+import VisibilityIcon      from '@material-ui/icons/Visibility';
+import React, { useState } from 'react';
 // import "./style.css";
-import { Link } from "react-router-dom";
+import { Link }            from 'react-router-dom';
+
 const DepositItemList = (props) => {
   const options = [
     {
-      title: "View",
-      icon: <VisibilityIcon />,
-      link: "#",
+      title: 'View',
+      icon : <VisibilityIcon />,
+      link : '#',
     },
     {
-      title: "Delete",
-      icon: <DeleteIcon />,
-      link: "#",
+      title: 'Delete',
+      icon : <DeleteIcon />,
+      link : '#',
     },
   ];
 
@@ -50,8 +51,8 @@ const DepositItemList = (props) => {
               <div
                 className="item__list__item__personal"
                 style={{
-                  flexBasis: props.columns[0].width,
-                  paddingLeft: "0px",
+                  flexBasis  : props.columns[0].width,
+                  paddingLeft: '0px',
                 }}
               >
                 <div className="item__list__item__details">

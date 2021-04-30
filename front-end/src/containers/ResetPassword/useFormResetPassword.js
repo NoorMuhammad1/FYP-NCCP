@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import ResetPasswordValidator from "./ResetPasswordValidator";
+import React, { useEffect, useState } from 'react';
+
 const useFormResetPassword = (handleSubmission, ResetPasswordValidator) => {
   const [resetPassword, setResetPassword] = useState({
-    password: "",
-    confirm_password: "",
-  });
+                                                       password        : '',
+                                                       confirm_password: '',
+                                                     });
 
   const [resetPasswordErrors, setResetPasswordErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
@@ -23,9 +23,9 @@ const useFormResetPassword = (handleSubmission, ResetPasswordValidator) => {
 
   const updateResetPassword = (e) => {
     setResetPassword({
-      ...resetPassword,
-      [e.target.name]: e.target.value,
-    });
+                       ...resetPassword,
+                       [e.target.name]: e.target.value,
+                     });
   };
 
   return {

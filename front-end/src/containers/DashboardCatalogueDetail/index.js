@@ -1,9 +1,8 @@
-import { Button } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
-import { Accordion, Card, Col, Form, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import Layout from "../../components/Layout";
-import axios from "../../helpers/axios";
+import React, { useEffect, useState }              from 'react';
+import { Accordion, Button, Card, Col, Form, Row } from 'react-bootstrap';
+import { useSelector }                             from 'react-redux';
+import Layout                                      from '../../components/Layout';
+import axios                                       from '../../helpers/axios';
 
 const DashboardCatalogueDetail = (props) => {
   const { token } = useSelector((state) => state.auth);
@@ -13,7 +12,7 @@ const DashboardCatalogueDetail = (props) => {
   const [option, setOption] = useState(false);
 
   const handleUpdateForm = (command) => {
-    if (command === "save") {
+    if (command === 'save') {
       // dispatch(updateUserInfo(userData, token));
       // setSavingData(!savingData);
     }
@@ -22,7 +21,7 @@ const DashboardCatalogueDetail = (props) => {
 
   useEffect(async () => {
     const res = await axios.post(
-      "/findmicroorganism",
+      '/findmicroorganism',
       { id }
       // { headers: { authorization: token } }
     );
@@ -35,7 +34,7 @@ const DashboardCatalogueDetail = (props) => {
           handleUpdateForm(e.target.innerHTML.trim().toLowerCase())
         }
       >
-        {option ? "Save" : "Edit"}
+        {option ? 'Save' : 'Edit'}
       </Button>
       <Accordion defaultActiveKey="0">
         {Object.keys(data).map((heading, key) => {
@@ -53,16 +52,16 @@ const DashboardCatalogueDetail = (props) => {
                         <Col>
                           <Form.Control
                             type="text"
-                            style={{ backgroundColor: "green" }}
+                            style={{ backgroundColor: 'green' }}
                             value={data[heading][label]}
                             onChange={(e) => {
                               setData({
-                                ...data,
-                                [heading]: {
-                                  ...data[heading],
-                                  [label]: e.target.value,
-                                },
-                              });
+                                        ...data,
+                                        [heading]: {
+                                          ...data[heading],
+                                          [label]: e.target.value,
+                                        },
+                                      });
                             }}
                             disabled={!option}
                           />

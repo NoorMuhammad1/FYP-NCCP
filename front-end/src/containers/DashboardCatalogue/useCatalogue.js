@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useSelector }                from 'react-redux';
 
 const useCatalogue = () => {
   //catalogue state
@@ -10,19 +10,19 @@ const useCatalogue = () => {
   const [filteredList, setFilteredList] = useState([]);
 
   //search string hook
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   //search filters hook
   const [searchFilter, setFilter] = useState({
-    bacteria: false,
-    fungi: false,
-    archaea: false,
-    antibody: false,
-    microalgae: false,
-    phage: false,
-    virus: false,
-    yeast: false,
-  });
+                                               bacteria  : false,
+                                               fungi     : false,
+                                               archaea   : false,
+                                               antibody  : false,
+                                               microalgae: false,
+                                               phage     : false,
+                                               virus     : false,
+                                               yeast     : false,
+                                             });
 
   //hook to identify if either to apply a filter or not
   const [applySearchFilter, setApplySearchFilter] = useState(false);
@@ -55,7 +55,8 @@ const useCatalogue = () => {
           return searchFilter[item.OrganismType.toLowerCase()];
         })
       );
-    } else {
+    }
+    else {
       setFilteredList(dataList);
     }
   }, [applySearchFilter]);

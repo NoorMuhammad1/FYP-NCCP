@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Header from "../Header/index";
-import { Container, Jumbotron, Row, Col, Nav } from "react-bootstrap";
-import { Link, NavLink, Redirect, useLocation } from "react-router-dom";
-import "./style.css";
-import { useSelector } from "react-redux";
-import SideBar from "../SideBar";
-import { SideBarData } from "./SidebarData";
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Nav, Row }   from 'react-bootstrap';
+import { useSelector }                from 'react-redux';
+import { Link }                       from 'react-router-dom';
+import Header                         from '../Header/index';
+import { SideBarData }                from './SidebarData';
+import './style.css';
+
 const Layout = (props) => {
   const [options, setOptions] = useState([]);
   const opt = useSelector((state) => state.dashboard.options);
-  const sideBarOptions = ["CATALOGUE", "USERS"];
+  const sideBarOptions = ['CATALOGUE', 'USERS'];
 
   useEffect(() => {
     setOptions(opt);

@@ -1,30 +1,30 @@
-import { authConstants } from "../actions/constants";
+import { authConstants } from '../actions/constants';
 
 const initialState = {
-  catalogueData: [],
-  fetching: false,
-  fetched: false,
+  catalogueData   : [],
+  fetching        : false,
+  fetched         : false,
   addMicroorganism: {
     adding: false,
-    added: false,
-    data: {},
-    error: {
-      code: 0,
-      message: "",
+    added : false,
+    data  : {},
+    error : {
+      code   : 0,
+      message: '',
     },
   },
-  delete: {
+  delete          : {
     deleting: false,
-    deleted: false,
-    data: {},
-    error: {
-      code: 0,
-      message: "",
+    deleted : false,
+    data    : {},
+    error   : {
+      code   : 0,
+      message: '',
     },
   },
-  error: {
-    code: 0,
-    message: "",
+  error           : {
+    code   : 0,
+    message: '',
   },
 };
 
@@ -34,24 +34,24 @@ export default (state = initialState, action) => {
       state = {
         ...state,
         fetching: true,
-        fetched: false,
+        fetched : false,
       };
       break;
     case authConstants.CATALOGUE_INFO_SUCCESS:
       state = {
         ...state,
         catalogueData: action.payload.data,
-        fetching: false,
-        fetched: true,
+        fetching     : false,
+        fetched      : true,
       };
       break;
     case authConstants.CATALOGUE_INFO_FAILURE:
       state = {
         ...state,
         fetching: false,
-        fetched: false,
-        error: {
-          code: action.payload.status_code,
+        fetched : false,
+        error   : {
+          code   : action.payload.status_code,
           message: action.payload.message,
         },
       };
@@ -61,8 +61,8 @@ export default (state = initialState, action) => {
         addMicroorganism: {
           ...state.addMicroorganism,
           adding: true,
-          added: false,
-          data: action.payload.data,
+          added : false,
+          data  : action.payload.data,
         },
       };
       break;
@@ -72,7 +72,7 @@ export default (state = initialState, action) => {
         ...state,
         addMicroorganism: {
           ...state.addMicroorganism,
-          added: true,
+          added : true,
           adding: false,
         },
       };
@@ -83,10 +83,10 @@ export default (state = initialState, action) => {
         ...state,
         addMicroorganism: {
           ...state.addMicroorganism,
-          added: false,
+          added : false,
           adding: false,
-          error: {
-            code: action.payload.code,
+          error : {
+            code   : action.payload.code,
             message: action.payload.message,
           },
         },
@@ -107,9 +107,9 @@ export default (state = initialState, action) => {
         ...state,
         delete: {
           ...state.delete,
-          data: action.payload.data,
+          data    : action.payload.data,
           deleting: true,
-          deleted: false,
+          deleted : false,
         },
       };
       break;
@@ -120,7 +120,7 @@ export default (state = initialState, action) => {
         delete: {
           ...state.delete,
           deleting: false,
-          deleted: true,
+          deleted : true,
         },
       };
       break;
@@ -130,10 +130,10 @@ export default (state = initialState, action) => {
         ...state,
         delete: {
           ...state.delete,
-          deleted: false,
+          deleted : false,
           deleting: false,
-          error: {
-            code: action.payload.code,
+          error   : {
+            code   : action.payload.code,
             message: action.payload.message,
           },
         },

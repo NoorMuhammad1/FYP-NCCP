@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
-import {
-  Navbar,
-  Nav,
-  Container,
-  Dropdown,
-  DropdownButton,
-  NavLink,
-} from "react-bootstrap";
-import { RiDashboardLine } from "react-icons/ri";
-import { CgLogOut } from "react-icons/cg";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../actions";
-import { Link } from "react-router-dom";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import "./style.css";
+import ShoppingCartIcon                                      from '@material-ui/icons/ShoppingCart';
+import React, { useEffect, useState }                        from 'react';
+import { Container, Dropdown, DropdownButton, Nav, Navbar, } from 'react-bootstrap';
+import { CgLogOut }                                          from 'react-icons/cg';
+import { RiDashboardLine }                                   from 'react-icons/ri';
+import { useDispatch, useSelector }                          from 'react-redux';
+import { Link }                                              from 'react-router-dom';
+import { logout }                                            from '../../actions';
+import './style.css';
+
 const Header = (props) => {
   const dispatch = useDispatch();
   const [cartCount, setCartCount] = useState(0);
@@ -31,7 +25,7 @@ const Header = (props) => {
           </Dropdown.Header>
           <Dropdown.Divider />
           <Dropdown.Item>
-            <RiDashboardLine style={{ marginRight: "10px" }} />
+            <RiDashboardLine style={{ marginRight: '10px' }} />
             <Link to="/dashboard">Dashboard</Link>
           </Dropdown.Item>
           <Dropdown.Item
@@ -39,7 +33,7 @@ const Header = (props) => {
               logUserOut();
             }}
           >
-            <CgLogOut style={{ marginRight: "10px" }} />
+            <CgLogOut style={{ marginRight: '10px' }} />
             Logout
           </Dropdown.Item>
           <ShoppingCartIcon />
@@ -74,7 +68,7 @@ const Header = (props) => {
     <>
       <Navbar
         variant="dark"
-        style={{ backgroundColor: "#212529", zIndex: 1 }}
+        style={{ backgroundColor: '#212529', zIndex: 1 }}
         expand="lg"
       >
         <Container fluid>

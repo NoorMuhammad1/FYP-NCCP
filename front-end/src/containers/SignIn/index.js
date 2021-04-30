@@ -1,42 +1,29 @@
-import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Layout from "../../components/Layout/index";
-import { Form, Button, Container, Row, Col, FormLabel } from "react-bootstrap";
-import Input from "../../components/UI/Input/input";
-import { login } from "../../actions";
-import { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import PageHeader from "../../components/PageHeader";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import ReCAPTCHA from "react-google-recaptcha";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ErrorIcon from "@material-ui/icons/Error";
-import "./style.css";
 import {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@material-ui/core";
-import useSignInForm from "./SignInUseForm";
-import SignInValidator from "./SignInValidator";
-import SignUpValidator from "./SignUpValidator";
-import useFormSignUp from "./SignUpUseForm";
-import { authConstants } from "../../actions/constants";
-import { resetSignUpStore, signup } from "../../actions/signup.actions";
+  FormControl, FormControlLabel, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, Radio,
+  RadioGroup, TextField,
+}                                                         from '@material-ui/core';
+import Backdrop                                           from '@material-ui/core/Backdrop';
+import Fade                                               from '@material-ui/core/Fade';
+import Modal                                              from '@material-ui/core/Modal';
+import CheckCircleIcon                                    from '@material-ui/icons/CheckCircle';
+import ErrorIcon                                          from '@material-ui/icons/Error';
+import Visibility                                         from '@material-ui/icons/Visibility';
+import VisibilityOff                                      from '@material-ui/icons/VisibilityOff';
+import React, { useEffect, useRef, useState }             from 'react';
+import { Button, FormLabel }                              from 'react-bootstrap';
+import ReCAPTCHA                                          from 'react-google-recaptcha';
+import { useDispatch, useSelector }                       from 'react-redux';
+import { Link, Redirect }                                 from 'react-router-dom';
+import { authConstants, login, resetSignUpStore, signup } from '../../actions';
+import useSignInForm                                      from './SignInUseForm';
+import SignInValidator                                    from './SignInValidator';
+import useFormSignUp                                      from './SignUpUseForm';
+import SignUpValidator                                    from './SignUpValidator';
+import './style.css';
+
 const Signin = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [signInForm, setSignInForm] = useState(true);
   const [signUpForm, setSignUpForm] = useState(false);
   const auth = useSelector((state) => state.auth);
@@ -50,21 +37,21 @@ const Signin = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
 
-  const [userType, setUserType] = useState("");
+  const [userType, setUserType] = useState('');
 
   const selectUserType = (e) => {
     setUserType(e.target.name);
     const signUpSlides = document.getElementById(
-      "sign-in-form-slides-inner-div"
+      'sign-in-form-slides-inner-div'
     );
-    signUpSlides.style.transform = "translate(-50%)";
+    signUpSlides.style.transform = 'translate(-50%)';
   };
 
   const goBack = () => {
     const signUpSlides = document.getElementById(
-      "sign-in-form-slides-inner-div"
+      'sign-in-form-slides-inner-div'
     );
-    signUpSlides.style.transform = "translate(0%)";
+    signUpSlides.style.transform = 'translate(0%)';
   };
 
   // method to reset the sign up  store on modal close
@@ -107,28 +94,29 @@ const Signin = (props) => {
   };
 
   const {
-    signInValue,
-    handleSignInSubmit,
-    updateSignInValue,
-    signInErrors,
-  } = useSignInForm(userLogin, SignInValidator);
+          signInValue,
+          handleSignInSubmit,
+          updateSignInValue,
+          signInErrors,
+        } = useSignInForm(userLogin, SignInValidator);
 
   const {
-    handleSignUpSubmit,
-    signUpValue,
-    updateSignUpValue,
-    signUpErrors,
-  } = useFormSignUp(handleSignUpSubmission, SignUpValidator);
+          handleSignUpSubmit,
+          signUpValue,
+          updateSignUpValue,
+          signUpErrors,
+        } = useFormSignUp(handleSignUpSubmission, SignUpValidator);
 
   // Captcha functions
 
   const recaptchaRef = useRef();
 
   if (auth.authenticate) {
-    if (userType === "employee") {
-      return <Redirect to={"/adminDashboard"} />;
-    } else {
-      return <Redirect to={"/"} />;
+    if (userType === 'employee') {
+      return <Redirect to={'/adminDashboard'} />;
+    }
+    else {
+      return <Redirect to={'/'} />;
     }
   }
 
@@ -176,21 +164,21 @@ const Signin = (props) => {
             {signUpStore.registered ? (
               <CheckCircleIcon
                 className="signup-response-modal-icon"
-                style={{ fontSize: "5.5rem" }}
+                style={{ fontSize: '5.5rem' }}
               />
             ) : null}
             {signUpStore.error.found ? (
               <ErrorIcon
                 className="signup-response-modal-icon"
-                style={{ fontSize: "5.5rem" }}
+                style={{ fontSize: '5.5rem' }}
               />
             ) : null}
             <h2 id="transition-modal-title">
-              {signUpStore.registered ? "Success" : "Error"}
+              {signUpStore.registered ? 'Success' : 'Error'}
             </h2>
             <p id="transition-modal-description">
               {signUpStore.registered
-                ? "The signup request was successful. Check your email for verification"
+                ? 'The signup request was successful. Check your email for verification'
                 : signUpStore.error.message}
             </p>
           </div>
@@ -215,11 +203,11 @@ const Signin = (props) => {
             {signInStore.error.found ? (
               <ErrorIcon
                 className="signup-response-modal-icon"
-                style={{ fontSize: "5.5rem" }}
+                style={{ fontSize: '5.5rem' }}
               />
             ) : null}
             <h2 id="transition-modal-title">
-              {signInStore.error.found ? "Error" : null}
+              {signInStore.error.found ? 'Error' : null}
             </h2>
             <p id="transition-modal-description">
               {signInStore.error.found ? signInStore.error.message : null}
@@ -227,7 +215,7 @@ const Signin = (props) => {
           </div>
         </Fade>
       </Modal>
-      <div class={`container-div ${signInForm ? "" : "sign-up-mode"}`}>
+      <div class={`container-div ${signInForm ? '' : 'sign-up-mode'}`}>
         <div class="forms-container">
           <div class="signin-signup">
             <form action="#" className="sign-in-form">
@@ -254,15 +242,15 @@ const Signin = (props) => {
                       placeholder="e.g. name@gmail.com"
                       value={signInValue.email}
                       onChange={(e) => updateSignInValue(e)}
-                      helperText={signInErrors.email ? signInErrors.email : ""}
+                      helperText={signInErrors.email ? signInErrors.email : ''}
                       variant="outlined"
                       autoComplete="off"
-                      style={{ width: "70%", margin: "1rem 0 0.5rem 0" }}
+                      style={{ width: '70%', margin: '1rem 0 0.5rem 0' }}
                     />
                     <FormControl
                       // className={clsx(classes.margin, classes.textField)}
                       variant="outlined"
-                      style={{ width: "70%", margin: "1rem 0 0.5rem 0" }}
+                      style={{ width: '70%', margin: '1rem 0 0.5rem 0' }}
                       error={signInErrors.password ? true : undefined}
                       // helperText={signInErrors.password ? signInErrors.password : ""}
                     >
@@ -273,7 +261,7 @@ const Signin = (props) => {
                         id="outlined-adornment-password"
                         name="password"
                         placeholder="Min 6 letters & a capital letter"
-                        type={showPassword ? "text" : "password"}
+                        type={showPassword ? 'text' : 'password'}
                         value={signInValue.password}
                         onChange={(e) => updateSignInValue(e)}
                         endAdornment={
@@ -295,7 +283,7 @@ const Signin = (props) => {
                         labelWidth={70}
                       />
                       <FormHelperText id="my-helper-text">
-                        {signInErrors.password ? signInErrors.password : ""}
+                        {signInErrors.password ? signInErrors.password : ''}
                       </FormHelperText>
                     </FormControl>
                     <Link to="/forgetPassword" className="forget-password-link">
@@ -400,7 +388,7 @@ const Signin = (props) => {
                     />
                   </RadioGroup>
                   <FormHelperText>
-                    {signUpErrors.type ? signUpErrors.type : ""}
+                    {signUpErrors.type ? signUpErrors.type : ''}
                   </FormHelperText>
                 </FormControl>
                 {/* 
@@ -431,7 +419,7 @@ const Signin = (props) => {
                     id="outlined-adornment-password"
                     name="password"
                     placeholder="Min 6 letters & a capital letter"
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     value={signUpValue.password}
                     // className="input"
                     onChange={(e) => updateSignUpValue(e)}
@@ -450,7 +438,7 @@ const Signin = (props) => {
                     labelWidth={70}
                   />
                   <FormHelperText id="my-helper-text">
-                    {signUpErrors.password ? signUpErrors.password : ""}
+                    {signUpErrors.password ? signUpErrors.password : ''}
                   </FormHelperText>
                 </FormControl>
                 <FormControl
@@ -467,7 +455,7 @@ const Signin = (props) => {
                     id="outlined-adornment-confirm-password"
                     name="confirm_password"
                     placeholder="Min 6 letters & a capital letter"
-                    type={showConfirmPassword ? "text" : "password"}
+                    type={showConfirmPassword ? 'text' : 'password'}
                     value={signUpValue.confirme_password}
                     onChange={(e) => updateSignUpValue(e)}
                     endAdornment={
@@ -493,7 +481,7 @@ const Signin = (props) => {
                   <FormHelperText id="my-helper-text">
                     {signUpErrors.confirm_password
                       ? signUpErrors.confirm_password
-                      : ""}
+                      : ''}
                   </FormHelperText>
                 </FormControl>
                 <Link className="forget-password-link">

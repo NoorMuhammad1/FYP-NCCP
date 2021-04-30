@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepTwelveValidator from "./StepTwelveValidator";
-import useStepTwelveForm from "./useStepTwelveForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepTwelveValidator         from './StepTwelveValidator';
+import useStepTwelveForm           from './useStepTwelveForm';
 
 function Step12(props) {
   const handleSubmission = () => {
     props.next({
-      Medium: value,
-    });
+                 Medium: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepTwelveForm(
@@ -29,7 +29,7 @@ function Step12(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MediumNumber && (
-          <p style={{ color: "red" }}>{errors.MediumNumber}</p>
+          <p style={{ color: 'red' }}>{errors.MediumNumber}</p>
         )}
         <Input
           label="Medium Name"
@@ -40,7 +40,7 @@ function Step12(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MediumName && (
-          <p style={{ color: "red" }}>{errors.MediumName}</p>
+          <p style={{ color: 'red' }}>{errors.MediumName}</p>
         )}
         <Input
           label="Medium Composition"
@@ -51,7 +51,7 @@ function Step12(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MediumComposition && (
-          <p style={{ color: "red" }}>{errors.MediumComposition}</p>
+          <p style={{ color: 'red' }}>{errors.MediumComposition}</p>
         )}
         <Input
           label="Medium PH"
@@ -61,7 +61,7 @@ function Step12(props) {
           value={value.MediumPH}
           onChange={(e) => updateValue(e)}
         />
-        {errors.MediumPH && <p style={{ color: "red" }}>{errors.MediumPH}</p>}
+        {errors.MediumPH && <p style={{ color: 'red' }}>{errors.MediumPH}</p>}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>
       <Button onClick={(e) => handleSubmit(e)}>Next</Button>

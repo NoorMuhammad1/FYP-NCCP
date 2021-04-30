@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepSixValidator from "./StepSixValidator";
-import useStepSixForm from "./useStepSixForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepSixValidator            from './StepSixValidator';
+import useStepSixForm              from './useStepSixForm';
 
 function Step6(props) {
   const handleSubmission = () => {
     props.next({
-      BiologicalInteractions: value,
-    });
+                 BiologicalInteractions: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepSixForm(
@@ -28,7 +28,7 @@ function Step6(props) {
           value={value.Symbiosis}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Symbiosis && <p style={{ color: "red" }}>{errors.Symbiosis}</p>}
+        {errors.Symbiosis && <p style={{ color: 'red' }}>{errors.Symbiosis}</p>}
         <Input
           label="Mycoparasitism"
           type="text"
@@ -38,7 +38,7 @@ function Step6(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.Mycoparasitism && (
-          <p style={{ color: "red" }}>{errors.Mycoparasitism}</p>
+          <p style={{ color: 'red' }}>{errors.Mycoparasitism}</p>
         )}
         <Input
           label="Pathogenicity"
@@ -49,7 +49,7 @@ function Step6(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.Pathogenicity && (
-          <p style={{ color: "red" }}>{errors.Pathogenicity}</p>
+          <p style={{ color: 'red' }}>{errors.Pathogenicity}</p>
         )}
         <Input
           label="Allergenicity"
@@ -60,7 +60,7 @@ function Step6(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.Allergenicity && (
-          <p style={{ color: "red" }}>{errors.Allergenicity}</p>
+          <p style={{ color: 'red' }}>{errors.Allergenicity}</p>
         )}
         <Input
           label="Other Organism Toxicity"
@@ -71,7 +71,7 @@ function Step6(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OtherOrganismToxicity && (
-          <p style={{ color: "red" }}>{errors.OtherOrganismToxicity}</p>
+          <p style={{ color: 'red' }}>{errors.OtherOrganismToxicity}</p>
         )}
         <Input
           label="Antagonistic Activities"
@@ -82,7 +82,7 @@ function Step6(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.AntagonisticActivities && (
-          <p style={{ color: "red" }}>{errors.AntagonisticActivities}</p>
+          <p style={{ color: 'red' }}>{errors.AntagonisticActivities}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

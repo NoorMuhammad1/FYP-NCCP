@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+
 const useStepTwoForm = (initialValue, handleSubmission, StepTwoValidator) => {
   const [value, setValue] = useState(initialValue);
 
@@ -19,9 +20,9 @@ const useStepTwoForm = (initialValue, handleSubmission, StepTwoValidator) => {
 
   const updateValue = (e) => {
     setValue({
-      ...value,
-      [e.target.name]: e.target.value,
-    });
+               ...value,
+               [e.target.name]: e.target.value,
+             });
   };
 
   return { handleSubmit, value, updateValue, errors };

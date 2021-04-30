@@ -1,0 +1,209 @@
+.admin-dashboard {
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 2rem;
+    row-gap: 2rem;
+    justify-items: center;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+.card-div > * {
+    margin: 0rem 2rem;
+}
+
+.card-div > * p {
+    font-size: 18px;
+    color: rgb(131, 131, 131);
+    margin: 0;
+}
+
+.card-div > * h4 {
+    font-weight: 500;
+    font-size: 28px;
+    margin: 0;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-details {
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+
+.review-date {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    color: gray;
+}
+
+.review-icon {
+    color: gray;
+    margin-right: 10px;
+}
+
+.card {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.dashboard-dates {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card-div {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+
+.recent-order-headers {
+    display: flex;
+    color: gray
+}
+
+.date-header {
+    flex-basis: 30%;
+}
+
+.customer-header {
+    flex-basis: 30%;
+}
+
+.status-header {
+    flex-basis: 20%;
+}
+
+.total-header {
+    flex-basis: 10%;
+}
+
+.see-all-button {
+    min-width: 12%;
+    display: flex;
+    align-self: flex-start;
+}
+
+
+.recent-order-data {
+    display: flex;
+}
+
+.date-data {
+    flex-basis: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.customer-data {
+    flex-basis: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.order-customer-image {
+    margin-right: 0.5rem;
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
+.order-customer-image svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.status-data {
+    flex-basis: 20%;
+    display: flex;
+    align-items: center;
+}
+
+.total-data {
+    flex-basis: 10%;
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .admin-dashboard {
+        grid-template-columns: repeat(12, 1fr);
+        justify-items: flex-start;
+    }
+
+    .dashboard-dates {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .component-heading {
+        grid-column: 1/span 3;
+    }
+
+    .dashboard-dates {
+        grid-column: 9/-1;
+    }
+
+    .card-div {
+        grid-column: 1/9;
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .top-selling-div {
+        grid-column: 9/-1;
+        width: 100%;
+        grid-row: 2/4;
+    }
+
+    .sales-report {
+        grid-column: 1/9;
+        width: 100%;
+    }
+
+    .active-users {
+        grid-column: 1/span 4;
+        width: 100%;
+        grid-row: span 2;
+    }
+
+    .recent-reviews {
+        grid-column: span 4;
+        grid-row: span 2;
+        width: 100%;
+    }
+
+    .popular-categories {
+        grid-column: span 4;
+        grid-row: span 2;
+    }
+
+    .popular-categories-chart {
+        height: 100%;
+    }
+
+    .deposit-periods {
+        grid-column: span 4;
+    }
+
+    .recent-orders {
+        grid-column: 1/9;
+    }
+
+    .city-order-statistics {
+        grid-column: span 4;
+    }
+}

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+
 const useStepSixForm = (InitialValue, handleSubmission, StepSixValidator) => {
   const [value, setValue] = useState(InitialValue);
 
@@ -19,9 +20,9 @@ const useStepSixForm = (InitialValue, handleSubmission, StepSixValidator) => {
 
   const updateValue = (e) => {
     setValue({
-      ...value,
-      [e.target.name]: e.target.value,
-    });
+               ...value,
+               [e.target.name]: e.target.value,
+             });
   };
 
   return { handleSubmit, value, updateValue, errors };

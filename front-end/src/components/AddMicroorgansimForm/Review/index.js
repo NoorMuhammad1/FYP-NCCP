@@ -1,5 +1,5 @@
-import React from "react";
-import { Accordion, Button, Card } from "react-bootstrap";
+import React                       from 'react';
+import { Accordion, Button, Card } from 'react-bootstrap';
 
 function Review(props) {
   return (
@@ -13,9 +13,9 @@ function Review(props) {
                 as={Card.Header}
                 eventKey={`${key}`}
                 style={{
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "space-between",
+                  cursor        : 'pointer',
+                  display       : 'flex',
+                  justifyContent: 'space-between',
                 }}
               >
                 {heading}
@@ -28,8 +28,8 @@ function Review(props) {
                       <div
                         key={i}
                         style={{
-                          display: "flex",
-                          justifyContent: "space-between",
+                          display       : 'flex',
+                          justifyContent: 'space-between',
                         }}
                       >
                         <span>{label}</span>

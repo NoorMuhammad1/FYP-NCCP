@@ -1,0 +1,27 @@
+.image-preview {
+    width: 360px;
+    min-height: 100px;
+    border: 2px solid #8a91ac;
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #cccccc;
+}
+
+.image-preview__image {
+    display: none;
+    width: 100%;
+    /* width here ensures
+     - it will not overflow the container
+     - it will take space of 100% width of the container
+    */
+}
+
+.image-preview__default-text {
+    font-size: 28px;
+    font-style: italic;
+}

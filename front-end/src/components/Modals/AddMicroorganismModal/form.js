@@ -1,11 +1,11 @@
-import React from "react";
-import AddMicroorganismModal from ".";
+import React                 from 'react';
+import AddMicroorganismModal from '.';
 
 function form() {
   return (
     <AddMicroorganismModal
       title="Add Microorganism Record"
-      confirm={() => alert("microorganism add confirmed")}
+      confirm={() => alert('microorganism add confirmed')}
       ref={microroganismAddRef}
     >
       Add Microorganism

@@ -1,30 +1,29 @@
-import React, { useState } from "react";
-import ItemListCard from "../ItemListCard";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Avatar }          from '@material-ui/core';
+import IconButton          from '@material-ui/core/IconButton';
+import Menu                from '@material-ui/core/Menu';
+import MenuItem            from '@material-ui/core/MenuItem';
+import DeleteIcon          from '@material-ui/icons/Delete';
+import MoreVertIcon        from '@material-ui/icons/MoreVert';
+import VisibilityIcon      from '@material-ui/icons/Visibility';
+import React, { useState } from 'react';
+import { Link }            from 'react-router-dom';
 // import Image from "./image.jpg";
-import "./style.css";
-import { Avatar } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import './style.css';
+
 const ItemList = (props) => {
   //////////////////////
   /////options/////////
 
   const options = [
     {
-      title: "View",
-      icon: <VisibilityIcon />,
-      link: "#",
+      title: 'View',
+      icon : <VisibilityIcon />,
+      link : '#',
     },
     {
-      title: "Delete",
-      icon: <DeleteIcon />,
-      link: "#",
+      title: 'Delete',
+      icon : <DeleteIcon />,
+      link : '#',
     },
   ];
 
@@ -65,7 +64,7 @@ const ItemList = (props) => {
                 <div className="item__list__item__picture__box">
                   <Avatar
                     src={row.profilePicture}
-                    style={{ width: "75px", height: "75px" }}
+                    style={{ width: '75px', height: '75px' }}
                   />
                   {/* <img src={Image} className="item__list__item__picture" /> */}
                   {/* {row.profilePicture.toLowerCase() === "null" ? (

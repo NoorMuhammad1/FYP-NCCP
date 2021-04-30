@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Image, Row, Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { getUserData, updateUserInfo } from "../../actions/user.actions";
-import Layout from "../../components/Layout";
-import Input from "../../components/UI/Input/input";
+import React, { useEffect, useState }                   from 'react';
+import { Button, Container, Form, Image, Row, Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector }                     from 'react-redux';
+import { Redirect }                                     from 'react-router-dom';
+import { getUserData, updateUserInfo }                  from '../../actions/user.actions';
+import Layout                                           from '../../components/Layout';
+import Input                                            from '../../components/UI/Input/input';
 
 const User = (props) => {
   const authenticate = useSelector((state) => state.auth.authenticate);
@@ -33,13 +33,13 @@ const User = (props) => {
 
   const updateValue = (e) => {
     setUserData({
-      ...userData,
-      [e.target.name]: e.target.value,
-    });
+                  ...userData,
+                  [e.target.name]: e.target.value,
+                });
   };
 
   const handleUpdateForm = (command) => {
-    if (command === "save") {
+    if (command === 'save') {
       dispatch(updateUserInfo(userData, token));
       setSavingData(!savingData);
     }
@@ -63,7 +63,7 @@ const User = (props) => {
               handleUpdateForm(e.target.innerHTML.trim().toLowerCase())
             }
           >
-            {updateForm ? "Save" : "Edit"}
+            {updateForm ? 'Save' : 'Edit'}
           </Button>
           <Container>
             <Row>
@@ -124,7 +124,7 @@ const User = (props) => {
                 label="Affiliation"
                 type="text"
                 name="affiliation"
-                value={userData.affiliation ? userData.affiliation : "NULL"}
+                value={userData.affiliation ? userData.affiliation : 'NULL'}
                 disabled={!updateForm}
                 onChange={(e) => updateValue(e)}
                 placeholder="Affiliation"
@@ -146,16 +146,16 @@ const User = (props) => {
             </Row>
             {userData.permissions
               ? Object.keys(userData.permissions).map((permission) => (
-                  <Form.Check
-                    label={permission}
-                    name={permission}
-                    checked={userData.permissions[permission]}
-                    disabled={!updateForm}
-                    onChange={(e) =>
-                      (userData.permissions[permission] = e.target.checked)
-                    }
-                  ></Form.Check>
-                ))
+                <Form.Check
+                  label={permission}
+                  name={permission}
+                  checked={userData.permissions[permission]}
+                  disabled={!updateForm}
+                  onChange={(e) =>
+                    (userData.permissions[permission] = e.target.checked)
+                  }
+                ></Form.Check>
+              ))
               : undefined}
           </Container>
         </>

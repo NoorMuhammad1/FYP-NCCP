@@ -1,9 +1,9 @@
-import { Button, Container, Form } from "react-bootstrap";
-import React, { useState } from "react";
-import TagInput from "../../TagInput";
-import Input from "../../UI/Input/input";
-import useStepOneForm from "./useStepOneForm";
-import StepOneValidator from "./StepOneValidator";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import TagInput                    from '../../TagInput';
+import Input                       from '../../UI/Input/input';
+import StepOneValidator            from './StepOneValidator';
+import useStepOneForm              from './useStepOneForm';
 
 function Step1(props) {
   const handleSubmission = () => {
@@ -27,7 +27,7 @@ function Step1(props) {
           value={value.Genus}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Genus && <p style={{ color: "red" }}>{errors.Genus}</p>}
+        {errors.Genus && <p style={{ color: 'red' }}>{errors.Genus}</p>}
         <Input
           label="AccessionNumber"
           type="text"
@@ -37,7 +37,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.AccessionNumber && (
-          <p style={{ color: "red" }}>{errors.AccessionNumber}</p>
+          <p style={{ color: 'red' }}>{errors.AccessionNumber}</p>
         )}
         <TagInput
           label="Other Acession Numbers"
@@ -45,7 +45,7 @@ function Step1(props) {
           selected={(e) => updateValue(e)}
         />
         {errors.OtherCollection && (
-          <p style={{ color: "red" }}>{errors.OtherCollection}</p>
+          <p style={{ color: 'red' }}>{errors.OtherCollection}</p>
         )}
         <Input
           label="Species Epithet"
@@ -56,7 +56,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SpeciesEpithet && (
-          <p style={{ color: "red" }}>{errors.SpeciesEpithet}</p>
+          <p style={{ color: 'red' }}>{errors.SpeciesEpithet}</p>
         )}
         <Input
           label="Author"
@@ -66,7 +66,7 @@ function Step1(props) {
           value={value.Author}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Author && <p style={{ color: "red" }}>{errors.Author}</p>}
+        {errors.Author && <p style={{ color: 'red' }}>{errors.Author}</p>}
         <Form.Label>Organism Type</Form.Label>
         <Form.Control
           as="select"
@@ -85,7 +85,7 @@ function Step1(props) {
           <option>Antibody</option>
         </Form.Control>
         {errors.OrganismType && (
-          <p style={{ color: "red" }}>{errors.OrganismType}</p>
+          <p style={{ color: 'red' }}>{errors.OrganismType}</p>
         )}
         <Input
           label="History of Deposit"
@@ -96,7 +96,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.HistoryOfDeposit && (
-          <p style={{ color: "red" }}>{errors.HistoryOfDeposit}</p>
+          <p style={{ color: 'red' }}>{errors.HistoryOfDeposit}</p>
         )}
         <Input
           label="Date of Isolation"
@@ -107,7 +107,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DateOfIsolation && (
-          <p style={{ color: "red" }}>{errors.DateOfIsolation}</p>
+          <p style={{ color: 'red' }}>{errors.DateOfIsolation}</p>
         )}
         <Input
           label="Isolated From"
@@ -118,7 +118,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.IsolatedFrom && (
-          <p style={{ color: "red" }}>{errors.IsolatedFrom}</p>
+          <p style={{ color: 'red' }}>{errors.IsolatedFrom}</p>
         )}
         <Input
           label="Geographic Origin"
@@ -129,7 +129,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.GeographicOrigin && (
-          <p style={{ color: "red" }}>{errors.GeographicOrigin}</p>
+          <p style={{ color: 'red' }}>{errors.GeographicOrigin}</p>
         )}
         <Form.Label>Status</Form.Label>
         <Form.Control
@@ -141,7 +141,7 @@ function Step1(props) {
           <option>Type</option>
           <option>Non-Type</option>
         </Form.Control>
-        {errors.Status && <p style={{ color: "red" }}>{errors.Status}</p>}
+        {errors.Status && <p style={{ color: 'red' }}>{errors.Status}</p>}
         <Input
           label="Medium"
           type="text"
@@ -150,7 +150,7 @@ function Step1(props) {
           value={value.Medium}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Medium && <p style={{ color: "red" }}>{errors.Medium}</p>}
+        {errors.Medium && <p style={{ color: 'red' }}>{errors.Medium}</p>}
         <Input
           label="Optimum Growth Temperature"
           type="text"
@@ -160,7 +160,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OptimumGrowthTemperature && (
-          <p style={{ color: "red" }}>{errors.OptimumGrowthTemperature}</p>
+          <p style={{ color: 'red' }}>{errors.OptimumGrowthTemperature}</p>
         )}
         <Input
           label="Maximum Growth Temperature"
@@ -171,7 +171,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MaximumGrowthTemperature && (
-          <p style={{ color: "red" }}>{errors.MaximumGrowthTemperature}</p>
+          <p style={{ color: 'red' }}>{errors.MaximumGrowthTemperature}</p>
         )}
         <Input
           label="Minimum Growth Temperature"
@@ -182,7 +182,7 @@ function Step1(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MinimumGrowthTemperature && (
-          <p style={{ color: "red" }}>{errors.MinimumGrowthTemperature}</p>
+          <p style={{ color: 'red' }}>{errors.MinimumGrowthTemperature}</p>
         )}
         <Button onClick={(e) => handleSubmit(e)}>Next</Button>
       </Form>

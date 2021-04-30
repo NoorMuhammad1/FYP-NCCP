@@ -1,8 +1,8 @@
-import React from "react";
-import Layout from "../../components/Layout";
+import React  from 'react';
+import Layout from '../../components/Layout';
 
 const Orders = (props) => {
-  console.log("Order Component");
+  console.log('Order Component');
   return (
     <Layout sidebar>
       <h1>Order Component</h1>

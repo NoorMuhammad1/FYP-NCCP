@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepFourteenValidator from "./StepFourteenValidator";
-import useStepFourteenForm from "./useStepFourteenForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepFourteenValidator       from './StepFourteenValidator';
+import useStepFourteenForm         from './useStepFourteenForm';
 
 function Step14(props) {
   const handleSubmission = () => {
     props.next({
-      Catalogue: value,
-    });
+                 Catalogue: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepFourteenForm(
@@ -29,7 +29,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CatalogueName && (
-          <p style={{ color: "red" }}>{errors.CatalogueName}</p>
+          <p style={{ color: 'red' }}>{errors.CatalogueName}</p>
         )}
         <Input
           label="Catalogue URL"
@@ -40,7 +40,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CatalogueURL && (
-          <p style={{ color: "red" }}>{errors.CatalogueURL}</p>
+          <p style={{ color: 'red' }}>{errors.CatalogueURL}</p>
         )}
         <Input
           label="Catalogue Update Time"
@@ -51,7 +51,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CatalogueUpdateTime && (
-          <p style={{ color: "red" }}>{errors.CatalogueUpdateTime}</p>
+          <p style={{ color: 'red' }}>{errors.CatalogueUpdateTime}</p>
         )}
         <Input
           label="Contact Person Of Catalogue"
@@ -62,7 +62,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ContactPersonOfCatalogue && (
-          <p style={{ color: "red" }}>{errors.ContactPersonOfCatalogue}</p>
+          <p style={{ color: 'red' }}>{errors.ContactPersonOfCatalogue}</p>
         )}
         <Input
           label="Contact Email"
@@ -73,7 +73,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ContactEmail && (
-          <p style={{ color: "red" }}>{errors.ContactEmail}</p>
+          <p style={{ color: 'red' }}>{errors.ContactEmail}</p>
         )}
         <Input
           label="Contact Address"
@@ -84,7 +84,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ContactAddress && (
-          <p style={{ color: "red" }}>{errors.ContactAddress}</p>
+          <p style={{ color: 'red' }}>{errors.ContactAddress}</p>
         )}
         <Input
           label="Contact Telephone"
@@ -95,7 +95,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ContactTelephone && (
-          <p style={{ color: "red" }}>{errors.ContactTelephone}</p>
+          <p style={{ color: 'red' }}>{errors.ContactTelephone}</p>
         )}
         <Input
           label="Contact Fax"
@@ -106,7 +106,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ContactFax && (
-          <p style={{ color: "red" }}>{errors.ContactFax}</p>
+          <p style={{ color: 'red' }}>{errors.ContactFax}</p>
         )}
         <Input
           label="Number of Strains"
@@ -117,7 +117,7 @@ function Step14(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.NumberOfStrains && (
-          <p style={{ color: "red" }}>{errors.NumberOfStrains}</p>
+          <p style={{ color: 'red' }}>{errors.NumberOfStrains}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

@@ -1,5 +1,5 @@
-import React, { forwardRef, useState, useImperativeHandle } from "react";
-import CustomModal from "..";
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import CustomModal                                          from '..';
 
 const AddMicroorganismModal = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);

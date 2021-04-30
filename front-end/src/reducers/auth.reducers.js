@@ -1,18 +1,19 @@
-import { authConstants } from "../actions/constants";
+import { authConstants } from '../actions/constants';
+
 const initialState = {
-  token: null,
-  user: {
-    id: "",
-    firstname: "",
-    lastname: "",
-    email: "",
+  token         : null,
+  user          : {
+    id       : '',
+    firstname: '',
+    lastname : '',
+    email    : '',
   },
-  authenticate: false,
+  authenticate  : false,
   authenticating: false,
-  error: {
-    found: false,
+  error         : {
+    found      : false,
     status_code: 0,
-    message: 0,
+    message    : 0,
   },
 };
 
@@ -27,27 +28,21 @@ export default (state = initialState, action) => {
     case authConstants.LOGIN_SUCCESS:
       state = {
         ...state,
-        user: action.payload.user,
-        token: action.payload.token,
-        authenticate: true,
+        user          : action.payload.user,
+        token         : action.payload.token,
+        authenticate  : true,
         authenticating: false,
-      };
-      break;
-    case authConstants.USER_DATA_UPDATE:
-      state = {
-        ...state,
-        user: action.payload.user,
       };
       break;
     case authConstants.LOGIN_FAILURE:
       state = {
         ...initialState,
       };
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     case authConstants.LOGOUT:
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
       state = {
         ...initialState,
       };

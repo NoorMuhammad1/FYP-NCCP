@@ -1,12 +1,13 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
-import React, { useState } from "react";
-import "./style.css";
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import React, { useState }                           from 'react';
+import './style.css';
+
 const DropDown = (props) => {
   const [open, setOpen] = useState(false);
   return (
     <FormControl
       variant={props.variant}
-      style={{ width: props.width, margin: "0rem 0rem 0rem 1rem" }}
+      style={{ width: props.width, margin: '0rem 0rem 0rem 1rem' }}
     >
       <InputLabel id="demo-controlled-open-select-label">
         {props.title}
@@ -25,13 +26,13 @@ const DropDown = (props) => {
           <em>None</em>
         </MenuItem>
         {props.data &&
-          props.data.map((item, key) => {
-            return (
-              <MenuItem value={item.value} key={key}>
-                {item.title}
-              </MenuItem>
-            );
-          })}
+        props.data.map((item, key) => {
+          return (
+            <MenuItem value={item.value} key={key}>
+              {item.title}
+            </MenuItem>
+          );
+        })}
       </Select>
     </FormControl>
   );

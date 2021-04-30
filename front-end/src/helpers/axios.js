@@ -1,14 +1,13 @@
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { authConstants } from "../actions/constants";
-import store from "../store";
-const token = window.localStorage.getItem("token");
+import axios from 'axios';
+import store from '../store';
+
+const token = window.localStorage.getItem('token');
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:2000/api",
-  headers: {
-    authorization: token ? `${window.localStorage.getItem("token")}` : ``,
-  },
-});
+                                     baseURL: 'http://localhost:2000/api',
+                                     headers: {
+                                       authorization: token ? `${window.localStorage.getItem('token')}` : ``,
+                                     },
+                                   });
 
 axiosInstance.interceptors.request.use((req) => {
   const { auth } = store.getState();
@@ -26,16 +25,16 @@ axiosInstance.interceptors.response.use(
     const { response } = error;
 
     if (!response) {
-      alert("There was some error on the serverside. Try again");
+      alert('There was some error on the serverside. Try again');
     }
     if (response) {
       if (response.status === 500) {
-        console.log("token expired");
+        console.log('token expired');
         console.log(response);
       }
 
       if (response.status === 400) {
-        console.log("handling response in the axios.js file");
+        console.log('handling response in the axios.js file');
         console.log(response);
       }
     }

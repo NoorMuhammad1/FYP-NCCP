@@ -1,39 +1,36 @@
-import HomeIcon from "@material-ui/icons/Home";
-import PeopleIcon from "@material-ui/icons/People";
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import DashboardIcon      from '@material-ui/icons/Dashboard';
+import ListAltIcon        from '@material-ui/icons/ListAlt';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 // import { ReactComponent as Cell } from "./Icons/cell.svg";
-import PeopleRoundedIcon from "@material-ui/icons/PeopleRounded";
-import ListAltIcon from "@material-ui/icons/ListAlt";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import AssessmentIcon from "@material-ui/icons/Assessment";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import SettingsIcon from "@material-ui/icons/Settings";
-import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import PeopleRoundedIcon  from '@material-ui/icons/PeopleRounded';
+import SettingsIcon       from '@material-ui/icons/Settings';
+
 export const sidebarData = [
   {
-    title: "Dashboard",
-    icon: <DashboardIcon />,
-    link: "/AdminDashboard",
+    title: 'Dashboard',
+    icon : <DashboardIcon />,
+    link : '/AdminDashboard',
   },
   {
-    title: "Users",
-    icon: <PeopleRoundedIcon />,
-    link: "/adminDashboard/users",
+    title: 'Users',
+    icon : <PeopleRoundedIcon />,
+    link : '/adminDashboard/users',
   },
   {
-    title: "Orders",
-    icon: <ListAltIcon />,
-    link: "/adminDashboard/orders",
+    title: 'Orders',
+    icon : <ListAltIcon />,
+    link : '/adminDashboard/orders',
   },
   {
-    title: "Deposits",
-    icon: <AccountBalanceIcon />,
-    link: "/adminDashboard/deposits",
+    title: 'Deposits',
+    icon : <AccountBalanceIcon />,
+    link : '/adminDashboard/deposits',
   },
   {
-    title: "Payments",
-    icon: <MonetizationOnIcon />,
-    link: "/adminDashboard/payments",
+    title: 'Payments',
+    icon : <MonetizationOnIcon />,
+    link : '/adminDashboard/payments',
   },
   // {
   //   title: "Reports",
@@ -42,8 +39,8 @@ export const sidebarData = [
   // },
 
   {
-    title: "Settings",
-    icon: <SettingsIcon />,
-    link: "/adminDashboard/settings",
+    title: 'Settings',
+    icon : <SettingsIcon />,
+    link : '/adminDashboard/settings',
   },
 ];

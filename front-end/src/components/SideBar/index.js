@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
-import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
-import LayersIcon from "@material-ui/icons/Layers";
-import SettingsIcon from "@material-ui/icons/Settings";
+import { Avatar }                     from '@material-ui/core';
+import CloseRoundedIcon               from '@material-ui/icons/CloseRounded';
+import ExitToAppIcon                  from '@material-ui/icons/ExitToApp';
+import LayersIcon                     from '@material-ui/icons/Layers';
+import MenuRoundedIcon                from '@material-ui/icons/MenuRounded';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector }   from 'react-redux';
+import { Link }                       from 'react-router-dom';
+import { authConstants }              from '../../actions/constants';
+import { sidebarData }                from './sidebardata';
 // import Image from "./image.jpg";
-import "./style.css";
-import { Link } from "react-router-dom";
-import { Avatar, Tooltip } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { sidebarData } from "./sidebardata";
-import { authConstants } from "../../actions/constants";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import './style.css';
 
 const SideBar = (props) => {
   const sidebarCollapse = useSelector((state) => state.sidebar.collapsed);
@@ -48,10 +46,10 @@ const SideBar = (props) => {
   // }
 
   const changeActive = (e) => {
-    const link_color = document.querySelectorAll(".nav__link");
+    const link_color = document.querySelectorAll('.nav__link');
     if (link_color) {
-      link_color.forEach((l) => l.classList.remove("active"));
-      e.currentTarget.classList.add("active");
+      link_color.forEach((l) => l.classList.remove('active'));
+      e.currentTarget.classList.add('active');
     }
   };
 
@@ -62,9 +60,9 @@ const SideBar = (props) => {
   }, [user]);
 
   return (
-    <div className={sidebarCollapsed ? null : "body-pd"} id="body-pd">
+    <div className={sidebarCollapsed ? null : 'body-pd'} id="body-pd">
       <header
-        className={`header ${sidebarCollapsed ? null : "body-pd"}`}
+        className={`header ${sidebarCollapsed ? null : 'body-pd'}`}
         id="header"
       >
         <div
@@ -81,7 +79,7 @@ const SideBar = (props) => {
         </div>
       </header>
       <div
-        className={`l-navbar ${sidebarCollapsed ? null : "show"}`}
+        className={`l-navbar ${sidebarCollapsed ? null : 'show'}`}
         id="nav-bar"
       >
         <nav className="nav">
@@ -99,7 +97,7 @@ const SideBar = (props) => {
                     to={link.link}
                     className={`nav__link ${
                       props.active.toLowerCase() === link.title.toLowerCase()
-                        ? "active"
+                        ? 'active'
                         : null
                     }`}
                     key={key}
@@ -163,7 +161,7 @@ const SideBar = (props) => {
         </nav>
       </div>
       <div
-        className={`dashboard__content ${sidebarCollapsed ? null : "body-pd"}`}
+        className={`dashboard__content ${sidebarCollapsed ? null : 'body-pd'}`}
         id="dashboard__content"
       >
         {props.children}
