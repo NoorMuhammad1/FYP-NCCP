@@ -1,9 +1,10 @@
-import React, { forwardRef, useState, useImperativeHandle } from "react";
-import { Col, Form, Row } from "react-bootstrap";
-import CustomModal from "..";
-import Input from "../../UI/Input/input";
-import AddUserValidator from "./addUserValidator";
-import useAddUserForm from "./useAddUserForm";
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import { Col, Form, Row }                                   from 'react-bootstrap';
+import CustomModal                                          from '..';
+import Input                                                from '../../UI/Input/input';
+import AddUserValidator                                     from './addUserValidator';
+import useAddUserForm                                       from './useAddUserForm';
+
 const AddUserModal = forwardRef((props, ref) => {
   const handleConfirm = () => {
     setShow(false);
@@ -11,12 +12,12 @@ const AddUserModal = forwardRef((props, ref) => {
   };
   //using custom Add User Hook
   const {
-    value,
-    handleSubmit,
-    updateValue,
-    errors,
-    updatePermissionValue,
-  } = useAddUserForm(handleConfirm, AddUserValidator);
+          value,
+          handleSubmit,
+          updateValue,
+          errors,
+          updatePermissionValue,
+        } = useAddUserForm(handleConfirm, AddUserValidator);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -32,7 +33,7 @@ const AddUserModal = forwardRef((props, ref) => {
   return (
     <CustomModal
       show={show}
-      title={"Add User"}
+      title={'Add User'}
       close={handleClose}
       save={handleSubmit}
       saveText="Submit"
@@ -100,7 +101,7 @@ const AddUserModal = forwardRef((props, ref) => {
                 id={`default-radio-1`}
                 name="role"
                 value="internal"
-                checked={value.role === "internal"}
+                checked={value.role === 'internal'}
                 onChange={(e) => updateValue(e)}
               />
               <Form.Check
@@ -109,7 +110,7 @@ const AddUserModal = forwardRef((props, ref) => {
                 id={`default-radio-2`}
                 name="role"
                 value="admin"
-                checked={value.role === "admin"}
+                checked={value.role === 'admin'}
                 onChange={(e) => updateValue(e)}
               />
               {/* <Form.Check

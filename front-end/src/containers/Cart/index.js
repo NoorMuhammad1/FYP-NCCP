@@ -1,23 +1,12 @@
-import React from "react";
-import { Col, Jumbotron, Row, Table } from "react-bootstrap";
-import Layout from "../../components/Layout";
-import KeyboardArrowUpRoundedIcon from "@material-ui/icons/KeyboardArrowUpRounded";
-import KeyboardArrowDownRoundedIcon from "@material-ui/icons/KeyboardArrowDownRounded";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { ReactComponent as Delete } from "../Cart/Icons/trash-alt-solid.svg";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import {
-  IoIosArrowDroprightCircle,
-  IoIosArrowDropleftCircle,
-} from "react-icons/io";
-import "./style.css";
+import React                                                    from 'react';
+import { Jumbotron }                                            from 'react-bootstrap';
+import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle, } from 'react-icons/io';
+import { RiDeleteBin6Line }                                     from 'react-icons/ri';
 // import logo from "./product-image.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  decreaseQuantity,
-  increaseQuantity,
-  removeFromCart,
-} from "../../actions/cart.actions";
+import { useDispatch, useSelector }                             from 'react-redux';
+import { decreaseQuantity, increaseQuantity, removeFromCart, }  from '../../actions/cart.actions';
+import Layout                                                   from '../../components/Layout';
+import './style.css';
 
 const Cart = (props) => {
   const dispatch = useDispatch();
@@ -35,7 +24,7 @@ const Cart = (props) => {
   };
   return (
     <Layout>
-      <Jumbotron style={{ height: "100%" }}>
+      <Jumbotron style={{ height: '100%' }}>
         <div id="cart-header">
           <span id="description-heading">DESCRIPTION</span>
           <span id="quantity-heading">QUANTITY</span>

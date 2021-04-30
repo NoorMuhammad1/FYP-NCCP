@@ -1,8 +1,8 @@
 export const microorganismTemplate = {
   CoreDataSets: {
-    Genus: String,
+    Genus          : String,
     AccessionNumber: String,
     OtherCollection: Array,
   },
-  Name: {},
+  Name        : {},
 };

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepSevenValidator from "./StepSevenValidator";
-import useStepSevenForm from "./useStepSevenForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepSevenValidator          from './StepSevenValidator';
+import useStepSevenForm            from './useStepSevenForm';
 
 function Step7(props) {
   const handleSubmission = () => {
     props.next({
-      Sexuality: value,
-    });
+                 Sexuality: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepSevenForm(
@@ -29,7 +29,7 @@ function Step7(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SexualBehaviour && (
-          <p style={{ color: "red" }}>{errors.SexualBehaviour}</p>
+          <p style={{ color: 'red' }}>{errors.SexualBehaviour}</p>
         )}
         <Input
           label="Sexual State"
@@ -40,7 +40,7 @@ function Step7(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SexualState && (
-          <p style={{ color: "red" }}>{errors.SexualState}</p>
+          <p style={{ color: 'red' }}>{errors.SexualState}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

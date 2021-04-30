@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepTwoValidator from "./StepTwoValidator";
-import useStepTwoForm from "./useStepTwoForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepTwoValidator            from './StepTwoValidator';
+import useStepTwoForm              from './useStepTwoForm';
 
 function Step2(props) {
   const handleSubmission = () => {
     props.next({
-      Name: value,
-    });
+                 Name: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepTwoForm(
@@ -29,7 +29,7 @@ function Step2(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.TaxonomyID && (
-          <p style={{ color: "red" }}>{errors.TaxonomyID}</p>
+          <p style={{ color: 'red' }}>{errors.TaxonomyID}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

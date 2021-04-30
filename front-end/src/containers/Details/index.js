@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Accordion, Card, Container, Jumbotron } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchItemDetails } from "../../actions/catalogue.actions";
-import Layout from "../../components/Layout";
+import React, { useEffect, useState }            from 'react';
+import { Accordion, Card, Container, Jumbotron } from 'react-bootstrap';
+import { useDispatch, useSelector }              from 'react-redux';
+import { fetchItemDetails }                      from '../../actions/catalogue.actions';
+import Layout                                    from '../../components/Layout';
 
 const ItemDetails = (props) => {
   const [itemDetail, setItemDetail] = useState({});
@@ -16,8 +16,8 @@ const ItemDetails = (props) => {
     const { id } = props.location.state;
     // console.log(id);
     if (id) {
-      console.log("Dispatching fetch Item request");
-      dispatch(fetchItemDetails(id, "external"));
+      console.log('Dispatching fetch Item request');
+      dispatch(fetchItemDetails(id, 'external'));
     }
   }, []);
 
@@ -37,14 +37,14 @@ const ItemDetails = (props) => {
                     <Accordion.Collapse eventKey={`${index}`}>
                       <Card.Body
                         style={{
-                          display: "flex",
-                          justifyContent: "space-between",
+                          display       : 'flex',
+                          justifyContent: 'space-between',
                         }}
                       >
                         <span>{v}</span>
                         <span>
-                          {itemDetail[value][v] === ""
-                            ? "Nill"
+                          {itemDetail[value][v] === ''
+                            ? 'Nill'
                             : itemDetail[value][v]}
                         </span>
                       </Card.Body>
@@ -65,7 +65,7 @@ const ItemDetails = (props) => {
         <h1>
           {itemDetail.CoreDataSets
             ? `${itemDetail.CoreDataSets.Genus} ${itemDetail.CoreDataSets.SpeciesEpithet}`
-            : ""}
+            : ''}
         </h1>
       </Jumbotron>
       <Container>

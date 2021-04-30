@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import Layout from "../../components/Layout/index";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import Input from "../../components/UI/Input/input";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import useForm from "./SignUpUseForm";
-import SignUpValidator from "./SignUpValidator";
-import { signup } from "../../actions/signup.actions";
+import React                                 from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { useDispatch, useSelector }          from 'react-redux';
+import { Redirect }                          from 'react-router-dom';
+import { signup }                            from '../../actions/signup.actions';
+import Layout                                from '../../components/Layout/index';
+import Input                                 from '../../components/UI/Input/input';
+import useForm                               from './SignUpUseForm';
+import SignUpValidator                       from './SignUpValidator';
+
 const Signup = (props) => {
   const signupStore = useSelector((state) => state.sign);
 
   const dispatch = useDispatch();
 
   const handleSubmission = () => {
-    console.log("handling submission");
+    console.log('handling submission');
     const userData = {
       ...value,
-      role: "external",
+      role: 'external',
     };
     dispatch(signup(userData));
   };
@@ -27,13 +28,13 @@ const Signup = (props) => {
   );
 
   if (signupStore.registered) {
-    return <Redirect to={"/"} />;
+    return <Redirect to={'/'} />;
   }
   return (
     <>
       <Layout>
         <Container>
-          <Row style={{ marginTop: "2rem" }}>
+          <Row style={{ marginTop: '2rem' }}>
             <Col md={{ span: 6, offset: 3 }}>
               {signupStore.error.code > 300 && (
                 <h2>{signupStore.error.message}</h2>
@@ -101,7 +102,7 @@ const Signup = (props) => {
                         id={`default-radio-1`}
                         name="user-type"
                         value="Student"
-                        checked={value.type === "Student"}
+                        checked={value.type === 'Student'}
                         onChange={(e) => updateValue(e)}
                       />
                       <Form.Check
@@ -111,7 +112,7 @@ const Signup = (props) => {
                         name="user-type"
                         value="ResearchInstituteRepresentative"
                         checked={
-                          value.type === "ResearchInstituteRepresentative"
+                          value.type === 'ResearchInstituteRepresentative'
                         }
                         onChange={(e) => updateValue(e)}
                       />
@@ -121,7 +122,7 @@ const Signup = (props) => {
                         id={`default-radio-3`}
                         name="user-type"
                         value="IndustryRepresentative"
-                        checked={value.type === "IndustryRepresentative"}
+                        checked={value.type === 'IndustryRepresentative'}
                         onChange={(e) => updateValue(e)}
                       />
                     </div>

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import "../Logo/index.css";
+import '../Logo/index.css';
 
 const Logo = (props) => {
   return (

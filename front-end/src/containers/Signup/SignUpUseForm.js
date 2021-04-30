@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+
 const useForm = (handleSubmission, SignUpValidator) => {
   const [value, setValue] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    type: "Student",
-    affiliation: "",
-    description: "",
-    password: "",
-    confirm_password: "",
-  });
+                                       firstname       : '',
+                                       lastname        : '',
+                                       username        : '',
+                                       email           : '',
+                                       type            : 'Student',
+                                       affiliation     : '',
+                                       description     : '',
+                                       password        : '',
+                                       confirm_password: '',
+                                     });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setSubmitting] = useState(false);
@@ -29,9 +30,9 @@ const useForm = (handleSubmission, SignUpValidator) => {
 
   const updateValue = (e) => {
     setValue({
-      ...value,
-      [e.target.name]: e.target.value,
-    });
+               ...value,
+               [e.target.name]: e.target.value,
+             });
   };
 
   return { handleSubmit, value, updateValue, errors };

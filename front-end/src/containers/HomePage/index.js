@@ -1,68 +1,34 @@
-import React, { useEffect, useState } from "react";
-import {
-  Navbar,
-  NavDropdown,
-  Nav,
-  Container,
-  Dropdown,
-  DropdownButton,
-  NavLink,
-  Carousel,
-  Card,
-  Button,
-  Row,
-  Col,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Layout from "../../components/Layout/index";
-import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-//import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import HomeIcon from "@material-ui/icons/Home";
+import { EmailOutlined }                                  from '@material-ui/icons';
 // import "../HomePage/index.css";
-import CloseIcon from "@material-ui/icons/Close";
-import Logo from "../../components/Logo";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Bacteria from "./Images/bacteria.jpg";
-import Miccroorganism from "./Images/hqdefault.jpg";
-import Bacteria2 from "./Images/bacteria-2.jpg";
-import AboutUsImage from "./Images/about-us-image.jpg";
-import { Link } from "react-router-dom";
-import ObjectSlider from "../../components/ObjectSlider";
+//import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import LocationOnIcon                                     from '@material-ui/icons/LocationOn';
+import LocationOnOutlinedIcon                             from '@material-ui/icons/LocationOnOutlined';
+import MenuRoundedIcon                                    from '@material-ui/icons/MenuRounded';
+import PhoneIcon                                          from '@material-ui/icons/Phone';
+import PublicIcon                                         from '@material-ui/icons/Public';
+import PublishIcon                                        from '@material-ui/icons/Publish';
+import StarIcon                                           from '@material-ui/icons/Star';
+import StarsIcon                                          from '@material-ui/icons/Stars';
+import React                                              from 'react';
+import 'react-awesome-slider/dist/styles.css';
+import { Carousel, Container, Dropdown, DropdownButton, } from 'react-bootstrap';
+import ReactMapGL, { Marker }                             from 'react-map-gl';
+import { useDispatch }                                    from 'react-redux';
+import { Link }                                           from 'react-router-dom';
+import PageHeader                                         from '../../components/PageHeader';
+import Bacteria2                                          from './Images/bacteria-2.jpg';
+import Bacteria                                           from './Images/bacteria.jpg';
 
-import "./style.css";
-import PhoneIcon from "@material-ui/icons/Phone";
-import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
-import { EmailOutlined } from "@material-ui/icons";
-import Timeline from "@material-ui/lab/Timeline";
-import TimelineItem from "@material-ui/lab/TimelineItem";
-import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
-import TimelineConnector from "@material-ui/lab/TimelineConnector";
-import TimelineContent from "@material-ui/lab/TimelineContent";
-import TimelineDot from "@material-ui/lab/TimelineDot";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import StarIcon from "@material-ui/icons/Star";
-import PublishIcon from "@material-ui/icons/Publish";
-import PublicIcon from "@material-ui/icons/Public";
-import StarsIcon from "@material-ui/icons/Stars";
-
-import AwesomeSlider from "react-awesome-slider";
-import withAutoplay from "react-awesome-slider/dist/autoplay";
-import "react-awesome-slider/dist/styles.css";
-import ReactMapGL, { Marker } from "react-map-gl";
-import PageHeader from "../../components/PageHeader";
+import './style.css';
 
 const HomePage = (props) => {
   const dispatch = useDispatch();
 
   const [viewport, setViewport] = React.useState({
-    latitude: 33.678403942756674,
-    longitude: 73.13901040682869,
-    zoom: 15,
-  });
+                                                   latitude : 33.678403942756674,
+                                                   longitude: 73.13901040682869,
+                                                   zoom     : 15,
+                                                 });
 
   const loggedInNavLinks = () => {
     return (
@@ -216,7 +182,7 @@ const HomePage = (props) => {
               <PublishIcon />
             </div>
             <div className="achievement-details">
-              <h3 onClick={(e) => alert("odsfjo")}> 40+</h3>
+              <h3 onClick={(e) => alert('odsfjo')}> 40+</h3>
               <h4>Publications</h4>
             </div>
           </div>
@@ -257,21 +223,24 @@ const HomePage = (props) => {
           <Container className="services-content">
             <Link to="#">
               <div className="service">
-                <MenuRoundedIcon style={{ fontSize: "40px", fill: "white" }} />
+                <MenuRoundedIcon style={{ fontSize: '40px', fill: 'white' }} />
                 <h5>Order</h5>
                 <p>Order some things from us</p>
               </div>
             </Link>
-            <Link to="#">
+
+            <Link to="/depositHomePage">
               <div className="service">
-                <MenuRoundedIcon style={{ fontSize: "40px", fill: "white" }} />
+                <MenuRoundedIcon style={{ fontSize: '40px', fill: 'white' }} />
+
                 <h5>Deposit</h5>
                 <p>Deposit some things from us</p>
               </div>
+
             </Link>
             <Link to="/catalogue">
               <div className="service">
-                <MenuRoundedIcon style={{ fontSize: "40px", fill: "white" }} />
+                <MenuRoundedIcon style={{ fontSize: '40px', fill: 'white' }} />
                 <h5>Resources</h5>
                 <p>Seek some things from us</p>
               </div>

@@ -1,26 +1,8 @@
-import React from "react";
-import {
-  Button,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Container,
-  Form,
-  FormControl,
-  MenuItem,
-  Image,
-  Dropdown,
-  DropdownButton,
-  Col,
-  Row,
-} from "react-bootstrap";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { RiDashboardLine } from "react-icons/ri";
-import { CgLogOut } from "react-icons/cg";
-import { AiOutlineShoppingCart, AiOutlineSetting } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "../../actions";
+import React                       from 'react';
+import { Container, Nav, Navbar, } from 'react-bootstrap';
+import { useDispatch }             from 'react-redux';
+import { logout }                  from '../../actions';
+
 const DashboardHeader = (props) => {
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -33,15 +15,15 @@ const DashboardHeader = (props) => {
         <Nav>
           <Nav.Link
             style={{
-              borderLeft: "1px solid grey",
-              borderRight: "1px solid grey",
+              borderLeft : '1px solid grey',
+              borderRight: '1px solid grey',
             }}
           >
             Notifications
           </Nav.Link>
           <Nav.Link
             style={{
-              borderRight: "1px solid grey",
+              borderRight: '1px solid grey',
             }}
           >
             avatar

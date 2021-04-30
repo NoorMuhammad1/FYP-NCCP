@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+
 const useStepElevenForm = (
   initialValue,
   handleSubmission,
@@ -23,9 +24,9 @@ const useStepElevenForm = (
 
   const updateValue = (e) => {
     setValue({
-      ...value,
-      [e.target.name]: e.target.value,
-    });
+               ...value,
+               [e.target.name]: e.target.value,
+             });
   };
 
   return { handleSubmit, value, updateValue, errors };

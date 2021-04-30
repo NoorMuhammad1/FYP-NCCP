@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
-import "./style.css";
+import React, { useState } from 'react';
+import { Form }            from 'react-bootstrap';
+import './style.css';
+
 function TagInput(props) {
   const [tags, setTags] = useState([]);
   const deleteTag = (indexToRemove) => {
@@ -11,13 +12,13 @@ function TagInput(props) {
     );
   };
   const addTag = (event) => {
-    if (event.target.value !== "") {
+    if (event.target.value !== '') {
       setTags([...tags, event.target.value]);
       if (props.selected) {
         event.target.value = [...tags, event.target.value];
         props.selected(event);
       }
-      event.target.value = "";
+      event.target.value = '';
     }
   };
   return (
@@ -44,7 +45,7 @@ function TagInput(props) {
           type="text"
           name={props.name}
           placeholder="press enter to add new"
-          onKeyUp={(event) => (event.key === "Enter" ? addTag(event) : null)}
+          onKeyUp={(event) => (event.key === 'Enter' ? addTag(event) : null)}
         />
       </div>
     </>

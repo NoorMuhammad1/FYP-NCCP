@@ -1,34 +1,29 @@
+import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, } from '@material-ui/core';
 import {
-  FormControl,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@material-ui/core";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ErrorIcon from "@material-ui/icons/Error";
-import React, { useState } from "react";
-import { translate } from "react-range/lib/utils";
-import { Link } from "react-router-dom";
-import ResetPasswordValidator from "./ResetPasswordValidator";
-import axios from "../../helpers/axios";
+  Visibility, VisibilityOff
+}                                                                                              from '@material-ui/icons';
+import React, { useState }                                                                     from 'react';
+import { Link }                                                                                from 'react-router-dom';
+import axios
+                                                                                               from '../../helpers/axios';
+import ResetPasswordValidator
+                                                                                               from './ResetPasswordValidator';
 
-import "./style.css";
-import useFormResetPassword from "./useFormResetPassword";
+import './style.css';
+import useFormResetPassword
+                                                                                               from './useFormResetPassword';
+
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordReset, setPasswordReset] = useState(false);
-  const [message, setMessage] = useState("");
-  const token = window.location.href.split("/")[
-    window.location.href.split("/").length - 1
-  ];
+  const [message, setMessage] = useState('');
+  const token = window.location.href.split('/')[
+  window.location.href.split('/').length - 1
+    ];
   const handleSubmission = async () => {
     await axios
-      .post("/resetPassword", { token, password: resetPassword.password })
+      .post('/resetPassword', { token, password: resetPassword.password })
       .then((response) => {
         setPasswordReset(true);
         setMessage(response.data.message);
@@ -37,16 +32,16 @@ const ResetPassword = () => {
         setPasswordReset(false);
         setMessage(response.data.message);
       });
-    console.log("hii");
-    const slides = document.querySelector(".slides");
-    slides.style.transform = "translate(-50%)";
+    console.log('hii');
+    const slides = document.querySelector('.slides');
+    slides.style.transform = 'translate(-50%)';
   };
   const {
-    resetPassword,
-    handleResetSubmit,
-    updateResetPassword,
-    resetPasswordErrors,
-  } = useFormResetPassword(handleSubmission, ResetPasswordValidator);
+          resetPassword,
+          handleResetSubmit,
+          updateResetPassword,
+          resetPasswordErrors,
+        } = useFormResetPassword(handleSubmission, ResetPasswordValidator);
 
   const passwordForm = () => {
     return (
@@ -65,7 +60,7 @@ const ResetPassword = () => {
               name="password"
               // className="password-input-box"
               placeholder="Min 6 characters with atleast one capital letter"
-              type={showPassword ? "text" : "password"}
+              type={showPassword ? 'text' : 'password'}
               value={resetPassword.password}
               onChange={(e) => updateResetPassword(e)}
               endAdornment={
@@ -83,7 +78,7 @@ const ResetPassword = () => {
               labelWidth={105}
             />
             <FormHelperText>
-              {resetPasswordErrors.password ? resetPasswordErrors.password : ""}
+              {resetPasswordErrors.password ? resetPasswordErrors.password : ''}
             </FormHelperText>
           </FormControl>
           <FormControl
@@ -97,7 +92,7 @@ const ResetPassword = () => {
               id="confirm_password"
               name="confirm_password"
               placeholder="Min 6 characters with atleast one capital letter"
-              type={showConfirmPassword ? "text" : "password"}
+              type={showConfirmPassword ? 'text' : 'password'}
               value={resetPassword.confirm_password}
               onChange={(e) => updateResetPassword(e)}
               endAdornment={
@@ -119,7 +114,7 @@ const ResetPassword = () => {
             <FormHelperText>
               {resetPasswordErrors.confirm_password
                 ? resetPasswordErrors.confirm_password
-                : ""}
+                : ''}
             </FormHelperText>
           </FormControl>
         </div>
@@ -138,8 +133,8 @@ const ResetPassword = () => {
       <div className="reset-response-div">
         <h3 className="reset-response-title">
           {passwordReset
-            ? "Your account password has been changed successfully"
-            : "Password reset failed"}
+            ? 'Your account password has been changed successfully'
+            : 'Password reset failed'}
         </h3>
         <p>{message}</p>
         {passwordReset ? (
@@ -147,8 +142,8 @@ const ResetPassword = () => {
         ) : (
           <Link
             onClick={(e) => {
-              const slides = document.querySelector(".slides");
-              slides.style.transform = "translate(0%)";
+              const slides = document.querySelector('.slides');
+              slides.style.transform = 'translate(0%)';
             }}
           >
             Go back to reset

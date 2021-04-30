@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepThreeValidator from "./StepThreeValidator";
-import useStepThreeForm from "./useStepThreeForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepThreeValidator          from './StepThreeValidator';
+import useStepThreeForm            from './useStepThreeForm';
 
 function Step3(props) {
   const handleSubmission = () => {
     props.next({
-      StrainAdministration: value,
-    });
+                 StrainAdministration: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepThreeForm(
@@ -29,7 +29,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DateOfAccession && (
-          <p style={{ color: "red" }}>{errors.DateOfAccession}</p>
+          <p style={{ color: 'red' }}>{errors.DateOfAccession}</p>
         )}
         <Input
           label="HerbariumNo"
@@ -40,7 +40,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.HerbariumNo && (
-          <p style={{ color: "red" }}>{errors.HerbariumNo}</p>
+          <p style={{ color: 'red' }}>{errors.HerbariumNo}</p>
         )}
         <Input
           label="Internal Identity Check"
@@ -51,7 +51,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.InternalIdentityCheck && (
-          <p style={{ color: "red" }}>{errors.InternalIdentityCheck}</p>
+          <p style={{ color: 'red' }}>{errors.InternalIdentityCheck}</p>
         )}
         <Input
           label="Mode Of Preservation"
@@ -62,7 +62,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ModeOfPreservation && (
-          <p style={{ color: "red" }}>{errors.ModeOfPreservation}</p>
+          <p style={{ color: 'red' }}>{errors.ModeOfPreservation}</p>
         )}
 
         <Form.Label>Bio Hazard Level</Form.Label>
@@ -78,7 +78,7 @@ function Step3(props) {
           <option>4</option>
         </Form.Control>
         {errors.BioHazardLevel && (
-          <p style={{ color: "red" }}>{errors.BioHazardLevel}</p>
+          <p style={{ color: 'red' }}>{errors.BioHazardLevel}</p>
         )}
         <Input
           label="Remarks on Restrictions"
@@ -89,7 +89,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.RestrictionRemarks && (
-          <p style={{ color: "red" }}>{errors.RestrictionRemarks}</p>
+          <p style={{ color: 'red' }}>{errors.RestrictionRemarks}</p>
         )}
         <Input
           label="Country of Export"
@@ -100,7 +100,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CountryOfExport && (
-          <p style={{ color: "red" }}>{errors.CountryOfExport}</p>
+          <p style={{ color: 'red' }}>{errors.CountryOfExport}</p>
         )}
         <Input
           label="MTA"
@@ -110,7 +110,7 @@ function Step3(props) {
           value={value.MTA}
           onChange={(e) => updateValue(e)}
         />
-        {errors.MTA && <p style={{ color: "red" }}>{errors.MTA}</p>}
+        {errors.MTA && <p style={{ color: 'red' }}>{errors.MTA}</p>}
         <Input
           label="Distribution Restriction"
           type="text"
@@ -120,7 +120,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DestributionRestriction && (
-          <p style={{ color: "red" }}>{errors.DestributionRestriction}</p>
+          <p style={{ color: 'red' }}>{errors.DestributionRestriction}</p>
         )}
         <Input
           label="Animal Quarantine No"
@@ -131,7 +131,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.AnimalQuarantineNo && (
-          <p style={{ color: "red" }}>{errors.AnimalQuarantineNo}</p>
+          <p style={{ color: 'red' }}>{errors.AnimalQuarantineNo}</p>
         )}
         <Input
           label="Plant Quarantine No"
@@ -142,7 +142,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.PlantQuarantineNo && (
-          <p style={{ color: "red" }}>{errors.PlantQuarantineNo}</p>
+          <p style={{ color: 'red' }}>{errors.PlantQuarantineNo}</p>
         )}
         <Input
           label="Form of Supply"
@@ -153,7 +153,7 @@ function Step3(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.FormOfSupply && (
-          <p style={{ color: "red" }}>{errors.FormOfSupply}</p>
+          <p style={{ color: 'red' }}>{errors.FormOfSupply}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

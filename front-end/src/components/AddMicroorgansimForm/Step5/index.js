@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepFiveValidator from "./StepFiveValidator";
-import useStepFiveForm from "./useStepFiveForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepFiveValidator           from './StepFiveValidator';
+import useStepFiveForm             from './useStepFiveForm';
 
 function Step5(props) {
   const handleSubmission = () => {
     props.next({
-      Publication: value,
-    });
+                 Publication: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepFiveForm(
@@ -29,7 +29,7 @@ function Step5(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.LiteratureCategories && (
-          <p style={{ color: "red" }}>{errors.LiteratureCategories}</p>
+          <p style={{ color: 'red' }}>{errors.LiteratureCategories}</p>
         )}
         <Input
           label="Title"
@@ -39,7 +39,7 @@ function Step5(props) {
           value={value.Title}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Title && <p style={{ color: "red" }}>{errors.Title}</p>}
+        {errors.Title && <p style={{ color: 'red' }}>{errors.Title}</p>}
         <Input
           label="Author"
           type="text"
@@ -48,7 +48,7 @@ function Step5(props) {
           value={value.Author}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Author && <p style={{ color: "red" }}>{errors.Author}</p>}
+        {errors.Author && <p style={{ color: 'red' }}>{errors.Author}</p>}
         <Input
           label="Journal"
           type="text"
@@ -57,7 +57,7 @@ function Step5(props) {
           value={value.Journal}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Journal && <p style={{ color: "red" }}>{errors.Journal}</p>}
+        {errors.Journal && <p style={{ color: 'red' }}>{errors.Journal}</p>}
         <Input
           label="Volume"
           type="text"
@@ -66,7 +66,7 @@ function Step5(props) {
           value={value.Volume}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Volume && <p style={{ color: "red" }}>{errors.Volume}</p>}
+        {errors.Volume && <p style={{ color: 'red' }}>{errors.Volume}</p>}
         <Input
           label="Number"
           type="text"
@@ -75,7 +75,7 @@ function Step5(props) {
           value={value.Number}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Number && <p style={{ color: "red" }}>{errors.Number}</p>}
+        {errors.Number && <p style={{ color: 'red' }}>{errors.Number}</p>}
         <Input
           label="Starting Page"
           type="text"
@@ -85,7 +85,7 @@ function Step5(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.StartingPage && (
-          <p style={{ color: "red" }}>{errors.StartingPage}</p>
+          <p style={{ color: 'red' }}>{errors.StartingPage}</p>
         )}
         <Input
           label="Page Range"
@@ -95,7 +95,7 @@ function Step5(props) {
           value={value.PageRange}
           onChange={(e) => updateValue(e)}
         />
-        {errors.PageRange && <p style={{ color: "red" }}>{errors.PageRange}</p>}
+        {errors.PageRange && <p style={{ color: 'red' }}>{errors.PageRange}</p>}
         <Input
           label="Year"
           type="text"
@@ -104,7 +104,7 @@ function Step5(props) {
           value={value.Year}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Year && <p style={{ color: "red" }}>{errors.Year}</p>}
+        {errors.Year && <p style={{ color: 'red' }}>{errors.Year}</p>}
         <Input
           label="DOI Number"
           type="text"
@@ -113,7 +113,7 @@ function Step5(props) {
           value={value.DOINumber}
           onChange={(e) => updateValue(e)}
         />
-        {errors.DOINumber && <p style={{ color: "red" }}>{errors.DOINumber}</p>}
+        {errors.DOINumber && <p style={{ color: 'red' }}>{errors.DOINumber}</p>}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>
       <Button onClick={(e) => handleSubmit(e)}>Next</Button>

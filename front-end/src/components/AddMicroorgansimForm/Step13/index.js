@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepThirteenValidator from "./StepThirteenValidator";
-import useStepThirteenForm from "./useStepThirteenForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepThirteenValidator       from './StepThirteenValidator';
+import useStepThirteenForm         from './useStepThirteenForm';
 
 function Step13(props) {
   const handleSubmission = () => {
     props.next({
-      Sequence: value,
-    });
+                 Sequence: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepThirteenForm(
@@ -29,7 +29,7 @@ function Step13(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.AccessionNumber && (
-          <p style={{ color: "red" }}>{errors.AccessionNumber}</p>
+          <p style={{ color: 'red' }}>{errors.AccessionNumber}</p>
         )}
         <Input
           label="Target Gene"
@@ -40,7 +40,7 @@ function Step13(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.TargetGene && (
-          <p style={{ color: "red" }}>{errors.TargetGene}</p>
+          <p style={{ color: 'red' }}>{errors.TargetGene}</p>
         )}
         <Input
           label="Definition"
@@ -51,7 +51,7 @@ function Step13(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.Definition && (
-          <p style={{ color: "red" }}>{errors.Definition}</p>
+          <p style={{ color: 'red' }}>{errors.Definition}</p>
         )}
         <Input
           label="Sequencing Method"
@@ -62,7 +62,7 @@ function Step13(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SequencingMethod && (
-          <p style={{ color: "red" }}>{errors.SequencingMethod}</p>
+          <p style={{ color: 'red' }}>{errors.SequencingMethod}</p>
         )}
         <Input
           label="Length"
@@ -72,7 +72,7 @@ function Step13(props) {
           value={value.Length}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Length && <p style={{ color: "red" }}>{errors.Length}</p>}
+        {errors.Length && <p style={{ color: 'red' }}>{errors.Length}</p>}
         <Input
           label="Sequence Type"
           type="text"
@@ -82,7 +82,7 @@ function Step13(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SequenceType && (
-          <p style={{ color: "red" }}>{errors.SequenceType}</p>
+          <p style={{ color: 'red' }}>{errors.SequenceType}</p>
         )}
         <Input
           label="Source"
@@ -92,7 +92,7 @@ function Step13(props) {
           value={value.Source}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Source && <p style={{ color: "red" }}>{errors.Source}</p>}
+        {errors.Source && <p style={{ color: 'red' }}>{errors.Source}</p>}
         <Input
           label="Sequence"
           type="text"
@@ -101,7 +101,7 @@ function Step13(props) {
           value={value.Sequence}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Sequence && <p style={{ color: "red" }}>{errors.Sequence}</p>}
+        {errors.Sequence && <p style={{ color: 'red' }}>{errors.Sequence}</p>}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>
       <Button onClick={(e) => handleSubmit(e)}>Next</Button>

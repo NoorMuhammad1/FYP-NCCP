@@ -1,40 +1,14 @@
-import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Form,
-  Jumbotron,
-  Nav,
-  Row,
-  Spinner,
-  Button,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import {
-  fetchCatalogueData,
-  fetchItemDetails,
-  getCatalogueData,
-} from "../../actions/catalogue.actions";
-import { addItemToCart } from "../../actions/cart.actions";
-import "./style.css";
-import Layout from "../../components/Layout/index";
-import Input from "../../components/UI/Input/input";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { ReactComponent as Arrow } from "./Icons/right-arrow.svg";
-import { ReactComponent as Bacteria } from "./Icons/bacterium-solid.svg";
-import { ReactComponent as ShoppingCart } from "./Icons/shopping-cart-solid.svg";
-import HomePage from "../HomePage";
-import PageHeader from "../../components/PageHeader";
-import {
-  FormControl,
-  FormControlLabel,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@material-ui/core";
-import { SearchOutlined } from "@material-ui/icons";
+import { SearchOutlined }             from '@material-ui/icons';
+import React, { useEffect, useState } from 'react';
+import { Container, Form, Spinner, }  from 'react-bootstrap';
+import { useDispatch, useSelector }   from 'react-redux';
+import { Link }                       from 'react-router-dom';
+
+import { addItemToCart, getCatalogueData, } from '../../actions';
+import Layout                               from '../../components/Layout/index';
+import PageHeader                           from '../../components/PageHeader';
+import { ReactComponent as Bacteria }       from './Icons/bacterium-solid.svg';
+import './style.css';
 
 const Catalogue = (props) => {
   const { authenticate } = useSelector((state) => state.auth);
@@ -42,16 +16,16 @@ const Catalogue = (props) => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const filters = [
-    "bacteria",
-    "fungi",
-    "archaea",
-    "antibody",
-    "microalgae",
-    "phage",
-    "virus",
-    "yeast",
+    'bacteria',
+    'fungi',
+    'archaea',
+    'antibody',
+    'microalgae',
+    'phage',
+    'virus',
+    'yeast',
   ];
 
   const [searchFilters, setSearchFilters] = useState([]);
@@ -70,7 +44,7 @@ const Catalogue = (props) => {
   const search = (rows) => {
     return rows.filter((row) => {
       const applyFilter = searchFilters[0]
-        ? searchFilters.includes(row["OrganismType"].toLowerCase())
+        ? searchFilters.includes(row['OrganismType'].toLowerCase())
         : true;
       // console.log(
       //   columns &&
@@ -90,7 +64,7 @@ const Catalogue = (props) => {
           return (
             applyFilter &&
             row[column].toString().toLowerCase().indexOf(query.toLowerCase()) >
-              -1
+            -1
           );
         })
       );
@@ -138,24 +112,24 @@ const Catalogue = (props) => {
             <h3>Filters</h3>
             <hr />
             {filters &&
-              filters.map((filter) => {
-                return (
-                  <Form.Check
-                    label={filter}
-                    name={filter}
-                    className="filter-check"
-                    checked={searchFilters.includes(filter)}
-                    onChange={(e) => {
-                      const checked = searchFilters.includes(filter);
-                      setSearchFilters((prev) =>
-                        checked
-                          ? prev.filter((sf) => sf !== filter)
-                          : [...prev, filter]
-                      );
-                    }}
-                  />
-                );
-              })}
+            filters.map((filter) => {
+              return (
+                <Form.Check
+                  label={filter}
+                  name={filter}
+                  className="filter-check"
+                  checked={searchFilters.includes(filter)}
+                  onChange={(e) => {
+                    const checked = searchFilters.includes(filter);
+                    setSearchFilters((prev) =>
+                                       checked
+                                         ? prev.filter((sf) => sf !== filter)
+                                         : [...prev, filter]
+                    );
+                  }}
+                />
+              );
+            })}
           </div>
           <div className="catalogue-data-content-box">
             <div>
@@ -172,8 +146,8 @@ const Catalogue = (props) => {
                       <Link
                         className="catalogue-data-item-name"
                         to={{
-                          pathname: "/itemDetails",
-                          state: { id: row.id },
+                          pathname: '/itemDetails',
+                          state   : { id: row.id },
                         }}
                       >
                         <h4 className="item-name">{`${row.Genus} ${row.SpeciesEpithet}`}</h4>
@@ -181,22 +155,24 @@ const Catalogue = (props) => {
                           <Arrow className="arrow" />
                         </h3> */}
                       </Link>
-                      <span className="catalogue-data-item-accession-number">{`Accession Number    ${row.AccessionNumber}`}</span>
+                      <span
+                        className="catalogue-data-item-accession-number">{`Accession Number    ${row.AccessionNumber}`}</span>
                       <span className="catalogue-data-item-strain-type">{`Strain Type      ${row.Status}`}</span>
-                      <span className="catalogue-data-item-bio-hazard-level">{`Bio Hazard Level     ${row.BioHazardLevel}`}</span>
+                      <span
+                        className="catalogue-data-item-bio-hazard-level">{`Bio Hazard Level     ${row.BioHazardLevel}`}</span>
                     </div>
                     <div>
                       <span
                         className={
                           addedToCart.includes(row.id)
-                            ? "add-to-cart-button-disabled"
-                            : "add-to-cart-button"
+                            ? 'add-to-cart-button-disabled'
+                            : 'add-to-cart-button'
                         }
                         onClick={(e) => addToCart(row)}
                       >
                         {addedToCart.includes(row.id)
-                          ? "Added To Cart"
-                          : "Add To Cart"}
+                          ? 'Added To Cart'
+                          : 'Add To Cart'}
                       </span>
                     </div>
                   </div>

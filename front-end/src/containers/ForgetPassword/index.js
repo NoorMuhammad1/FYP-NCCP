@@ -1,20 +1,20 @@
-import { TextField } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { forgetPassword } from "../../actions";
-import axios from "../../helpers/axios";
-import "./style.css";
+import { TextField }       from '@material-ui/core';
+import React, { useState } from 'react';
+import { useDispatch }     from 'react-redux';
+import axios               from '../../helpers/axios';
+import './style.css';
+
 const ForgetPassword = () => {
   const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const dispatch = useDispatch();
-  const [emailValue, setEmailValue] = useState("");
+  const [emailValue, setEmailValue] = useState('');
   const [slideChange, setSlideChange] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const handleSubmission = async () => {
     await axios
-      .post("/forget-password", { email: emailValue })
+      .post('/forget-password', { email: emailValue })
       .then((response) => {
         setSlideChange(true);
         setEmailSent(true);
@@ -25,7 +25,7 @@ const ForgetPassword = () => {
         setEmailSent(false);
         setMessage(response.data.message);
       });
-    console.log("hii");
+    console.log('hii');
     // const slides = document.querySelector(".slides");
     // slides.style.transform = "translate(-50%)";
   };
@@ -44,7 +44,7 @@ const ForgetPassword = () => {
       {/* <div className="upper-nav">Logo</div> */}
       {slideChange ? (
         <div className="check-email-div">
-          <h3>{emailSent ? "Check your Email" : "Failed"}</h3>
+          <h3>{emailSent ? 'Check your Email' : 'Failed'}</h3>
           <p>{message}</p>
         </div>
       ) : (
@@ -63,7 +63,7 @@ const ForgetPassword = () => {
             className="forgot-password-email-input"
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
-            error={!emailValidator.test(emailValue.trim()) && emailValue !== ""}
+            error={!emailValidator.test(emailValue.trim()) && emailValue !== ''}
             helperText="must be of form: name@gmail.com"
             required
           />

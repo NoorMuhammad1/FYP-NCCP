@@ -1,23 +1,23 @@
-import { Button, CircularProgress, FormControl } from "@material-ui/core";
+import { Button, CircularProgress }   from '@material-ui/core';
 // import { Dropdown } from "bootstrap";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getUsers } from "../../actions/user.actions";
-import DropDown from "../../components/DropDown";
-import ItemList from "../../components/ItemList";
-import ItemListCard from "../../components/ItemListCard";
-import SideBar from "../../components/SideBar";
-import SearchBar from "../../components/SearchBar";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector }   from 'react-redux';
+import { Link }                       from 'react-router-dom';
+import { getUsers }                   from '../../actions/user.actions';
+import DropDown                       from '../../components/DropDown';
+import ItemList                       from '../../components/ItemList';
+import SearchBar                      from '../../components/SearchBar';
+import SideBar                        from '../../components/SideBar';
 
-import "./style.css";
+import './style.css';
+
 const AdminDashboardUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
   const [data, setData] = useState([]);
-  const [query, setQuery] = useState("");
-  const [sortBy, setSortBy] = useState("");
-  const [filter, setFilter] = useState("");
+  const [query, setQuery] = useState('');
+  const [sortBy, setSortBy] = useState('');
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     dispatch(getUsers());
@@ -28,7 +28,7 @@ const AdminDashboardUsers = () => {
       users.userList.map((row) => {
         return {
           ...row,
-          orders: Math.floor(Math.random() * 10),
+          orders  : Math.floor(Math.random() * 10),
           deposits: Math.floor(Math.random() * 10),
         };
       })
@@ -39,20 +39,20 @@ const AdminDashboardUsers = () => {
   const search = (data) => {
     return data.filter((row) => {
       const applyFilter =
-        filter === "" || row.role.toLowerCase() === filter.toLowerCase();
+              filter === '' || row.role.toLowerCase() === filter.toLowerCase();
       return (
         applyFilter &&
         (row.firstname.toString().toLowerCase().indexOf(query.toLowerCase()) >
           -1 ||
           row.lastname.toString().toLowerCase().indexOf(query.toLowerCase()) >
-            -1)
+          -1)
       );
     });
   };
 
   const sortData = (data) => {
     data[0] &&
-      data.sort((a, b) => b[sortBy.toLowerCase()] - a[sortBy.toLowerCase()]);
+    data.sort((a, b) => b[sortBy.toLowerCase()] - a[sortBy.toLowerCase()]);
     return data.sort(
       (a, b) => b[sortBy.toLowerCase() - a[sortBy.toLowerCase()]]
     );
@@ -93,24 +93,24 @@ const AdminDashboardUsers = () => {
 
   const columns = [
     {
-      title: "Name",
-      width: "40%",
+      title: 'Name',
+      width: '40%',
     },
     {
-      title: "Role",
-      width: "10%",
+      title: 'Role',
+      width: '10%',
     },
     {
-      title: "Orders",
-      width: "15%",
+      title: 'Orders',
+      width: '15%',
     },
     {
-      title: "Deposits",
-      width: "15%",
+      title: 'Deposits',
+      width: '15%',
     },
     {
-      title: "",
-      width: "10%",
+      title: '',
+      width: '10%',
     },
   ];
   return (
@@ -120,7 +120,7 @@ const AdminDashboardUsers = () => {
         <Button variant="contained" color="primary">
           <Link
             to="/dashboard/addUser"
-            style={{ color: "white", textDecoration: "none" }}
+            style={{ color: 'white', textDecoration: 'none' }}
           >
             Add User +
           </Link>
@@ -138,16 +138,16 @@ const AdminDashboardUsers = () => {
             width="150px"
             data={[
               {
-                title: "Name",
-                value: "name",
+                title: 'Name',
+                value: 'name',
               },
               {
-                title: "Orders",
-                value: "orders",
+                title: 'Orders',
+                value: 'orders',
               },
               {
-                title: "Deposits",
-                value: "deposits",
+                title: 'Deposits',
+                value: 'deposits',
               },
             ]}
           />
@@ -160,16 +160,16 @@ const AdminDashboardUsers = () => {
             width="150px"
             data={[
               {
-                title: "Admin",
-                value: "admin",
+                title: 'Admin',
+                value: 'admin',
               },
               {
-                title: "Internal",
-                value: "internal",
+                title: 'Internal',
+                value: 'internal',
               },
               {
-                title: "External",
-                value: "External",
+                title: 'External',
+                value: 'External',
               },
             ]}
           />

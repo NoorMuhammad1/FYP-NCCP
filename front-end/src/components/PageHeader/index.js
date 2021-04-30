@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import HomeIcon from "@material-ui/icons/Home";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-import "./style.css";
-import PhoneIcon from "@material-ui/icons/Phone";
-import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
-import { EmailOutlined } from "@material-ui/icons";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../actions";
+import { EmailOutlined }              from '@material-ui/icons';
+import CloseOutlinedIcon              from '@material-ui/icons/CloseOutlined';
+import HomeIcon                       from '@material-ui/icons/Home';
+import MenuRoundedIcon                from '@material-ui/icons/MenuRounded';
+import PhoneIcon                      from '@material-ui/icons/Phone';
+import QueryBuilderIcon               from '@material-ui/icons/QueryBuilder';
+import SearchOutlinedIcon             from '@material-ui/icons/SearchOutlined';
+import ShoppingCartIcon               from '@material-ui/icons/ShoppingCart';
+import ShoppingCartOutlinedIcon       from '@material-ui/icons/ShoppingCartOutlined';
+import React, { useEffect, useState } from 'react';
+import { Container }                  from 'react-bootstrap';
+import { useDispatch, useSelector }   from 'react-redux';
+import { Link }                       from 'react-router-dom';
+import { logout }                     from '../../actions';
+import './style.css';
 
 const PageHeader = (props) => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const PageHeader = (props) => {
   return (
     <>
       {sideBarshow ? (
-        <div className={sideBarshow ? "sidebar-active" : "sidebar"}>
+        <div className={sideBarshow ? 'sidebar-active' : 'sidebar'}>
           <div className="sidebar-upper-div">
             <div className="sidebar-upper-div-options">
               <HomeIcon fontSize="large" />

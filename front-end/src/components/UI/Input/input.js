@@ -1,5 +1,6 @@
-import React from "react";
-import { Form } from "react-bootstrap";
+import React    from 'react';
+import { Form } from 'react-bootstrap';
+
 const Input = (props) => {
   return (
     <Form.Group>

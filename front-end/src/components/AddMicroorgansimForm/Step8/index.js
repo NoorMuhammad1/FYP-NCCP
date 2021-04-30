@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form, FormGroup } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepEightValidator from "./StepEightValidator";
-import useStepEightForm from "./useStepEightForm";
+import React                                  from 'react';
+import { Button, Container, Form, FormGroup } from 'react-bootstrap';
+import Input                                  from '../../UI/Input/input';
+import StepEightValidator                     from './StepEightValidator';
+import useStepEightForm                       from './useStepEightForm';
 
 function Step8(props) {
   const handleSubmission = () => {
     props.next({
-      Properties: value,
-    });
+                 Properties: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepEightForm(
@@ -29,7 +29,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.NumberOfNuclei && (
-          <p style={{ color: "red" }}>{errors.NumberOfNuclei}</p>
+          <p style={{ color: 'red' }}>{errors.NumberOfNuclei}</p>
         )}
         <Input
           label="Rehydration Fluid"
@@ -40,7 +40,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.RehydrationFluid && (
-          <p style={{ color: "red" }}>{errors.RehydrationFluid}</p>
+          <p style={{ color: 'red' }}>{errors.RehydrationFluid}</p>
         )}
         <Input
           label="Fine Structure Data"
@@ -51,7 +51,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.FineStructureData && (
-          <p style={{ color: "red" }}>{errors.FineStructureData}</p>
+          <p style={{ color: 'red' }}>{errors.FineStructureData}</p>
         )}
         <Input
           label="WallConstituents"
@@ -62,7 +62,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.WallConstituents && (
-          <p style={{ color: "red" }}>{errors.WallConstituents}</p>
+          <p style={{ color: 'red' }}>{errors.WallConstituents}</p>
         )}
         <Input
           label="Cell Contents"
@@ -73,7 +73,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CellContents && (
-          <p style={{ color: "red" }}>{errors.CellContents}</p>
+          <p style={{ color: 'red' }}>{errors.CellContents}</p>
         )}
         <Input
           label="Coenzyme Q System"
@@ -84,7 +84,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CoenzymeQSystem && (
-          <p style={{ color: "red" }}>{errors.CoenzymeQSystem}</p>
+          <p style={{ color: 'red' }}>{errors.CoenzymeQSystem}</p>
         )}
         <FormGroup>
           <Form.Label>Staining Reactions</Form.Label>
@@ -99,7 +99,7 @@ function Step8(props) {
           </Form.Control>
         </FormGroup>
         {errors.StainingReactions && (
-          <p style={{ color: "red" }}>{errors.StainingReactions}</p>
+          <p style={{ color: 'red' }}>{errors.StainingReactions}</p>
         )}
         <Input
           label="Pigment Production"
@@ -110,7 +110,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.PigmentProduction && (
-          <p style={{ color: "red" }}>{errors.PigmentProduction}</p>
+          <p style={{ color: 'red' }}>{errors.PigmentProduction}</p>
         )}
         <Input
           label="Cell Shape"
@@ -120,7 +120,7 @@ function Step8(props) {
           value={value.CellShape}
           onChange={(e) => updateValue(e)}
         />
-        {errors.CellShape && <p style={{ color: "red" }}>{errors.CellShape}</p>}
+        {errors.CellShape && <p style={{ color: 'red' }}>{errors.CellShape}</p>}
         <Input
           label="Cell Size"
           type="text"
@@ -129,7 +129,7 @@ function Step8(props) {
           value={value.CellSize}
           onChange={(e) => updateValue(e)}
         />
-        {errors.CellSize && <p style={{ color: "red" }}>{errors.CellSize}</p>}
+        {errors.CellSize && <p style={{ color: 'red' }}>{errors.CellSize}</p>}
         <FormGroup>
           <Form.Label>Motile</Form.Label>
           <Form.Control
@@ -142,7 +142,7 @@ function Step8(props) {
             <option>Non-Motile</option>
           </Form.Control>
         </FormGroup>
-        {errors.Motile && <p style={{ color: "red" }}>{errors.Motile}</p>}
+        {errors.Motile && <p style={{ color: 'red' }}>{errors.Motile}</p>}
         <Input
           label="Spore Forming"
           type="text"
@@ -152,7 +152,7 @@ function Step8(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SporeForming && (
-          <p style={{ color: "red" }}>{errors.SporeForming}</p>
+          <p style={{ color: 'red' }}>{errors.SporeForming}</p>
         )}
         <Input
           label="Motile By"
@@ -162,7 +162,7 @@ function Step8(props) {
           value={value.MotileBy}
           onChange={(e) => updateValue(e)}
         />
-        {errors.MotileBy && <p style={{ color: "red" }}>{errors.MotileBy}</p>}
+        {errors.MotileBy && <p style={{ color: 'red' }}>{errors.MotileBy}</p>}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>
       <Button onClick={(e) => handleSubmit(e)}>Next</Button>

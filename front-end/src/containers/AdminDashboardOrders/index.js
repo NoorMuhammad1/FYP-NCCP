@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import SideBar from "../../components/SideBar";
-import { Button, CircularProgress, FormControl } from "@material-ui/core";
-import OrderItemList from "../../components/OrderItemList";
+import { CircularProgress } from "@material-ui/core";
 import DropDown from "../../components/DropDown";
-import StripeCheckout from "react-stripe-checkout";
+import OrderItemList from "../../components/OrderItemList";
+import SideBar from "../../components/SideBar";
 import "./style.css";
-import { useDispatch } from "react-redux";
-import { confirmPayment } from "../../actions/payment.actions";
 
 const AdminDashboardOrders = () => {
   const dispatch = useDispatch();

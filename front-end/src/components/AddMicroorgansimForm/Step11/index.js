@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepElevenValidator from "./StepElevenValidator";
-import useStepElevenForm from "./useStepElevenForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepElevenValidator         from './StepElevenValidator';
+import useStepElevenForm           from './useStepElevenForm';
 
 function Step11(props) {
   const handleSubmission = () => {
     props.next({
-      ChemistryAndEnzymes: value,
-    });
+                 ChemistryAndEnzymes: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepElevenForm(
@@ -29,7 +29,7 @@ function Step11(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.EnzymesProduced && (
-          <p style={{ color: "red" }}>{errors.EnzymesProduced}</p>
+          <p style={{ color: 'red' }}>{errors.EnzymesProduced}</p>
         )}
         <Input
           label="Decomposition And Deteriorating Capabilities"
@@ -40,7 +40,7 @@ function Step11(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DecompositionAndDeterioratingCapabilities && (
-          <p style={{ color: "red" }}>
+          <p style={{ color: 'red' }}>
             {errors.DecompositionAndDeterioratingCapabilities}
           </p>
         )}
@@ -53,7 +53,7 @@ function Step11(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MetabolitiesProduced && (
-          <p style={{ color: "red" }}>{errors.MetabolitiesProduced}</p>
+          <p style={{ color: 'red' }}>{errors.MetabolitiesProduced}</p>
         )}
         <Input
           label="Bio transformations"
@@ -64,7 +64,7 @@ function Step11(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.Biotransformations && (
-          <p style={{ color: "red" }}>{errors.Biotransformations}</p>
+          <p style={{ color: 'red' }}>{errors.Biotransformations}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

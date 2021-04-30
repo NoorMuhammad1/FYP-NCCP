@@ -1,17 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Container, Form, Row, Spinner, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import {
-  deleteMicroorganism,
-  getCatalogueData,
-} from "../../actions/catalogue.actions";
-import Layout from "../../components/Layout";
-import AddMicroorganismModal from "../../components/Modals/AddMicroorganismModal";
-import DeleteUserModal from "../../components/Modals/DeleteUserModal";
-import Input from "../../components/UI/Input/input";
-import { microorganismTemplate } from "../../helpers/templates";
-import useCatalogue from "./useCatalogue";
+import React, { useEffect, useRef, useState }           from 'react';
+import { Button, Container, Form, Row, Spinner, Table } from 'react-bootstrap';
+import { useDispatch, useSelector }                     from 'react-redux';
+import { Link, Redirect }                               from 'react-router-dom';
+import { deleteMicroorganism, getCatalogueData, }       from '../../actions/catalogue.actions';
+import Layout                                           from '../../components/Layout';
+import DeleteUserModal                                  from '../../components/Modals/DeleteUserModal';
+import Input                                            from '../../components/UI/Input/input';
+
 const DashboardCatalogue = (props) => {
   const { authenticate, token } = useSelector((state) => state.auth);
   const { permissions } = useSelector((state) => state.auth.user);
@@ -19,16 +14,16 @@ const DashboardCatalogue = (props) => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const filters = [
-    "bacteria",
-    "fungi",
-    "archaea",
-    "antibody",
-    "microalgae",
-    "phage",
-    "virus",
-    "yeast",
+    'bacteria',
+    'fungi',
+    'archaea',
+    'antibody',
+    'microalgae',
+    'phage',
+    'virus',
+    'yeast',
   ];
   const [searchFilters, setSearchFilters] = useState([]);
 
@@ -41,7 +36,7 @@ const DashboardCatalogue = (props) => {
   }, [catalogueData]);
 
   //delete hook
-  const [deleteRecordId, setDeleteRecordId] = useState("");
+  const [deleteRecordId, setDeleteRecordId] = useState('');
 
   const columns = data[0] && Object.keys(data[0].CoreDataSets);
 
@@ -49,8 +44,8 @@ const DashboardCatalogue = (props) => {
     return rows.filter((row) => {
       const applyFilter = searchFilters[0]
         ? searchFilters.includes(
-            row["CoreDataSets"]["OrganismType"].toLowerCase()
-          )
+          row['CoreDataSets']['OrganismType'].toLowerCase()
+        )
         : true;
 
       return (
@@ -58,7 +53,7 @@ const DashboardCatalogue = (props) => {
         columns.some(
           (column) =>
             applyFilter &&
-            row["CoreDataSets"][column]
+            row['CoreDataSets'][column]
               .toString()
               .toLowerCase()
               .indexOf(query.toLowerCase()) > -1
@@ -80,19 +75,19 @@ const DashboardCatalogue = (props) => {
         <Link
           to={{
             pathname: permissions.view_M_Permission
-              ? "/dashboard/details"
-              : "#",
-            state: { id: permissions.view_M_Permission ? id : undefined },
+              ? '/dashboard/details'
+              : '#',
+            state   : { id: permissions.view_M_Permission ? id : undefined },
           }}
         >
           <Button
-            variant={permissions.view_M_Permission ? "primary" : "secondary"}
+            variant={permissions.view_M_Permission ? 'primary' : 'secondary'}
           >
             View
           </Button>
         </Link>
         <Button
-          variant={permissions.delete_M_Permission ? "danger" : "secondary"}
+          variant={permissions.delete_M_Permission ? 'danger' : 'secondary'}
           onClick={() => {
             deleteRecordRef.current.show();
             setDeleteRecordId(id);
@@ -139,28 +134,28 @@ const DashboardCatalogue = (props) => {
       <Container>
         <Row
           style={{
-            display: "flex",
-            justifyContent: "space-between",
+            display       : 'flex',
+            justifyContent: 'space-between',
           }}
         >
           {filters &&
-            filters.map((filter) => {
-              return (
-                <Form.Check
-                  label={filter}
-                  name={filter}
-                  checked={searchFilters.includes(filter)}
-                  onChange={(e) => {
-                    const checked = searchFilters.includes(filter);
-                    setSearchFilters((prev) =>
-                      checked
-                        ? prev.filter((sf) => sf !== filter)
-                        : [...prev, filter]
-                    );
-                  }}
-                />
-              );
-            })}
+          filters.map((filter) => {
+            return (
+              <Form.Check
+                label={filter}
+                name={filter}
+                checked={searchFilters.includes(filter)}
+                onChange={(e) => {
+                  const checked = searchFilters.includes(filter);
+                  setSearchFilters((prev) =>
+                                     checked
+                                       ? prev.filter((sf) => sf !== filter)
+                                       : [...prev, filter]
+                  );
+                }}
+              />
+            );
+          })}
           <Link to="/dashboard/addMicroorganism">
             <Button>Add</Button>
           </Link>
@@ -168,27 +163,27 @@ const DashboardCatalogue = (props) => {
       </Container>
       <Table striped bordered hover responsive>
         <thead>
-          <tr>
-            {columns &&
-              columns.map((heading) => {
-                return <th>{heading}</th>;
-              })}
-            <th className="text-center">Options</th>
-          </tr>
+        <tr>
+          {columns &&
+          columns.map((heading) => {
+            return <th>{heading}</th>;
+          })}
+          <th className="text-center">Options</th>
+        </tr>
         </thead>
         <tbody>
-          {search(data).map((row) => {
-            return (
-              <tr>
-                {columns.map((heading) => {
-                  return <td>{row["CoreDataSets"][heading]}</td>;
-                })}
-                <td style={{ display: "flex", justifyContent: "space-around" }}>
-                  {recordOptions(row._id)}
-                </td>
-              </tr>
-            );
-          })}
+        {search(data).map((row) => {
+          return (
+            <tr>
+              {columns.map((heading) => {
+                return <td>{row['CoreDataSets'][heading]}</td>;
+              })}
+              <td style={{ display: 'flex', justifyContent: 'space-around' }}>
+                {recordOptions(row._id)}
+              </td>
+            </tr>
+          );
+        })}
         </tbody>
       </Table>
     </Layout>

@@ -1,15 +1,10 @@
-import React from "react";
-import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-} from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, } from '@material-ui/core';
+import SearchIcon                                                              from '@material-ui/icons/Search';
+import React                                                                   from 'react';
+
 const SearchBar = (props) => {
   return (
-    <FormControl variant="outlined" style={{ width: "50%" }}>
+    <FormControl variant="outlined" style={{ width: '50%' }}>
       <InputLabel htmlFor="outlined-adornment-search-bar">Search</InputLabel>
       <OutlinedInput
         id="outlined-adornment-search-bar"

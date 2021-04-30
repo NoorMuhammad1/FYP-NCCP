@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepTenValidator from "./StepTenValidator";
-import useStepTenForm from "./useStepTenForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepTenValidator            from './StepTenValidator';
+import useStepTenForm              from './useStepTenForm';
 
 function Step10(props) {
   const handleSubmission = () => {
     props.next({
-      GrowthConditions: value,
-    });
+                 GrowthConditions: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepTenForm(
@@ -29,7 +29,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ConditionsForGrowthAndMaintenenceOnSolidMedia && (
-          <p style={{ color: "red" }}>
+          <p style={{ color: 'red' }}>
             {errors.ConditionsForGrowthAndMaintenenceOnSolidMedia}
           </p>
         )}
@@ -42,7 +42,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ConditionsForGrowthInLiquidMedia && (
-          <p style={{ color: "red" }}>
+          <p style={{ color: 'red' }}>
             {errors.ConditionsForGrowthInLiquidMedia}
           </p>
         )}
@@ -55,7 +55,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ConditionsForFruitingOrSporulation && (
-          <p style={{ color: "red" }}>
+          <p style={{ color: 'red' }}>
             {errors.ConditionsForFruitingOrSporulation}
           </p>
         )}
@@ -68,7 +68,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.ConditionsForGermination && (
-          <p style={{ color: "red" }}>{errors.ConditionsForGermination}</p>
+          <p style={{ color: 'red' }}>{errors.ConditionsForGermination}</p>
         )}
         <Input
           label="Carbon Sources Tested"
@@ -79,7 +79,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CarbonSourcesTested && (
-          <p style={{ color: "red" }}>{errors.CarbonSourcesTested}</p>
+          <p style={{ color: 'red' }}>{errors.CarbonSourcesTested}</p>
         )}
         <Input
           label="Nitrogen Sources Tested"
@@ -90,7 +90,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.NitrogenSourcesTested && (
-          <p style={{ color: "red" }}>{errors.NitrogenSourcesTested}</p>
+          <p style={{ color: 'red' }}>{errors.NitrogenSourcesTested}</p>
         )}
         <Input
           label="Single Compound Tested"
@@ -101,7 +101,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SingleCompoundTested && (
-          <p style={{ color: "red" }}>{errors.SingleCompoundTested}</p>
+          <p style={{ color: 'red' }}>{errors.SingleCompoundTested}</p>
         )}
         <Input
           label="Nutritional Requirements"
@@ -112,7 +112,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.NutritionalRequirements && (
-          <p style={{ color: "red" }}>{errors.NutritionalRequirements}</p>
+          <p style={{ color: 'red' }}>{errors.NutritionalRequirements}</p>
         )}
         <Input
           label="Defeciencies"
@@ -123,7 +123,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.Defeciencies && (
-          <p style={{ color: "red" }}>{errors.Defeciencies}</p>
+          <p style={{ color: 'red' }}>{errors.Defeciencies}</p>
         )}
         <Input
           label="Tolerances And Sensitivities"
@@ -134,7 +134,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.TolerancesAndSensitivities && (
-          <p style={{ color: "red" }}>{errors.TolerancesAndSensitivities}</p>
+          <p style={{ color: 'red' }}>{errors.TolerancesAndSensitivities}</p>
         )}
         <Input
           label="Temperature Relationships"
@@ -145,7 +145,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.TemperatureRelationships && (
-          <p style={{ color: "red" }}>{errors.TemperatureRelationships}</p>
+          <p style={{ color: 'red' }}>{errors.TemperatureRelationships}</p>
         )}
         <Input
           label="Maximum Growth PH"
@@ -156,7 +156,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MaximumGrowthPH && (
-          <p style={{ color: "red" }}>{errors.MaximumGrowthPH}</p>
+          <p style={{ color: 'red' }}>{errors.MaximumGrowthPH}</p>
         )}
         <Input
           label="Minimum Growth PH"
@@ -167,7 +167,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MinimumGrowthPH && (
-          <p style={{ color: "red" }}>{errors.MinimumGrowthPH}</p>
+          <p style={{ color: 'red' }}>{errors.MinimumGrowthPH}</p>
         )}
         <Input
           label="Optimal Growth PH"
@@ -178,7 +178,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OptimalGrowthPH && (
-          <p style={{ color: "red" }}>{errors.OptimalGrowthPH}</p>
+          <p style={{ color: 'red' }}>{errors.OptimalGrowthPH}</p>
         )}
         <Input
           label="Light Conditions"
@@ -189,7 +189,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.LightConditions && (
-          <p style={{ color: "red" }}>{errors.LightConditions}</p>
+          <p style={{ color: 'red' }}>{errors.LightConditions}</p>
         )}
         <Input
           label="Oxygen Relationship"
@@ -200,7 +200,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OxygenRelationship && (
-          <p style={{ color: "red" }}>{errors.OxygenRelationship}</p>
+          <p style={{ color: 'red' }}>{errors.OxygenRelationship}</p>
         )}
         <Input
           label="Heat Resistence"
@@ -211,7 +211,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.HeatResistence && (
-          <p style={{ color: "red" }}>{errors.HeatResistence}</p>
+          <p style={{ color: 'red' }}>{errors.HeatResistence}</p>
         )}
         <Input
           label="Ethanol Conditions"
@@ -222,7 +222,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.EthanolConditions && (
-          <p style={{ color: "red" }}>{errors.EthanolConditions}</p>
+          <p style={{ color: 'red' }}>{errors.EthanolConditions}</p>
         )}
         <Input
           label="Salinity Requirements"
@@ -233,7 +233,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.SalinityRequirements && (
-          <p style={{ color: "red" }}>{errors.SalinityRequirements}</p>
+          <p style={{ color: 'red' }}>{errors.SalinityRequirements}</p>
         )}
         <Input
           label="Optimal NaCl Concentration"
@@ -244,7 +244,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OptimalNaClConcentration && (
-          <p style={{ color: "red" }}>{errors.OptimalNaClConcentration}</p>
+          <p style={{ color: 'red' }}>{errors.OptimalNaClConcentration}</p>
         )}
         <Input
           label="Minimum NaCl Concentration"
@@ -255,7 +255,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MinimumNaClConcentration && (
-          <p style={{ color: "red" }}>{errors.MinimumNaClConcentration}</p>
+          <p style={{ color: 'red' }}>{errors.MinimumNaClConcentration}</p>
         )}
         <Input
           label="Maximum NaCl Cocentration"
@@ -266,7 +266,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MaximumNaClCocentration && (
-          <p style={{ color: "red" }}>{errors.MaximumNaClCocentration}</p>
+          <p style={{ color: 'red' }}>{errors.MaximumNaClCocentration}</p>
         )}
         <Input
           label="Optimum Sugar Concentration"
@@ -277,7 +277,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OptimumSugarConcentration && (
-          <p style={{ color: "red" }}>{errors.OptimumSugarConcentration}</p>
+          <p style={{ color: 'red' }}>{errors.OptimumSugarConcentration}</p>
         )}
         <Input
           label="Minimum Sugar Concentration"
@@ -288,7 +288,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MinimumSugarConcentration && (
-          <p style={{ color: "red" }}>{errors.MinimumSugarConcentration}</p>
+          <p style={{ color: 'red' }}>{errors.MinimumSugarConcentration}</p>
         )}
         <Input
           label="Maximum Sugar Concentration"
@@ -299,7 +299,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MaximumSugarConcentration && (
-          <p style={{ color: "red" }}>{errors.MaximumSugarConcentration}</p>
+          <p style={{ color: 'red' }}>{errors.MaximumSugarConcentration}</p>
         )}
         <Input
           label="Osmophily And Xerophily"
@@ -310,7 +310,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.OsmophilyAndXerophily && (
-          <p style={{ color: "red" }}>{errors.OsmophilyAndXerophily}</p>
+          <p style={{ color: 'red' }}>{errors.OsmophilyAndXerophily}</p>
         )}
         <Input
           label="Water Activity Conditions"
@@ -321,7 +321,7 @@ function Step10(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.WaterActivityConditions && (
-          <p style={{ color: "red" }}>{errors.WaterActivityConditions}</p>
+          <p style={{ color: 'red' }}>{errors.WaterActivityConditions}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

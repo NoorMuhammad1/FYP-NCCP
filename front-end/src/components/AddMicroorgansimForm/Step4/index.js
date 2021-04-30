@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import Input from "../../UI/Input/input";
-import StepFourValidator from "./StepFourValidator";
-import useStepFourForm from "./useStepFourForm";
+import React                       from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import Input                       from '../../UI/Input/input';
+import StepFourValidator           from './StepFourValidator';
+import useStepFourForm             from './useStepFourForm';
 
 function Step4(props) {
   const handleSubmission = () => {
     props.next({
-      EnviromentAndHistory: value,
-    });
+                 EnviromentAndHistory: value,
+               });
   };
 
   const { handleSubmit, value, updateValue, errors } = useStepFourForm(
@@ -28,7 +28,7 @@ function Step4(props) {
           value={value.SubStrate}
           onChange={(e) => updateValue(e)}
         />
-        {errors.SubStrate && <p style={{ color: "red" }}>{errors.SubStrate}</p>}
+        {errors.SubStrate && <p style={{ color: 'red' }}>{errors.SubStrate}</p>}
         <Input
           label="Habitat"
           type="text"
@@ -37,7 +37,7 @@ function Step4(props) {
           value={value.Habitat}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Habitat && <p style={{ color: "red" }}>{errors.Habitat}</p>}
+        {errors.Habitat && <p style={{ color: 'red' }}>{errors.Habitat}</p>}
         <Input
           label="Latitude"
           type="text"
@@ -46,7 +46,7 @@ function Step4(props) {
           value={value.Latitude}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Latitude && <p style={{ color: "red" }}>{errors.Latitude}</p>}
+        {errors.Latitude && <p style={{ color: 'red' }}>{errors.Latitude}</p>}
         <Input
           label="Longitude"
           type="text"
@@ -55,7 +55,7 @@ function Step4(props) {
           value={value.Longitude}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Longitude && <p style={{ color: "red" }}>{errors.Longitude}</p>}
+        {errors.Longitude && <p style={{ color: 'red' }}>{errors.Longitude}</p>}
         <Input
           label="Altitude"
           type="text"
@@ -64,7 +64,7 @@ function Step4(props) {
           value={value.Altitude}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Altitude && <p style={{ color: "red" }}>{errors.Altitude}</p>}
+        {errors.Altitude && <p style={{ color: 'red' }}>{errors.Altitude}</p>}
         <Input
           label="Depth"
           type="text"
@@ -73,7 +73,7 @@ function Step4(props) {
           value={value.Depth}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Depth && <p style={{ color: "red" }}>{errors.Depth}</p>}
+        {errors.Depth && <p style={{ color: 'red' }}>{errors.Depth}</p>}
         <Input
           label="Humidity"
           type="text"
@@ -82,7 +82,7 @@ function Step4(props) {
           value={value.Humidity}
           onChange={(e) => updateValue(e)}
         />
-        {errors.Humidity && <p style={{ color: "red" }}>{errors.Humidity}</p>}
+        {errors.Humidity && <p style={{ color: 'red' }}>{errors.Humidity}</p>}
         <Input
           label="PH for Enviroment"
           type="text"
@@ -92,7 +92,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.PHForEnviroment && (
-          <p style={{ color: "red" }}>{errors.PHForEnviroment}</p>
+          <p style={{ color: 'red' }}>{errors.PHForEnviroment}</p>
         )}
         <Input
           label="Temperature for Enviroment"
@@ -103,7 +103,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.TemperatureForEnviroment && (
-          <p style={{ color: "red" }}>{errors.TemperatureForEnviroment}</p>
+          <p style={{ color: 'red' }}>{errors.TemperatureForEnviroment}</p>
         )}
         <Input
           label="CollectionMethod"
@@ -114,7 +114,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CollectionMethod && (
-          <p style={{ color: "red" }}>{errors.CollectionMethod}</p>
+          <p style={{ color: 'red' }}>{errors.CollectionMethod}</p>
         )}
         <Input
           label="Date of Collection"
@@ -125,7 +125,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DateOfCollection && (
-          <p style={{ color: "red" }}>{errors.DateOfCollection}</p>
+          <p style={{ color: 'red' }}>{errors.DateOfCollection}</p>
         )}
         <Input
           label="Country of Collection"
@@ -136,7 +136,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CountryOfCollection && (
-          <p style={{ color: "red" }}>{errors.CountryOfCollection}</p>
+          <p style={{ color: 'red' }}>{errors.CountryOfCollection}</p>
         )}
         <Input
           label="State"
@@ -146,7 +146,7 @@ function Step4(props) {
           value={value.State}
           onChange={(e) => updateValue(e)}
         />
-        {errors.State && <p style={{ color: "red" }}>{errors.State}</p>}
+        {errors.State && <p style={{ color: 'red' }}>{errors.State}</p>}
         <Input
           label="Region of Collection"
           type="text"
@@ -156,7 +156,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.RegionOfCollection && (
-          <p style={{ color: "red" }}>{errors.RegionOfCollection}</p>
+          <p style={{ color: 'red' }}>{errors.RegionOfCollection}</p>
         )}
         <Input
           label="Collected By"
@@ -167,7 +167,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.CollectedBy && (
-          <p style={{ color: "red" }}>{errors.CollectedBy}</p>
+          <p style={{ color: 'red' }}>{errors.CollectedBy}</p>
         )}
         <Input
           label="Isolated By"
@@ -178,7 +178,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.IsolatedBy && (
-          <p style={{ color: "red" }}>{errors.IsolatedBy}</p>
+          <p style={{ color: 'red' }}>{errors.IsolatedBy}</p>
         )}
         <Input
           label="Method of Isolation"
@@ -189,7 +189,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.MethodOfIsolation && (
-          <p style={{ color: "red" }}>{errors.MethodOfIsolation}</p>
+          <p style={{ color: 'red' }}>{errors.MethodOfIsolation}</p>
         )}
         <Input
           label="Identified By"
@@ -200,7 +200,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.IdentifiedBy && (
-          <p style={{ color: "red" }}>{errors.IdentifiedBy}</p>
+          <p style={{ color: 'red' }}>{errors.IdentifiedBy}</p>
         )}
         <Input
           label="Date Of Identification"
@@ -211,7 +211,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DateOfIdentification && (
-          <p style={{ color: "red" }}>{errors.DateOfIdentification}</p>
+          <p style={{ color: 'red' }}>{errors.DateOfIdentification}</p>
         )}
         <Input
           label="Deposited By"
@@ -222,7 +222,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DepositedBy && (
-          <p style={{ color: "red" }}>{errors.DepositedBy}</p>
+          <p style={{ color: 'red' }}>{errors.DepositedBy}</p>
         )}
         <Input
           label="Date of Deposition"
@@ -233,7 +233,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.DateOfDeposition && (
-          <p style={{ color: "red" }}>{errors.DateOfDeposition}</p>
+          <p style={{ color: 'red' }}>{errors.DateOfDeposition}</p>
         )}
         <Input
           label="Name At Accept"
@@ -244,7 +244,7 @@ function Step4(props) {
           onChange={(e) => updateValue(e)}
         />
         {errors.NameAtAccept && (
-          <p style={{ color: "red" }}>{errors.NameAtAccept}</p>
+          <p style={{ color: 'red' }}>{errors.NameAtAccept}</p>
         )}
       </Form>
       <Button onClick={() => props.prev()}>Back</Button>

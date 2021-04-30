@@ -1,41 +1,42 @@
 .users__content__div {
-  height: 100%;
+    height: 100%;
 }
 
 /* fetch data spninner*/
 
 .fetch__data__div,
 .error__div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 90vh;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+    justify-content: center;
 }
 
 .fetch__data__title,
 .error__title {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.5rem;
 }
+
 .fetch__data__spinner,
 .fetch__data__spinner svg {
-  width: 5rem !important;
-  height: 5rem !important;
+    width: 5rem !important;
+    height: 5rem !important;
 }
 
 .div__one,
 .div__two {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 1rem 0.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0.2rem;
 }
 
 .div__three {
-  height: 100%;
+    height: 100%;
 }
 
 .add__user__button {
-  background-color: royalblue;
+    background-color: royalblue;
 }

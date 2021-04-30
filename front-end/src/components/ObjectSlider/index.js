@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 // import Carousel from "react-elastic-carousel";
 // import Bacteria_Archaea from "./Icons/Bacteria_Archaea.png";
 // import Fungi from "./Icons/Fungi.png";

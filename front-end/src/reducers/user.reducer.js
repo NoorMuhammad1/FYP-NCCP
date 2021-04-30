@@ -1,28 +1,28 @@
-import { authConstants } from "../actions/constants";
+import { authConstants } from '../actions/constants';
 
 const initialState = {
-  users: {
+  users      : {
     userList: [],
     fetching: false,
-    fetched: false,
-    error: {
-      found: false,
+    fetched : false,
+    error   : {
+      found      : false,
       status_code: 0,
-      message: "",
+      message    : '',
     },
   },
-  add_user: {
-    data: {},
+  add_user   : {
+    data  : {},
     adding: false,
-    added: false,
-    error: {
-      found: false,
+    added : false,
+    error : {
+      found      : false,
       status_code: 0,
-      message: "",
+      message    : '',
     },
   },
   delete_user: {},
-  user_data: {},
+  user_data  : {},
   // users: [],
   // user: {
   //   data: {},
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
         ...state,
         users: {
           ...state.users,
-          fetched: true,
+          fetched : true,
           fetching: false,
           userList: action.payload.users,
         },
@@ -74,10 +74,10 @@ export default (state = initialState, action) => {
         users: {
           ...state.users,
           fetching: false,
-          error: {
-            found: true,
+          error   : {
+            found      : true,
             status_code: action.payload.status_code,
-            message: action.payload.message,
+            message    : action.payload.message,
           },
         },
       };
@@ -91,9 +91,9 @@ export default (state = initialState, action) => {
     case authConstants.USER_DATA_SUCCESS:
       state = {
         ...state,
-        fetched: true,
+        fetched : true,
         fetching: false,
-        user: action.payload.user,
+        user    : action.payload.user,
       };
       break;
     case authConstants.USER_DATA_FAILURE:
@@ -114,7 +114,7 @@ export default (state = initialState, action) => {
         ...state,
         user: {
           deleting: false,
-          deleted: true,
+          deleted : true,
         },
       };
       break;
@@ -123,9 +123,9 @@ export default (state = initialState, action) => {
         ...state,
         add_user: {
           ...initialState.add_user,
-          data: action.payload.data,
+          data  : action.payload.data,
           adding: true,
-          added: false,
+          added : false,
         },
       };
       break;
@@ -135,8 +135,8 @@ export default (state = initialState, action) => {
         add_user: {
           ...state.add_user,
           adding: false,
-          added: true,
-          error: {
+          added : true,
+          error : {
             ...state.add_user.error,
             found: false,
           },
@@ -148,12 +148,12 @@ export default (state = initialState, action) => {
         ...state,
         add_user: {
           ...state.add_user,
-          added: false,
+          added : false,
           adding: false,
-          error: {
+          error : {
             ...state.add_user.error,
-            found: true,
-            message: action.payload.message,
+            found      : true,
+            message    : action.payload.message,
             status_code: action.payload.status,
           },
         },

@@ -1,5 +1,5 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
-import CustomModal from "..";
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import CustomModal                                          from '..';
 
 const ResponseModal = forwardRef((props, ref) => {
   const [show, setShow] = useState(false);
@@ -21,7 +21,7 @@ const ResponseModal = forwardRef((props, ref) => {
   return (
     <CustomModal
       show={show}
-      title={"Server Response"}
+      title={'Server Response'}
       close={handleClose}
       save={handleConfirm}
       saveText="OK"

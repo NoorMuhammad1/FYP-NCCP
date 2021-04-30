@@ -1,32 +1,35 @@
-import { authConstants } from "./constants";
-import axios from "../helpers/axios";
+import { authConstants } from './constants';
 
-export const addItemToCart = (data) => {
+const addItemToCart = (data) => {
   return (dispatch) => {
-    //dispatch({ type: authConstants.CART_RESET });
     dispatch({ type: authConstants.CART_ITEM_ADD, payload: { ...data } });
   };
 };
-
-export const removeFromCart = (data) => {
+const removeFromCart = (data) => {
   return (dispatch) => {
     dispatch({ type: authConstants.CART_ITEM_REMOVE, payload: { ...data } });
   };
 };
-
-export const increaseQuantity = (data) => {
+const increaseQuantity = (data) => {
   return (dispatch) => {
     dispatch({
-      type: authConstants.CART_ITEM_QUANTITY_INCREASE,
-      payload: { ...data },
-    });
+               type   : authConstants.CART_ITEM_QUANTITY_INCREASE,
+               payload: { ...data },
+             });
   };
 };
-export const decreaseQuantity = (data) => {
+const decreaseQuantity = (data) => {
   return (dispatch) => {
     dispatch({
-      type: authConstants.CART_ITEM_QUANTITY_DECREASE,
-      payload: { ...data },
-    });
+               type   : authConstants.CART_ITEM_QUANTITY_DECREASE,
+               payload: { ...data },
+             });
   };
+};
+
+export {
+  addItemToCart,
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity
 };

@@ -4,42 +4,45 @@ const SignUpValidator = (value) => {
   let errors = {};
 
   if (!isNaN(value.firstname.trim())) {
-    errors.firstname = "Firstname can only contian characters";
+    errors.firstname = 'Firstname can only contian characters';
   }
   if (!value.firstname.trim()) {
-    errors.firstname = "Firstname cannot be empty";
+    errors.firstname = 'Firstname cannot be empty';
   }
   if (!isNaN(value.lastname.trim())) {
-    errors.lastname = "Lastname can only contian characters";
+    errors.lastname = 'Lastname can only contian characters';
   }
   if (!value.lastname.trim()) {
-    errors.lastname = "Lastname cannot be empty";
+    errors.lastname = 'Lastname cannot be empty';
   }
   if (!value.email.trim()) {
-    errors.email = "Email cannot be empty";
-  } else if (!emailValidator.test(value.email.trim())) {
-    errors.email = "must be of form: name@gmail.com";
+    errors.email = 'Email cannot be empty';
+  }
+  else if (!emailValidator.test(value.email.trim())) {
+    errors.email = 'must be of form: name@gmail.com';
   }
 
   if (!value.type.trim()) {
-    errors.type = "One of the type must be selected";
+    errors.type = 'One of the type must be selected';
   }
   if (!isNaN(value.affiliation.trim())) {
-    errors.affiliation = "Affiliation can only contian characters";
+    errors.affiliation = 'Affiliation can only contian characters';
   }
   if (!value.affiliation.trim()) {
-    errors.affiliation = "Affiliation cannot be empty";
+    errors.affiliation = 'Affiliation cannot be empty';
   }
   if (!value.password.trim()) {
-    errors.password = "Password cannot be empty";
-  } else if (!passwordValidator.test(value.password.trim())) {
+    errors.password = 'Password cannot be empty';
+  }
+  else if (!passwordValidator.test(value.password.trim())) {
     errors.password =
-      "Password should be atleast 6 characters long and have atleast one capital letter in it.";
+      'Password should be atleast 6 characters long and have atleast one capital letter in it.';
   }
   if (!value.confirm_password.trim()) {
-    errors.confirm_password = "Confirm Password cannot be empty";
-  } else if (!(value.password === value.confirm_password)) {
-    errors.confirm_password = "Password don't match";
+    errors.confirm_password = 'Confirm Password cannot be empty';
+  }
+  else if (!(value.password === value.confirm_password)) {
+    errors.confirm_password = 'Password don\'t match';
   }
 
   return errors;

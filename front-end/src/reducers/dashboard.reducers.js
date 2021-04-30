@@ -1,10 +1,10 @@
-import { authConstants } from "../actions/constants";
+import { authConstants } from '../actions/constants';
 
 const initialState = {
-  options: [],
-  data: {},
+  options : [],
+  data    : {},
   fetching: false,
-  fetched: false,
+  fetched : false,
 };
 
 export default (state = initialState, action) => {
@@ -28,9 +28,9 @@ export default (state = initialState, action) => {
     case authConstants.DASHBOARD_DATA_SUCCESS:
       state = {
         ...state,
-        data: action.payload.data,
+        data    : action.payload.data,
         fetching: false,
-        fetched: true,
+        fetched : true,
       };
       break;
     case authConstants.DASHBOARD_DATA_FAILURE:
