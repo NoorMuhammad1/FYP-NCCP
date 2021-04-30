@@ -3,9 +3,13 @@ import SideBar from "../../components/SideBar";
 import { Button, CircularProgress, FormControl } from "@material-ui/core";
 import OrderItemList from "../../components/OrderItemList";
 import DropDown from "../../components/DropDown";
+import StripeCheckout from "react-stripe-checkout";
 import "./style.css";
+import { useDispatch } from "react-redux";
+import { confirmPayment } from "../../actions/payment.actions";
 
 const AdminDashboardOrders = () => {
+  const dispatch = useDispatch();
   const [data, setData] = useState([
     {
       order_id: "120191",
@@ -92,6 +96,35 @@ const AdminDashboardOrders = () => {
     },
   ];
 
+  // Payment Component
+
+  const [paymentDetails, setPaymentDetails] = useState({
+    order_id: "60643cdf5d049b0a48495594",
+    items: [
+      {
+        _id: "60643cdf5d049b0a48495595",
+        microorganism_id: "5fd2fb5b44712417441281e9",
+        quantity: 3,
+        sub_total: 600,
+      },
+    ],
+    total: 600,
+  });
+
+  const payment = () => {
+    return "acb";
+  };
+
+  const makePayment = (token) => {
+    dispatch(
+      confirmPayment({
+        order_id: paymentDetails.order_id,
+        token,
+        products: paymentDetails.items,
+      })
+    );
+  };
+
   return (
     <SideBar active="Orders">
       <div className="div__one">
@@ -161,6 +194,15 @@ const AdminDashboardOrders = () => {
       <div className="div__three">
         <OrderItemList columns={columns} rows={sortData(search(data))} />
       </div>
+      <StripeCheckout
+        stripeKey="pk_test_51IhcBtCueTz3N4RSq2lZieK9Wh8cD7XR2KlScdCDyfyuCcnjbj6RzGbaoxUtIOHxDAruTsgTTuFWKz1lcSj7YlO60066rgWObx"
+        token={makePayment}
+        amount={paymentDetails.total * 100}
+      >
+        <Button variant="contained" color="primary">
+          Pay with Credit/Debit card
+        </Button>
+      </StripeCheckout>
     </SideBar>
   );
 };

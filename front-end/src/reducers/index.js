@@ -9,6 +9,7 @@ import updatingUserReducer from "./updatingUser.reducer";
 import { authConstants } from "../actions/constants";
 import cartReducer from "./cart.reducer";
 import sidebarReducer from "./sidebar.reducer";
+import paymentReducer from "./payment.reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   userUpdate: updatingUserReducer,
   cart: cartReducer,
   sidebar: sidebarReducer,
+  payment: paymentReducer,
 });
 
 export default (state, action) =>

@@ -8,6 +8,9 @@ const userRoutes = require("./src/routes/user");
 const orderRouter = require("./src/routes/orders");
 const microorganismRouter = require("./src/routes/microorganism");
 const dashboardRouter = require("./src/routes/dashboard");
+const paymentRouter = require("./src/routes/payments");
+const sharingRouter = require("./src/routes/sharing");
+const reportsRouter = require("./src/routes/reports");
 env.config();
 app.use(cors());
 
@@ -31,6 +34,9 @@ app.use("/api", userRoutes);
 app.use("/api", microorganismRouter);
 app.use("/api", dashboardRouter);
 app.use("/api", orderRouter);
+app.use("/api", paymentRouter);
+app.use("/api", sharingRouter);
+app.use("/api", reportsRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

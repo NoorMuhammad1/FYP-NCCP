@@ -75,7 +75,7 @@ exports.checkUserType = (req, res, next) => {
 
 exports.OrderDetails = async (req, res) => {
   const { order_id } = req.body;
-  Order.findById(order_id, (error, data) => {
+  Order.findById(order_id, async (error, data) => {
     if (error) {
       return res.status(400).json({
         message: "There was some error fetching the order details",
@@ -121,6 +121,27 @@ exports.OrderDetails = async (req, res) => {
             };
             break;
           case "Payment":
+            const { items } = data;
+            let total = 0;
+            const itemsInformation = await Promise.all(
+              items.map(async (item) => {
+                const data = await Microorganism.findById(
+                  item.microorganism_id,
+                  "price"
+                ).exec();
+                const { price } = data._doc;
+                const sub_total = price * item.quantity;
+                total += sub_total;
+                return {
+                  ...item._doc,
+                  sub_total,
+                };
+              })
+            );
+            response.data = {
+              items: itemsInformation,
+              total,
+            };
             break;
           case "Processing":
             response.data = { message: "The order is in processing" };
