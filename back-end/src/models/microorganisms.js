@@ -92,7 +92,7 @@ const MicroorganismSchema = new mongoose.Schema(
         trim: true,
         default: null,
       },
-      MinmumGrowthTemperature: {
+      MinimumGrowthTemperature: {
         type: String,
         required: true,
         trim: true,
@@ -104,7 +104,7 @@ const MicroorganismSchema = new mongoose.Schema(
         trim: true,
         default: null,
       },
-      Applcation: {
+      Application: {
         type: String,
         trim: true,
         default: null,
@@ -713,7 +713,7 @@ const MicroorganismSchema = new mongoose.Schema(
         trim: true,
         default: null,
       },
-      MaximumrowthPH: {
+      MaximumGrowthPH: {
         type: Number,
         trim: true,
         default: null,
@@ -768,7 +768,7 @@ const MicroorganismSchema = new mongoose.Schema(
         trim: true,
         default: null,
       },
-      OptimumSugarContentration: {
+      OptimumSugarConcentration: {
         type: String,
         trim: true,
         default: null,
@@ -934,7 +934,7 @@ const MicroorganismSchema = new mongoose.Schema(
         trim: true,
         default: null,
       },
-      CatalogeURL: {
+      CatalogueURL: {
         type: String,
         trim: true,
         default: null,

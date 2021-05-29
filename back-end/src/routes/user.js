@@ -13,6 +13,8 @@ const {
   verifyEmail,
   resetPassword,
   updateUser,
+  updatePassword,
+  refreshUserData,
 } = require("../controller/autheticate");
 const router = express.Router();
 const {
@@ -38,7 +40,13 @@ router.post("/signup", validateSignup, signup);
 router.post("/verifyEmail", verifyEmail);
 router.post("/users", RequireSignin, checkPermission("viewUser"), getUsers);
 router.post("/userData", RequireSignin, checkPermission("viewUser"), userData);
-router.post("/updateUser", RequireSignin, validateUserUpdate, updateUserInfo);
+router.post(
+  "/updateUser",
+  RequireSignin,
+  //  validateUserUpdate,
+  updateUserInfo
+);
+router.post("/updatePassword", RequireSignin, updatePassword);
 router.post(
   "/deleteUser",
   RequireSignin,
@@ -49,12 +57,18 @@ router.post(
 router.post(
   "/addUser",
   RequireSignin,
-  // upload.single("profile_picture"),
   checkPermission("addUser"),
-  validateAddUser,
+  unpackFormRequest("profile_picture"),
+  // validateAddUser,
   addUser
 );
 
-router.post("/updateUserInfo", unpackFormRequest("profilePicture"), updateUser);
+router.post(
+  "/updateUserProfilePicture",
+  unpackFormRequest("profilePicture"),
+  updateUser
+);
+
+router.post("/refreshUser", RequireSignin, refreshUserData);
 
 module.exports = router;

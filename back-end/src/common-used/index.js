@@ -14,9 +14,8 @@ const storage = multer.diskStorage({
 });
 
 exports.RequireSignin = (req, res, next) => {
-  // console.log("came to require sign in");
   if (req.headers.authorization) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[2];
     jwt.verify(token, process.env.SECRET_TOKEN, (error, user) => {
       if (error) {
         return res.status(405).json({
@@ -48,13 +47,16 @@ exports.permissionsArray = [
 exports.unpackFormRequest = (fieldname) => {
   return async (req, res, next) => {
     const upload = multer({ storage }).array(fieldname);
+    console.log("came to unpack the request");
     upload(req, res, (error) => {
       if (error) {
+        console.log(error);
         return res.status(400).json({
           message: "found some error while parsing the form data",
           error,
         });
       }
+      console.log("nothing");
       next();
     });
   };

@@ -1,34 +1,34 @@
-import { EmailOutlined }                                  from '@material-ui/icons';
+import { EmailOutlined } from "@material-ui/icons";
 // import "../HomePage/index.css";
 //import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
-import LocationOnIcon                                     from '@material-ui/icons/LocationOn';
-import LocationOnOutlinedIcon                             from '@material-ui/icons/LocationOnOutlined';
-import MenuRoundedIcon                                    from '@material-ui/icons/MenuRounded';
-import PhoneIcon                                          from '@material-ui/icons/Phone';
-import PublicIcon                                         from '@material-ui/icons/Public';
-import PublishIcon                                        from '@material-ui/icons/Publish';
-import StarIcon                                           from '@material-ui/icons/Star';
-import StarsIcon                                          from '@material-ui/icons/Stars';
-import React                                              from 'react';
-import 'react-awesome-slider/dist/styles.css';
-import { Carousel, Container, Dropdown, DropdownButton, } from 'react-bootstrap';
-import ReactMapGL, { Marker }                             from 'react-map-gl';
-import { useDispatch }                                    from 'react-redux';
-import { Link }                                           from 'react-router-dom';
-import PageHeader                                         from '../../components/PageHeader';
-import Bacteria2                                          from './Images/bacteria-2.jpg';
-import Bacteria                                           from './Images/bacteria.jpg';
+import LocationOnIcon from "@material-ui/icons/LocationOn";
+import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
+import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
+import PhoneIcon from "@material-ui/icons/Phone";
+import PublicIcon from "@material-ui/icons/Public";
+import PublishIcon from "@material-ui/icons/Publish";
+import StarIcon from "@material-ui/icons/Star";
+import StarsIcon from "@material-ui/icons/Stars";
+import React from "react";
+import "react-awesome-slider/dist/styles.css";
+import { Carousel, Container, Dropdown, DropdownButton } from "react-bootstrap";
+import ReactMapGL, { Marker } from "react-map-gl";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import PageHeader from "../../components/PageHeader";
+import Bacteria2 from "./Images/bacteria-2.jpg";
+import Bacteria from "./Images/bacteria.jpg";
 
-import './style.css';
+import "./style.css";
 
 const HomePage = (props) => {
   const dispatch = useDispatch();
 
   const [viewport, setViewport] = React.useState({
-                                                   latitude : 33.678403942756674,
-                                                   longitude: 73.13901040682869,
-                                                   zoom     : 15,
-                                                 });
+    latitude: 33.678403942756674,
+    longitude: 73.13901040682869,
+    zoom: 15,
+  });
 
   const loggedInNavLinks = () => {
     return (
@@ -182,7 +182,7 @@ const HomePage = (props) => {
               <PublishIcon />
             </div>
             <div className="achievement-details">
-              <h3 onClick={(e) => alert('odsfjo')}> 40+</h3>
+              <h3 onClick={(e) => alert("odsfjo")}> 40+</h3>
               <h4>Publications</h4>
             </div>
           </div>
@@ -221,26 +221,25 @@ const HomePage = (props) => {
         <h2>Explore Our Main Services</h2>
         <div className="services-tag">
           <Container className="services-content">
-            <Link to="#">
+            <Link to="/catalogue">
               <div className="service">
-                <MenuRoundedIcon style={{ fontSize: '40px', fill: 'white' }} />
+                <MenuRoundedIcon style={{ fontSize: "40px", fill: "white" }} />
                 <h5>Order</h5>
                 <p>Order some things from us</p>
               </div>
             </Link>
 
-            <Link to="/depositHomePage">
+            <Link to="/deposits">
               <div className="service">
-                <MenuRoundedIcon style={{ fontSize: '40px', fill: 'white' }} />
+                <MenuRoundedIcon style={{ fontSize: "40px", fill: "white" }} />
 
                 <h5>Deposit</h5>
                 <p>Deposit some things from us</p>
               </div>
-
             </Link>
             <Link to="/catalogue">
               <div className="service">
-                <MenuRoundedIcon style={{ fontSize: '40px', fill: 'white' }} />
+                <MenuRoundedIcon style={{ fontSize: "40px", fill: "white" }} />
                 <h5>Resources</h5>
                 <p>Seek some things from us</p>
               </div>

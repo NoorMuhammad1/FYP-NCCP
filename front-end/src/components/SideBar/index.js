@@ -1,15 +1,15 @@
-import { Avatar }                     from '@material-ui/core';
-import CloseRoundedIcon               from '@material-ui/icons/CloseRounded';
-import ExitToAppIcon                  from '@material-ui/icons/ExitToApp';
-import LayersIcon                     from '@material-ui/icons/Layers';
-import MenuRoundedIcon                from '@material-ui/icons/MenuRounded';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector }   from 'react-redux';
-import { Link }                       from 'react-router-dom';
-import { authConstants }              from '../../actions/constants';
-import { sidebarData }                from './sidebardata';
+import { Avatar } from "@material-ui/core";
+import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import LayersIcon from "@material-ui/icons/Layers";
+import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { authConstants } from "../../actions/constants";
+import { sidebarData } from "./sidebardata";
 // import Image from "./image.jpg";
-import './style.css';
+import "./style.css";
 
 const SideBar = (props) => {
   const sidebarCollapse = useSelector((state) => state.sidebar.collapsed);
@@ -46,10 +46,10 @@ const SideBar = (props) => {
   // }
 
   const changeActive = (e) => {
-    const link_color = document.querySelectorAll('.nav__link');
+    const link_color = document.querySelectorAll(".nav__link");
     if (link_color) {
-      link_color.forEach((l) => l.classList.remove('active'));
-      e.currentTarget.classList.add('active');
+      link_color.forEach((l) => l.classList.remove("active"));
+      e.currentTarget.classList.add("active");
     }
   };
 
@@ -60,9 +60,9 @@ const SideBar = (props) => {
   }, [user]);
 
   return (
-    <div className={sidebarCollapsed ? null : 'body-pd'} id="body-pd">
+    <div className={sidebarCollapsed ? null : "body-pd"} id="body-pd">
       <header
-        className={`header ${sidebarCollapsed ? null : 'body-pd'}`}
+        className={`header ${sidebarCollapsed ? null : "body-pd"}`}
         id="header"
       >
         <div
@@ -79,7 +79,7 @@ const SideBar = (props) => {
         </div>
       </header>
       <div
-        className={`l-navbar ${sidebarCollapsed ? null : 'show'}`}
+        className={`l-navbar ${sidebarCollapsed ? null : "show"}`}
         id="nav-bar"
       >
         <nav className="nav">
@@ -97,7 +97,7 @@ const SideBar = (props) => {
                     to={link.link}
                     className={`nav__link ${
                       props.active.toLowerCase() === link.title.toLowerCase()
-                        ? 'active'
+                        ? "active"
                         : null
                     }`}
                     key={key}
@@ -107,6 +107,14 @@ const SideBar = (props) => {
                   </Link>
                 );
               })}
+              <Link
+                onClick={(e) => dispatch({ type: authConstants.LOGOUT })}
+                className="nav__link"
+                to=""
+              >
+                <ExitToAppIcon className="nav_link_logo" />
+                <div className="nav_link_title">Logout</div>
+              </Link>
               {/* <Link
                 to="/AdminDashboard"
                 className="nav__link active"
@@ -150,19 +158,12 @@ const SideBar = (props) => {
               </Link> */}
             </div>
           </div>
-          <Link
-            onClick={(e) => dispatch({ type: authConstants.LOGOUT })}
-            className="nav__link"
-            to=""
-          >
-            <ExitToAppIcon className="nav_link_logo" />
-            <div className="nav_link_title">Logout</div>
-          </Link>
         </nav>
       </div>
       <div
-        className={`dashboard__content ${sidebarCollapsed ? null : 'body-pd'}`}
+        className={`dashboard__content ${sidebarCollapsed ? null : "body-pd"}`}
         id="dashboard__content"
+        style={{ backgroundColor: "#eeeeee", minHeight: "90vh" }}
       >
         {props.children}
       </div>

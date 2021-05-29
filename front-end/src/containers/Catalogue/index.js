@@ -1,14 +1,14 @@
-import { SearchOutlined }             from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
-import { Container, Form, Spinner, }  from 'react-bootstrap';
-import { useDispatch, useSelector }   from 'react-redux';
-import { Link }                       from 'react-router-dom';
+import { SearchOutlined, TrendingUpOutlined } from "@material-ui/icons";
+import React, { useEffect, useState } from "react";
+import { Container, Form, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { addItemToCart, getCatalogueData, } from '../../actions';
-import Layout                               from '../../components/Layout/index';
-import PageHeader                           from '../../components/PageHeader';
-import { ReactComponent as Bacteria }       from './Icons/bacterium-solid.svg';
-import './style.css';
+import { addItemToCart, getCatalogueData } from "../../actions";
+import Layout from "../../components/Layout/index";
+import PageHeader from "../../components/PageHeader";
+import { ReactComponent as Bacteria } from "./Icons/bacterium-solid.svg";
+import "./style.css";
 
 const Catalogue = (props) => {
   const { authenticate } = useSelector((state) => state.auth);
@@ -16,16 +16,16 @@ const Catalogue = (props) => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const filters = [
-    'bacteria',
-    'fungi',
-    'archaea',
-    'antibody',
-    'microalgae',
-    'phage',
-    'virus',
-    'yeast',
+    "bacteria",
+    "fungi",
+    "archaea",
+    "antibody",
+    "microalgae",
+    "phage",
+    "virus",
+    "yeast",
   ];
 
   const [searchFilters, setSearchFilters] = useState([]);
@@ -42,10 +42,24 @@ const Catalogue = (props) => {
   const columns = data[0] && Object.keys(data[0]);
 
   const search = (rows) => {
+    // return rows.filter((row) => {
+    //   // return row.genus.toLowerCase().indexof(query.toLowerCase()) > -1;
+    //   // const applyFilter = searchFilters[0]
+    //   //   ? searchFilters.includes(row.OrganismType.toLowerCase())
+    //   //   : true;
+    //   // return applyFilter;
+    // });
     return rows.filter((row) => {
       const applyFilter = searchFilters[0]
-        ? searchFilters.includes(row['OrganismType'].toLowerCase())
+        ? searchFilters.includes(row["OrganismType"].toLowerCase())
         : true;
+      return (
+        applyFilter &&
+        (row.Genus.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
+          row.SpeciesEpithet.toString()
+            .toLowerCase()
+            .indexOf(query.toLowerCase()) > -1)
+      );
       // console.log(
       //   columns &&
       //     columns.some((column) => {
@@ -58,16 +72,40 @@ const Catalogue = (props) => {
       //       );
       //     })
       // );
+      console.log(columns);
       return (
         columns &&
         columns.some((column) => {
-          return (
-            applyFilter &&
-            row[column].toString().toLowerCase().indexOf(query.toLowerCase()) >
-            -1
-          );
+          if (row[column]) {
+            return (
+              applyFilter &&
+              row[column]
+                .toString()
+                .toLowerCase()
+                .indexOf(query.toLowerCase()) > -1
+            );
+          } else {
+            return applyFilter;
+          }
         })
       );
+
+      //     return rows.filter((row)=>{
+      //       const applyFilter= filter===""|| row.organism_type.toLowerCase()===filter.to
+      //     })
+      // return rows.filter((row) => {
+      //   const applyFilter = searchFilters[0]
+      //     ? searchFilters.includes(row["OrganismType"].toLowerCase())
+      //     : true;
+      //   return (
+      //     applyFilter &&
+      //     (row.genus.toString().toLowerCase().indexOf(query.toLowerCase()) > -1 ||
+      //       row.species_epithet
+      //         .toString()
+      //         .toLowerCase()
+      //         .indexOf(query.toLowerCase()) > -1)
+      //   );
+      // });
     });
   };
 
@@ -112,24 +150,24 @@ const Catalogue = (props) => {
             <h3>Filters</h3>
             <hr />
             {filters &&
-            filters.map((filter) => {
-              return (
-                <Form.Check
-                  label={filter}
-                  name={filter}
-                  className="filter-check"
-                  checked={searchFilters.includes(filter)}
-                  onChange={(e) => {
-                    const checked = searchFilters.includes(filter);
-                    setSearchFilters((prev) =>
-                                       checked
-                                         ? prev.filter((sf) => sf !== filter)
-                                         : [...prev, filter]
-                    );
-                  }}
-                />
-              );
-            })}
+              filters.map((filter) => {
+                return (
+                  <Form.Check
+                    label={filter}
+                    name={filter}
+                    className="filter-check"
+                    checked={searchFilters.includes(filter)}
+                    onChange={(e) => {
+                      const checked = searchFilters.includes(filter);
+                      setSearchFilters((prev) =>
+                        checked
+                          ? prev.filter((sf) => sf !== filter)
+                          : [...prev, filter]
+                      );
+                    }}
+                  />
+                );
+              })}
           </div>
           <div className="catalogue-data-content-box">
             <div>
@@ -143,36 +181,34 @@ const Catalogue = (props) => {
                       </h4>
                     </div>
                     <div className="item-detail">
-                      <Link
+                      {/* <Link
                         className="catalogue-data-item-name"
                         to={{
-                          pathname: '/itemDetails',
-                          state   : { id: row.id },
+                          pathname: "/itemDetails",
+                          state: { id: row.id },
                         }}
-                      >
-                        <h4 className="item-name">{`${row.Genus} ${row.SpeciesEpithet}`}</h4>
-                        {/* <h3 className="arrow-box">
+                      > */}
+                      <h4 className="item-name">{`${row.Genus} ${row.SpeciesEpithet}`}</h4>
+                      {/* <h3 className="arrow-box">
                           <Arrow className="arrow" />
                         </h3> */}
-                      </Link>
-                      <span
-                        className="catalogue-data-item-accession-number">{`Accession Number    ${row.AccessionNumber}`}</span>
+                      {/* </Link> */}
+                      <span className="catalogue-data-item-accession-number">{`Accession Number    ${row.AccessionNumber}`}</span>
                       <span className="catalogue-data-item-strain-type">{`Strain Type      ${row.Status}`}</span>
-                      <span
-                        className="catalogue-data-item-bio-hazard-level">{`Bio Hazard Level     ${row.BioHazardLevel}`}</span>
+                      <span className="catalogue-data-item-bio-hazard-level">{`Bio Hazard Level     ${row.BioHazardLevel}`}</span>
                     </div>
                     <div>
                       <span
                         className={
                           addedToCart.includes(row.id)
-                            ? 'add-to-cart-button-disabled'
-                            : 'add-to-cart-button'
+                            ? "add-to-cart-button-disabled"
+                            : "add-to-cart-button"
                         }
                         onClick={(e) => addToCart(row)}
                       >
                         {addedToCart.includes(row.id)
-                          ? 'Added To Cart'
-                          : 'Add To Cart'}
+                          ? "Added To Cart"
+                          : "Add To Cart"}
                       </span>
                     </div>
                   </div>

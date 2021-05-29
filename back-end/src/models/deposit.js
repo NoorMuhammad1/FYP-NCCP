@@ -8,10 +8,14 @@ const depositSchema = mongoose.Schema(
     },
     items: [
       {
-        name: String,
+        genus: String,
+        species: String,
+        organismType: String,
+        description: String,
         quantity: Number,
       },
     ],
+    address: String,
     description: { type: String, default: "" },
     type: { type: String, default: "General Deposit" },
     status: {
@@ -28,11 +32,13 @@ const depositSchema = mongoose.Schema(
       ],
       default: "Deposit Request",
     },
+    rejected: { type: Boolean, default: false },
+    total: Number,
     documents: [
       {
         title: String,
         document: String,
-        approved: Boolean,
+        approved: { type: String, default: null },
         description: String,
         date: Date,
       },

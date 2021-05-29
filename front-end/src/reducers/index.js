@@ -10,6 +10,11 @@ import { authConstants } from "../actions/constants";
 import cartReducer from "./cart.reducer";
 import sidebarReducer from "./sidebar.reducer";
 import paymentReducer from "./payment.reducer";
+import orderReducer from "./orders.reducer";
+import depositReducer from "./deposit.reducers";
+import logsReducer from "./logs.reducer";
+import reportReducer from "./report.reducer";
+import OtherReducer from "./other.reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -22,6 +27,11 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   sidebar: sidebarReducer,
   payment: paymentReducer,
+  order: orderReducer,
+  deposit: depositReducer,
+  logs: logsReducer,
+  report: reportReducer,
+  other: OtherReducer,
 });
 // import { combineReducers } from 'redux';
 // import { authConstants }   from '../actions/constants';
@@ -47,5 +57,6 @@ const rootReducer = combineReducers({
 //                                       sidebar   : sidebarReducer,
 //                                     });
 
-export default (state, action) =>
+const rootreducer = (state, action) =>
   rootReducer(action.type === authConstants.LOGOUT ? undefined : state, action);
+export default rootreducer;

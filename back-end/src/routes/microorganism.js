@@ -8,6 +8,8 @@ const {
   fetchData,
   getSearchInfo,
   getCatalogueData,
+  getMicroorganisms,
+  fetchMicroorganismData,
 } = require("../controller/microorganism_database");
 
 const {
@@ -33,6 +35,7 @@ router.post(
   ValidateFindMicroorganismRequest,
   findMicroorganism
 );
+router.post("/fetchMicroorganismData", RequireSignin, fetchMicroorganismData);
 router.post(
   "/deletemicroorganism",
   RequireSignin,
@@ -44,7 +47,7 @@ router.post(
   "/updatemicroorganism",
   RequireSignin,
   checkPermission("updateMicroorganism"),
-  ValidateUpdateMicroorganismRequest,
+  // ValidateUpdateMicroorganismRequest,
   updateMicroorganism
 );
 router.get("/getSearchInfo", getSearchInfo);
@@ -53,6 +56,13 @@ router.post(
   // RequireSignin,
   // checkPermission("viewMicroorganism"),
   getCatalogueData
+);
+
+router.get(
+  "/microorganismlist",
+  RequireSignin,
+  checkPermission("viewMicroorganism"),
+  getMicroorganisms
 );
 
 router.get("/fetchData", fetchData);

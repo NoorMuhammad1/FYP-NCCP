@@ -59,18 +59,23 @@ exports.paymentReport = async (req, res) => {
       }
       return true;
     });
-    // const payment_report = payments.map((one_payment)=>{
-    //   return {
-    //     amount:one_payment.amount,
-    //     user_id:one_payment.amount,
-    //     currency:one_payment.currency,
-    //     email:one_payment.email,
-    //     status:one_payment.status,
-    //     card:one_payment.card,
+    const payment_report = await Promise.all(
+      payments.map(async (one_payment) => {
+        const { firstname, lastname } = (
+          await user.findById(one_payment.user_id, "firstname lastname")
+        )._doc;
+        return {
+          username: `${firstname} ${lastname}`,
+          email: one_payment.email,
+          amount: one_payment.amount,
+          date: new Date(one_payment.createdAt).toLocaleDateString(),
 
-    //   }
-    // });
-    return res.status(200).json(payments);
+          card: one_payment.card.funding,
+          status: one_payment.status,
+        };
+      })
+    );
+    return res.status(200).json(payment_report);
   } catch (error) {
     return res.status(400).json({
       message: "There was some error while generating the report",
@@ -128,11 +133,11 @@ exports.orderReport = async (req, res) => {
           })
         );
         return {
-          order_id: order._id,
-          user_id: order_user._id,
+          // order_id: order._id,
+          // user_id: order_user._id,
           user_name: `${order_user.firstname} ${order_user.lastname}`,
           destination: order.destination,
-          date: order.createdAt,
+          date: new Date(order.createdAt).toLocaleDateString(),
           payment_amount: order.total,
           current_status: order.status,
           delivery_date: order.delivery_date,
@@ -149,7 +154,6 @@ exports.orderReport = async (req, res) => {
     });
   }
 };
-
 exports.depositReport = async (req, res) => {
   try {
     let deposits = await deposit.find({}).exec();
@@ -197,23 +201,26 @@ exports.depositReport = async (req, res) => {
           { _id: deposit.userid },
           "firstname lastname"
         );
-        const microorganism_names = await Promise.all(
-          deposit.items.map(async (microorganism) => {
-            const micro = await microorganisms
-              .findById(
-                microorganism.microorganism_id,
-                "CoreDataSets.Genus CoreDataSets.SpeciesEpithet"
-              )
-              .exec();
-            return `${micro.CoreDataSets.Genus} ${micro.CoreDataSets.SpeciesEpithet}`;
-          })
+        const microorganism_names = deposit.items.map(
+          (item) => `${item.genus} ${item.species}`
         );
+        // const microorganism_names = await Promise.all(
+        //   deposit.items.map(async (microorganism) => {
+        //     const micro = await microorganisms
+        //       .findById(
+        //         microorganism.microorganism_id,
+        //         "CoreDataSets.Genus CoreDataSets.SpeciesEpithet"
+        //       )
+        //       .exec();
+        //     return `${micro.CoreDataSets.Genus} ${micro.CoreDataSets.SpeciesEpithet}`;
+        //   })
+        // );
         return {
-          deposit_id: deposit._id,
-          user_id: deposit_user._id,
+          // deposit_id: deposit._id,
+          // user_id: deposit_user._id,
           user_name: `${deposit_user.firstname} ${deposit_user.lastname}`,
           destination: deposit.destination,
-          date: deposit.createdAt,
+          date: new Date(deposit.createdAt).toLocaleDateString(),
           payment_amount: deposit.total,
           current_status: deposit.status,
           delivery_date: deposit.delivery_date,
@@ -224,6 +231,7 @@ exports.depositReport = async (req, res) => {
     );
     return res.status(200).json(deposit_report);
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       message: "There was some error while generating the report",
       error,
@@ -262,12 +270,13 @@ exports.userReport = async (req, res) => {
           await payment.find({ user_id: one_user._id }, "_id")
         ).flatMap((one_payment) => one_payment._id);
         return {
-          user_id: one_user._id,
+          // user_id: one_user._id,
           username: `${one_user.firstname} ${one_user.lastname}`,
-          usertype: one_user.role,
-          orders: user_orders || [],
-          deposits: user_deposits || [],
-          payments: user_payments || [],
+          email: one_user.email || "",
+          usertype: one_user.role || "",
+          // orders: user_orders || [],
+          // deposits: user_deposits || [],
+          // payments: user_payments || [],
           order_count: user_orders.length || 0,
           deposit_count: user_deposits.length || 0,
           payment_amount: user_payments.length || 0,
@@ -334,16 +343,21 @@ exports.microorganismReport = async (req, res) => {
           return one_deposit._id;
         });
         return {
-          accesion_number: micro.CoreDataSets.AccessionNumber,
-          name: `${micro.CoreDataSets.Genus} ${micro.CoreDataSets.SpeciesEpithet}`,
-          bio_hazard_level: micro.StrainAdministration.BioHazardLevel,
-          type: micro.CoreDataSets.Status,
-          organismType: micro.CoreDataSets.OrganismType,
-          other_collection_numbers: micro.CoreDataSets.OtherCollectionNumbers,
-          date_of_isolation: micro.CoreDataSets.DateOfIsolation,
-          orders: micro_orders || [],
+          accesion_number: micro.CoreDataSets.AccessionNumber || "",
+          name:
+            `${micro.CoreDataSets.Genus} ${micro.CoreDataSets.SpeciesEpithet}` ||
+            "",
+          bio_hazard_level: micro.StrainAdministration.BioHazardLevel || "",
+          organismType: micro.CoreDataSets.OrganismType || "",
+          // type: micro.CoreDataSets.Status,
+          other_collection_numbers:
+            micro.CoreDataSets.OtherCollectionNumbers || "",
+          date_of_isolation: new Date(
+            micro.CoreDataSets.DateOfIsolation
+          ).toLocaleDateString(),
+          // orders: micro_orders || [],
           order_count: micro_orders.length || 0,
-          deposits: micro_deposits || [],
+          // deposits: micro_deposits || [],
           deposit_count: micro_deposits.length || 0,
         };
       })

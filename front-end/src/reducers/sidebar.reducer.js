@@ -1,10 +1,10 @@
-import { authConstants } from '../actions/constants';
+import { authConstants } from "../actions/constants";
 
 const initialState = {
   collapsed: true,
 };
 
-export default (state = initialState, action) => {
+const sidebar = (state = initialState, action) => {
   switch (action.type) {
     case authConstants.COLLAPSE_SIDEBAR:
       state = {
@@ -17,3 +17,5 @@ export default (state = initialState, action) => {
   }
   return state;
 };
+
+export default sidebar;

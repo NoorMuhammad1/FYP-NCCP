@@ -31,12 +31,13 @@ const orderSchema = mongoose.Schema(
       {
         title: String,
         document: String,
-        approved: Boolean,
+        approved: { type: String, default: null },
         description: String,
         date: Date,
-        // default: [],
       },
     ],
+    address: String,
+    description: String,
     payment: { type: mongoose.Schema.Types.ObjectId, default: null },
     tracking: { type: String, default: "" },
     status_history: [

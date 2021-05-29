@@ -1,68 +1,99 @@
-import { authConstants } from '../actions/constants';
+import { authConstants } from "../actions/constants";
 
 const initialState = {
-  catalogueData   : [],
-  fetching        : false,
-  fetched         : false,
+  updateMicroorganism: {
+    data: {},
+    fetching: false,
+    fetched: false,
+    error: {
+      found: false,
+      code: 0,
+      message: "",
+    },
+  },
+  fetchMicroorganism: {
+    data: {},
+    fetching: false,
+    fetched: false,
+    error: {
+      found: false,
+      code: 0,
+      message: "",
+    },
+  },
+  getMicroorganisms: {
+    microorganisms: [],
+    fetching: false,
+    fetched: false,
+    error: {
+      found: false,
+      code: 0,
+      message: "",
+    },
+  },
+  catalogueData: [],
+  fetching: false,
+  fetched: false,
   addMicroorganism: {
     adding: false,
-    added : false,
-    data  : {},
-    error : {
-      code   : 0,
-      message: '',
+    added: false,
+    data: {},
+    error: {
+      code: 0,
+      message: "",
     },
   },
-  delete          : {
+  delete: {
     deleting: false,
-    deleted : false,
-    data    : {},
-    error   : {
-      code   : 0,
-      message: '',
+    deleted: false,
+    data: {},
+    error: {
+      code: 0,
+      message: "",
     },
   },
-  error           : {
-    code   : 0,
-    message: '',
+  error: {
+    code: 0,
+    message: "",
   },
 };
 
-export default (state = initialState, action) => {
+const catalogue = (state = initialState, action) => {
   switch (action.type) {
     case authConstants.CATALOGUE_INFO_REQUEST:
       state = {
         ...state,
         fetching: true,
-        fetched : false,
+        fetched: false,
       };
       break;
     case authConstants.CATALOGUE_INFO_SUCCESS:
       state = {
         ...state,
         catalogueData: action.payload.data,
-        fetching     : false,
-        fetched      : true,
+        fetching: false,
+        fetched: true,
       };
       break;
     case authConstants.CATALOGUE_INFO_FAILURE:
       state = {
         ...state,
         fetching: false,
-        fetched : false,
-        error   : {
-          code   : action.payload.status_code,
+        fetched: false,
+        error: {
+          code: action.payload.status_code,
           message: action.payload.message,
         },
       };
+      break;
     case authConstants.ADD_MICROORGANISM_REQUEST: {
       state = {
         ...state,
         addMicroorganism: {
           ...state.addMicroorganism,
           adding: true,
-          added : false,
-          data  : action.payload.data,
+          added: false,
+          data: action.payload.data,
         },
       };
       break;
@@ -72,7 +103,7 @@ export default (state = initialState, action) => {
         ...state,
         addMicroorganism: {
           ...state.addMicroorganism,
-          added : true,
+          added: true,
           adding: false,
         },
       };
@@ -83,15 +114,30 @@ export default (state = initialState, action) => {
         ...state,
         addMicroorganism: {
           ...state.addMicroorganism,
-          added : false,
+          added: false,
           adding: false,
-          error : {
-            code   : action.payload.code,
+          error: {
+            code: action.payload.code,
             message: action.payload.message,
           },
         },
       };
       break;
+    }
+    case authConstants.ADD_MICROORGANISM_RESET: {
+      state = {
+        ...state,
+        addMicroorganism: {
+          data: {},
+          added: false,
+          adding: false,
+          error: {
+            found: false,
+            code: 0,
+            message: "",
+          },
+        },
+      };
     }
     case authConstants.RESET_ADD_MICROORGANISM_STATE: {
       state = {
@@ -107,9 +153,9 @@ export default (state = initialState, action) => {
         ...state,
         delete: {
           ...state.delete,
-          data    : action.payload.data,
+          data: action.payload.data,
           deleting: true,
-          deleted : false,
+          deleted: false,
         },
       };
       break;
@@ -120,25 +166,156 @@ export default (state = initialState, action) => {
         delete: {
           ...state.delete,
           deleting: false,
-          deleted : true,
+          deleted: true,
         },
       };
       break;
     }
+
     case authConstants.CATALOGUE_DELETE_ITEM_FAILURE: {
       state = {
         ...state,
         delete: {
           ...state.delete,
-          deleted : false,
+          deleted: false,
           deleting: false,
-          error   : {
-            code   : action.payload.code,
+          error: {
+            code: action.payload.code,
             message: action.payload.message,
           },
         },
       };
+      break;
     }
+    case authConstants.DASHBOARD_CATALOUGE_REQUEST:
+      state = {
+        ...state,
+        getMicroorganisms: {
+          ...state.getMicroorganisms,
+          microorganisms: [],
+          fetched: false,
+          fetching: true,
+          error: {
+            found: false,
+            code: 0,
+            message: "",
+          },
+        },
+      };
+      break;
+    case authConstants.DASHBOARD_CATALOGUE_SUCCESS:
+      state = {
+        ...state,
+        getMicroorganisms: {
+          ...state.getMicroorganisms,
+          microorganisms: action.payload.data,
+          fetched: true,
+          fetching: false,
+        },
+      };
+      break;
+    case authConstants.DASHBOARD_CATALOUGE_FAILURE:
+      state = {
+        ...state,
+        getMicroorganisms: {
+          ...state.getMicroorganisms,
+          fetching: false,
+          fetched: false,
+          error: {
+            found: true,
+            code: action.payload.status_code,
+            message: action.payload.message,
+          },
+        },
+      };
+      break;
+    case authConstants.FETCH_MICROORGANISM_DETAILS_REQUEST:
+      state = {
+        ...state,
+        fetchMicroorganism: {
+          ...state.fetchMicroorganism,
+          data: {},
+          fetched: false,
+          fetching: true,
+          error: {
+            found: false,
+            code: 0,
+            message: "",
+          },
+        },
+      };
+      break;
+    case authConstants.FETCH_MICROORGANISM_DETAILS_SUCCESS:
+      state = {
+        ...state,
+        fetchMicroorganism: {
+          ...state.fetchMicroorganism,
+          data: action.payload.data,
+          fetched: true,
+          fetching: false,
+        },
+      };
+      break;
+    case authConstants.FETCH_MICROORGANISM_DETAILS_FAILURE:
+      state = {
+        ...state,
+        fetchMicroorganism: {
+          ...state.fetchMicroorganism,
+          fetching: false,
+          fetched: false,
+          error: {
+            found: true,
+            code: action.payload.status_code,
+            message: action.payload.message,
+          },
+        },
+      };
+      break;
+    case authConstants.UPDATE_MICROORGANISM_DETAILS_REQUEST:
+      state = {
+        ...state,
+        updateMicroorganism: {
+          ...state.updateMicroorganism,
+          data: {},
+          fetched: false,
+          fetching: true,
+          error: {
+            found: false,
+            code: 0,
+            message: "",
+          },
+        },
+      };
+      break;
+    case authConstants.UPDATE_MICROORGANISM_DETAILS_SUCCESS:
+      state = {
+        ...state,
+        updateMicroorganism: {
+          ...state.updateMicroorganism,
+          data: action.payload.data,
+          fetched: true,
+          fetching: false,
+        },
+      };
+      break;
+    case authConstants.UPDATE_MICROORGANISM_DETAILS_FAILURE:
+      state = {
+        ...state,
+        updateMicroorganism: {
+          ...state.updateMicroorganism,
+          fetching: false,
+          fetched: false,
+          error: {
+            found: true,
+            code: action.payload.status_code,
+            message: action.payload.message,
+          },
+        },
+      };
+      break;
+    default:
+      break;
   }
   return state;
 };
+export default catalogue;

@@ -2,6 +2,7 @@ const { compareSync } = require("bcrypt");
 const e = require("express");
 const User = require("../models/user");
 exports.checkPermission = (permission) => {
+  console.log("came to check the permission");
   return async (req, res, next) => {
     await User.findById(req.user._id, (error, user) => {
       if (error) {
@@ -52,6 +53,12 @@ hasPermission = (user, permission) => {
       return !user.permissions.view_M_Permission;
     case "deleteMicroorganism":
       return !user.permissions.delete_M_Permission;
+    case "deleteDeposit":
+      return !user.permissions.delete_D_Permission;
+    case "deleteOrder":
+      return !user.permissions.delete_O_Permission;
+    case "deletePayment":
+      return !user.permissions.delete_P_Permission;
     case "updateMicroorganism":
       return !user.permissions.update_M_Permission;
     case "viewUser":

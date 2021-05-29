@@ -5,10 +5,14 @@ exports.ValidateAddMicroorganismRequest = (req, res, next) => {
   // console.log(checkStrainAdministration(StrainAdministration));
   //console.log(checkEnviromentAndHistory(EnviromentAndHistory));
 
+  console.log(checkCoreDataSets(CoreDataSets));
+  console.log(checkStrainAdministration(StrainAdministration));
+  console.log(checkEnviromentAndHistory(EnviromentAndHistory));
   if (
-    checkCoreDataSets(CoreDataSets) &&
-    checkStrainAdministration(StrainAdministration) &&
-    checkEnviromentAndHistory(EnviromentAndHistory)
+    checkCoreDataSets(CoreDataSets)
+    //  &&
+    // checkStrainAdministration(StrainAdministration) &&
+    // checkEnviromentAndHistory(EnviromentAndHistory)
   ) {
     var errors = {};
     // if (!checkValue(StrainAdministration.BioHazardLevel, 1, 4)) {
@@ -71,16 +75,16 @@ exports.ValidateFindMicroorganismRequest = (req, res, next) => {
 };
 
 exports.ValidateDeleteMicroorganismRequest = (req, res, next) => {
-  if (req.body.id) {
+  if (req.body.microorganismsToDelete) {
     next();
   } else {
-    return res.status(200).json({
+    return res.status(400).json({
       message: "The record id is missing",
     });
   }
 };
 exports.ValidateUpdateMicroorganismRequest = (req, res, next) => {
-  if (req.body.AccessionNumber) {
+  if (req.body.CoreDataSets.AccessionNumber) {
     next();
   } else {
     return res.status(200).json({
@@ -126,14 +130,24 @@ checkStrainAdministration = (StrainAdministration) => {
   // console.log(StrainAdministration.DistributionRestriction);
   return (
     !!StrainAdministration.DateOfAccession &&
-    !!StrainAdministration.ModeOfPreservation &&
+    // !!StrainAdministration.ModeOfPreservation &&
     !!StrainAdministration.BioHazardLevel &&
-    !!StrainAdministration.MTA &&
-    !!StrainAdministration.DistributionRestriction
+    !!StrainAdministration.MTA
+    // !!StrainAdministration.DistributionRestriction
   );
 };
 
 checkEnviromentAndHistory = (EnviromentAndHistory) => {
+  // console.log(EnviromentAndHistory.DateOfCollection);
+  // console.log(EnviromentAndHistory.CountryOfCollection);
+  // console.log(EnviromentAndHistory.RegionOfCollection);
+  // console.log(EnviromentAndHistory.CollectedBy);
+  // console.log(EnviromentAndHistory.IsolatedBy);
+  // console.log(EnviromentAndHistory.IdentifiedBy);
+  // console.log(EnviromentAndHistory.DateOfIdentification);
+  // console.log(EnviromentAndHistory.DepositedBy);
+  // console.log(EnviromentAndHistory.DateOfDeposition);
+  return true;
   return (
     !!EnviromentAndHistory.DateOfCollection &&
     !!EnviromentAndHistory.CountryOfCollection &&

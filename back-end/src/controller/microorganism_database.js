@@ -49,6 +49,25 @@ exports.addMicroorganism = async (req, res) => {
   );
 };
 
+exports.fetchMicroorganismData = async (req, res) => {
+  const { id } = req.body;
+  await Microorganism.findById(
+    id,
+    "-createdAt -price -_id -updatedAt -__v",
+    (error, data) => {
+      if (error) {
+        return res.status(400).json({
+          message: "There was some error while finding the microorganism",
+          error,
+        });
+      }
+      if (data) {
+        return res.status(200).json(data);
+      }
+    }
+  );
+};
+
 exports.getSearchInfo = async (req, res) => {
   await Microorganism.find((error, data) => {
     if (error) {
@@ -144,6 +163,51 @@ const flattenData = (data) => {
   });
 };
 
+exports.getMicroorganisms = async (req, res) => {
+  Microorganism.find(
+    {},
+    "_id CoreDataSets.Genus CoreDataSets.SpeciesEpithet CoreDataSets.AccessionNumber CoreDataSets.OrganismType CoreDataSets.Status StrainAdministration.BioHazardLevel",
+    async (error, data) => {
+      if (error) {
+        return res.status(400).json({
+          message: "There was some error",
+        });
+      }
+      if (data) {
+        data = data.map((item) => {
+          const extracted_data = {
+            ...JSON.parse(JSON.stringify({ ...item.CoreDataSets })),
+          };
+          return {
+            microorganism_id: item._id,
+            genus: extracted_data.Genus || null,
+            species_epithet: extracted_data.SpeciesEpithet || null,
+            organism_type: extracted_data.OrganismType || null,
+            status: extracted_data.Status || null,
+            bio_hazard_level: item.StrainAdministration.BioHazardLevel || null,
+          };
+        });
+        // data = await Promise.all(
+        //   data.map(async (one_deposit) => {
+        //     const user_data = await user.findById(
+        //       one_deposit.userid,
+        //       "firstname lastname"
+        //     );
+        //     return {
+        //       deposit_id: one_deposit._id,
+        //       customer: `${user_data.firstname} ${user_data.lastname}`,
+        //       type: one_deposit.type,
+        //       date: one_deposit.createdAt,
+        //       status: one_deposit.status,
+        //     };
+        //   })
+        // );
+        return res.status(200).json(data);
+      }
+    }
+  );
+};
+
 exports.getCatalogueData = async (req, res) => {
   await Microorganism.find(
     {},
@@ -172,17 +236,39 @@ exports.getCatalogueData = async (req, res) => {
   );
 };
 
-exports.deleteMicroorganism = (req, res) => {
-  const { id } = req.body;
-  Microorganism.findByIdAndDelete(id, (error, data) => {
+exports.deleteMicroorganism = async (req, res) => {
+  const { microorganismsToDelete } = req.body;
+  console.log(microorganismsToDelete);
+  await Microorganism.deleteMany(
+    { _id: microorganismsToDelete },
+    (error, data) => {
+      if (error) {
+        return res.status(400).json({
+          message: "There was some error deleteing the microorganisms",
+          error,
+        });
+      }
+      if (data) {
+        return res.status(200).json({
+          message: "Microorganism delete successfully",
+        });
+      }
+    }
+  );
+};
+exports.updateMicroorganism = (req, res) => {
+  const { data, id } = req.body;
+  console.log(id);
+  Microorganism.findByIdAndUpdate(id, { ...data }, (error, data) => {
     if (error) {
       return res.status(400).json({
+        message: "There was some error updating microorganism data",
         error,
       });
-    }
-    if (data) {
+    } else if (data) {
+      // console.log("data was updated.", d.n);
       return res.status(200).json({
-        message: "Successfully deleted the data",
+        message: "Data updated Successfully",
       });
     } else {
       return res.status(401).json({
@@ -191,38 +277,37 @@ exports.deleteMicroorganism = (req, res) => {
     }
   });
 };
-
-exports.updateMicroorganism = (req, res) => {
-  updateObject = generateJSON(req);
-  updatedObject = {};
-  for (value in updateObject) {
-    if (Object.entries(value).length > 0) {
-      for (v in updateObject[value]) {
-        updatedObject[`${value}.${v}`] = updateObject[value][v];
-      }
-    }
-  }
-  Microorganism.updateOne(
-    { "CoreDataSets.AccessionNumber": req.body.AccessionNumber },
-    { $set: updatedObject },
-    (error, data) => {
-      if (error) {
-        return res.status(400).json({
-          error,
-        });
-      }
-      if (data.n > 0) {
-        return res.status(401).json({
-          message: "Data updated Successfully",
-        });
-      } else {
-        return res.status(401).json({
-          message: "No such microorganism record exists in the database",
-        });
-      }
-    }
-  );
-};
+// exports.updateMicroorganism = (req, res) => {
+//   updateObject = generateJSON(req);
+//   updatedObject = {};
+//   for (value in updateObject) {
+//     if (Object.entries(value).length > 0) {
+//       for (v in updateObject[value]) {
+//         updatedObject[`${value}.${v}`] = updateObject[value][v];
+//       }
+//     }
+//   }
+//   Microorganism.updateOne(
+//     { "CoreDataSets.AccessionNumber": req.body.AccessionNumber },
+//     { $set: updatedObject },
+//     (error, data) => {
+//       if (error) {
+//         return res.status(400).json({
+//           error,
+//         });
+//       }
+//       if (data.n > 0) {
+//         return res.status(401).json({
+//           message: "Data updated Successfully",
+//         });
+//       } else {
+//         return res.status(401).json({
+//           message: "No such microorganism record exists in the database",
+//         });
+//       }
+//     }
+//   );
+// };
 
 const scrapeKCTC = async (microorganism_name) => {
   const browser = await playwright.chromium.launch({
@@ -366,7 +451,7 @@ generateJSON = (req) => {
             ...(req.body.CoreDataSets.OtherCollectionNumbers != undefined
               ? {
                   OtherCollectionNumbers:
-                    req.body.CoreDataSets.OtherCollectionNumbers,
+                    req.body.CoreDataSets.OtherCollectionNumbers.split(","),
                 }
               : {}),
             ...(req.body.CoreDataSets.SpeciesEpithet != undefined

@@ -5,38 +5,56 @@ const User = require("../models/user");
 const Microorganism = require("../models/microorganisms");
 const { uploadFile, unpackFormRequest } = require("../common-used");
 const order = require("../models/order");
+const user = require("../models/user");
+const { sample_order_files } = require("./files");
+const prices = require("../models/prices");
 exports.CreateOrder = async (req, res) => {
-  const { userid, items, total } = req.body;
-  // user_id = await User.findOne({}, "_id").exec();
-  // m_id = await Microorganism.findOne({}, "_id").exec();
+  const items = req.body.data;
+  const userid = req.user._id;
   const _order = new Order({
     userid,
     items,
-    total,
   });
   _order.save((error, data) => {
     if (error) {
       return res.status(400).json({
+        message: "Ther was some error creating the order",
         error,
       });
     }
-    if (data) {
+    if (data)
       return res.status(200).json({
-        data,
+        message: "order created successfully",
       });
-    }
   });
 };
 
 exports.getOrderList = (req, res) => {
-  const condition = req.retrieve_all ? {} : { _id: req.user._id };
-  Order.find(condition, "_id status createdAt", (error, data) => {
+  const condition = req.retrieve_all ? {} : { userid: req.user._id };
+  Order.find(condition, "_id status createdAt userid", async (error, data) => {
     if (error) {
       return res.status(400).json({
         message: "There was some error",
       });
     }
     if (data) {
+      data = await Promise.all(
+        data.map(async (one_order) => {
+          console.log(one_order.userid);
+          const user_data = await user.findById(
+            one_order.userid,
+            "firstname lastname"
+          );
+          return {
+            order_id: one_order._id,
+            customer: user_data
+              ? `${user_data.firstname} ${user_data.lastname}`
+              : "user is not in the system anymore",
+            date: one_order.createdAt,
+            status: one_order.status,
+          };
+        })
+      );
       return res.status(200).json(data);
     }
   });
@@ -73,6 +91,33 @@ exports.checkUserType = (req, res, next) => {
   });
 };
 
+exports.RejectOrder = async (req, res) => {
+  const { order_id, description } = req.body;
+  if (req.retrieve_all) {
+    order.findByIdAndUpdate(
+      order_id,
+      { status: "Rejected", description },
+      (error, data) => {
+        if (error) {
+          console.log(error);
+          return res.status(400).json({
+            message: "there was some error",
+          });
+        }
+        if (data) {
+          return res.status(200).json({
+            message: "The order has been successfully rejected",
+          });
+        }
+      }
+    );
+  } else {
+    return res.status(400).json({
+      message: "You do not have the necessary permission to reject this order",
+    });
+  }
+};
+
 exports.OrderDetails = async (req, res) => {
   const { order_id } = req.body;
   Order.findById(order_id, async (error, data) => {
@@ -83,27 +128,42 @@ exports.OrderDetails = async (req, res) => {
     }
     if (data) {
       const { status, _id, userid, createdAt } = data;
+      const order_user = await user.findById(userid, "firstname lastname");
       var response = {
-        _id,
-        userid,
-        createdAt,
+        order_id: _id,
+        user_id: userid,
+        username: `${order_user.firstname} ${order_user.lastname}`,
+        date: new Date(createdAt).toLocaleDateString(),
         status,
       };
       if (req.retrieve_all) {
         switch (status) {
           case "Order Request":
+            let ordered_items = await Promise.all(
+              data.items.map(async (item, index) => {
+                let micro = await Microorganism.findById(
+                  item.microorganism_id,
+                  "CoreDataSets.Genus CoreDataSets.SpeciesEpithet"
+                );
+                return {
+                  genus: micro.CoreDataSets.Genus,
+                  speciesEpithet: micro.CoreDataSets.SpeciesEpithet,
+                  quantity: item.quantity,
+                };
+              })
+            );
             response.data = {
-              items: data.items,
+              items: ordered_items,
               description: data.description,
             };
             break;
-          case "Order Rejected":
-            const reject_history_object = data.status_history.find(
-              (element) => element.status === status
-            );
+          case "Rejected":
+            // const reject_history_object = data.status_history.find(
+            //   (element) => element.status === status
+            // );
             response.data = {
-              date: reject_history_object.data,
-              description: reject_history_object.description,
+              // date: reject_history_object.data,
+              description: data.description || "no description given",
             };
             break;
           case "Order Cancelled":
@@ -160,15 +220,16 @@ exports.OrderDetails = async (req, res) => {
       } else {
         switch (status) {
           case "Order Request":
+            console.log("came to request orderr");
             response.message = "Your request is waiting to be approved";
             break;
-          case "Order Rejected":
-            const reject_history_object = data.status_history.find(
-              (element) => element.status === status
-            );
+          case "Rejected":
+            // const reject_history_object = data.status_history.find(
+            //   (element) => element.status === status
+            // );
             response.data = {
-              date: reject_history_object.data,
-              description: reject_history_object.description,
+              // date: reject_history_object.date,
+              description: data.description || "no description given",
             };
             break;
           case "Order Cancelled":
@@ -181,16 +242,40 @@ exports.OrderDetails = async (req, res) => {
             };
             break;
           case "Document Submission":
+            const documents = (
+              await sampleDocuments.findById(process.env.SAMPLE_DOCUMENT_ID)
+            )._doc;
             response.data = {
-              sample_documents: [
-                "https://res.cloudinary.com/dl4rpeztt/raw/upload/v1618135965/documents/Scope_Template_Updated_gsxdar.docx",
-                "https://res.cloudinary.com/dl4rpeztt/raw/upload/v1618135932/documents/Scope_Document_Template_BSCS_vhwxwf.docx",
-              ],
+              sample_documents: [...documents.order],
               submitted_documents: data.documents,
             };
-
             break;
           case "Payment":
+            const { items } = data;
+            let total = 0;
+            let price = 0;
+            const order_prices = (
+              await prices.findById(process.env.PRICES_DOCUMENT_ID)
+            )._doc;
+            price = order_prices.order;
+            const payment_data = await Promise.all(
+              items.map(async (item) => {
+                const { CoreDataSets } = (
+                  await Microorganism.findById(
+                    item.microorganism_id,
+                    "CoreDataSets.Genus CoreDataSets.SpeciesEpithet price"
+                  )
+                )._doc;
+                total += item.quantity * price;
+                return {
+                  microorganism_name: `${CoreDataSets.Genus} ${CoreDataSets.SpeciesEpithet}`,
+                  quantity: item.quantity,
+                  price,
+                  sub_total: item.quantity * price,
+                };
+              })
+            );
+            response.data = { items: payment_data, total };
             break;
           case "Processing":
             response.data = {
@@ -203,12 +288,48 @@ exports.OrderDetails = async (req, res) => {
             break;
 
           case "Delivered":
-            response.data.message =
-              "Your order has been delivered successfully";
+            response.data = {
+              message: "Your order has been delivered successfully",
+            };
           // feedback=order.status_history.find((entry)=>entry.status==="Delivered")
         }
       }
       return res.status(200).json(response);
+    }
+  });
+};
+
+exports.SubmitOrderDocuments = async (req, res) => {
+  const file = req.files[0];
+  const { order_id, document_id } = req.body;
+  let { documents } = await Order.findById(order_id, "documents");
+  // documents = await documents.documents;
+  documents = await Promise.all(
+    documents.map(async (doc) => {
+      if (doc._id == document_id) {
+        const file_data = await uploadFile(file, "documents");
+        return {
+          ...doc._doc,
+          document: file_data.url,
+          approved: "Awaiting Approval",
+          date: file_data.created_at,
+        };
+      }
+      return doc;
+    })
+  );
+  Order.findByIdAndUpdate(order_id, { documents }, (error, data) => {
+    if (error) {
+      console.log(error);
+      return res.status(400).json({
+        message: "There was some error submitting the file",
+      });
+    }
+    if (data) {
+      console.log("file upploaded successfully");
+      return res.status(200).json({
+        message: "File submitted successfully",
+      });
     }
   });
 };
@@ -222,7 +343,7 @@ exports.SubmitDocuments = async (req, res) => {
       return {
         title: file_data.original_filename,
         document: file_data.url,
-        approved: false,
+        approved: null,
         date: file_data.created_at,
       };
     })
@@ -246,10 +367,25 @@ exports.ChangeOrderStatus = async (req, res) => {
   const { order_id } = req.body;
   const order = await Order.findById(order_id).exec();
   let current_status = order.status;
+
   const current_status_index = this.OrderStatus.findIndex(
     (status) => status === order.status
   );
   if (current_status_index > -1) {
+    if (current_status === "Order Request") {
+      console.log("order request being updated");
+      console.log(sample_order_files);
+      await Order.findByIdAndUpdate(
+        order_id,
+        {
+          documents: sample_order_files,
+        }
+        // (error, data) => {
+        //   if (error) console.log(error);
+        //   if (data) console.log("doone");
+        // }
+      );
+    }
     if (current_status === "Document Submission") {
       // checking if both documents are uploaded before moving on to the next step
 
@@ -279,17 +415,25 @@ exports.ChangeOrderStatus = async (req, res) => {
         });
       }
     }
+    // if (direction && direction.toLowerCase() === "forward") {
+    //   current_status = this.OrderStatus[current_status_index + 1];
+    // }
+    // if (direction && direction.toLowerCase() === "backward") {
+    //   current_status = this.OrderStatus[current_status_index + 1];
+    // }
     current_status = this.OrderStatus[current_status_index + 1];
     Order.findByIdAndUpdate(
       order_id,
       { status: current_status },
       (error, data) => {
         if (error) {
+          console.log(error);
           return res.status(400).json({
             message: "There was some error while changing the status of order",
           });
         }
         if (data) {
+          console.log("order status updated");
           return res.status(200).json({
             message: "Status has been updated Successfully",
           });
@@ -301,6 +445,66 @@ exports.ChangeOrderStatus = async (req, res) => {
       message: "The order has been either cancelled or rejected before",
     });
   }
+};
+
+exports.ApproveOrderDocument = async (req, res) => {
+  const { order_id, document_id } = req.body;
+  let { documents } = await order.findById(order_id, "documents");
+  documents = documents.map((doc) => {
+    if (doc._id == document_id) {
+      doc.approved = "Approved";
+    }
+    return doc;
+  });
+  const check = documents.every(
+    (doc) => doc.approved.toLowerCase() == "approved"
+  );
+  await Order.findByIdAndUpdate(
+    order_id,
+    { documents, ...(check ? { status: "Payment" } : null) },
+    (error, data) => {
+      if (error) {
+        return res.status(400).json({
+          message: "There was some error",
+        });
+      }
+      if (data) {
+        // console.log(data);
+        return res.status(200).json({
+          message: "The document was approved successfully",
+        });
+      }
+    }
+  );
+};
+exports.RejectOrderDocument = async (req, res) => {
+  const { order_id, document_id, description } = req.body;
+  let { documents } = await order.findById(order_id, "documents");
+  documents = documents.map((doc) => {
+    if (doc._id == document_id) {
+      doc.approved = "Rejected";
+      doc.description = description;
+    }
+    return doc;
+  });
+  await Order.findByIdAndUpdate(order_id, { documents }, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        message: "There was some error",
+      });
+    }
+    if (data) {
+      console.log(res);
+      return res.status(200).json({
+        message: "The document was rejected successfully",
+      });
+    }
+  });
+};
+
+exports.FowardOrderRequestStatus = async (req, res) => {
+  const { order_id } = req.body;
+  const order_to_forward = await order.findById(order_id);
 };
 
 exports.OrderStatus = [
@@ -316,8 +520,11 @@ exports.SubmitTrackingNumber = async (req, res) => {
   const { order_id, tracking_number } = req.body;
 
   await Order.findOneAndUpdate(
-    { _id: order_id, status: "Dispatched" },
-    { tracking: tracking_number === undefined ? "" : tracking_number },
+    { _id: order_id },
+    {
+      tracking: tracking_number === undefined ? "" : tracking_number,
+      status: "Dispatched",
+    },
     (error, data) => {
       if (error) {
         return res.status(400).json({
@@ -369,4 +576,21 @@ exports.ChangeOrderDocumentStatus = async (req, res) => {
       }
     }
   );
+};
+
+exports.deleteOrder = async (req, res) => {
+  const { ordersToDelete } = req.body;
+  await Order.deleteMany({ _id: ordersToDelete }, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        message: "There was some error deleteing the orders",
+        error,
+      });
+    }
+    if (data) {
+      return res.status(200).json({
+        message: "Orders delete successfully",
+      });
+    }
+  });
 };

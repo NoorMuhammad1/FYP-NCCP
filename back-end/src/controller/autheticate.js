@@ -11,6 +11,7 @@ const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
 var { cloudinary } = require("../common-used/cloudinary");
 const { uploadFile } = require("../common-used");
+const { LogInActivity } = require("./logs");
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
@@ -107,7 +108,7 @@ exports.resetPassword = (req, res) => {
   const { token, password } = req.body;
   jwt.verify(token, process.env.SECRET_TOKEN, (error, decodedToken) => {
     if (error) {
-      return res.status(400).json({
+      return res.status(405).json({
         message: "The token has expired. Please try again from the start",
       });
     }
@@ -115,7 +116,7 @@ exports.resetPassword = (req, res) => {
     User.findOneAndUpdate({ email }, { password }, (error, data) => {
       if (error) {
         return res.status(400).json({
-          message: "There while updating the password try again",
+          message: "There was an error while updating the password try again",
         });
       }
       if (data) {
@@ -220,6 +221,73 @@ exports.forgetPassword = async (req, res) => {
   // });
 };
 
+exports.updatePassword = (req, res) => {
+  const { password } = req.body;
+  User.findById(req.user._id, (error, data) => {
+    if (error) {
+      return res.status(400).json({
+        message: "No such user exists in the system",
+      });
+    }
+    if (data) {
+      data.password = password;
+      data.save((error, data) => {
+        if (error) {
+          return res.status(400).json({
+            message: "There was an error while updating the password try again",
+          });
+        }
+        if (data) {
+          return res.status(200).json({
+            message: "Password updated successfully.",
+          });
+        }
+      });
+    }
+  });
+};
+
+exports.refreshUserData = async (req, res) => {
+  const user = req.user;
+  User.findById(user._id, (error, user) => {
+    if (error) {
+      return res.status(400).json({
+        message: error,
+      });
+    }
+    if (user) {
+      const {
+        _id,
+        firstname,
+        lastname,
+        email,
+        fullname,
+        permissions,
+        contactNumber,
+        role,
+        profilePicture,
+      } = user;
+      return res.status(200).json({
+        user: {
+          _id,
+          firstname,
+          lastname,
+          email,
+          fullname,
+          permissions,
+          contactNumber,
+          role,
+          profilePicture,
+        },
+      });
+    } else {
+      return res.status(400).json({
+        message: "There was some error",
+      });
+    }
+  });
+};
+
 exports.signin = async (req, res) => {
   await User.findOne({ email: req.body.email }).exec((error, user) => {
     if (error) {
@@ -240,8 +308,16 @@ exports.signin = async (req, res) => {
           fullname,
           permissions,
           role,
+          contactNumber,
           profilePicture,
         } = user;
+        LogInActivity({
+          userid: _id,
+          request: "signin",
+          output: "success",
+          description: "",
+          error: null,
+        });
         return res.status(200).json({
           token,
           user: {
@@ -253,16 +329,19 @@ exports.signin = async (req, res) => {
             permissions,
             role,
             profilePicture,
+            contactNumber,
           },
         });
       } else {
         return res.status(400).json({
-          message: "Wrong email or password",
+          message: "Wrong password for this email",
         });
       }
     } else {
       console.log("Something wrong");
-      return res.status(404).json({ message: "Something went wrong" });
+      return res
+        .status(404)
+        .json({ message: "This email address does not exist in the system" });
     }
   });
 };
@@ -270,6 +349,7 @@ exports.signin = async (req, res) => {
 exports.getUsers = async (req, res) => {
   await user.find(
     {},
+    //profilePicture
     "firstname lastname email role profilePicture",
     (error, data) => {
       if (error) {
@@ -278,6 +358,18 @@ exports.getUsers = async (req, res) => {
         });
       }
       if (data) {
+        data = data.map((item) => {
+          const { _id, firstname, lastname, email, role, profilePicture } =
+            item;
+          return {
+            user_id: _id,
+            firstname,
+            lastname,
+            email,
+            role,
+            profilePicture,
+          };
+        });
         return res.status(200).json(data);
       } else {
         return res.status(401).json({
@@ -316,19 +408,22 @@ exports.updateUser = async (req, res) => {
   const { user_id } = req.body;
   const profilePicture = req.files[0];
   const uploadedImage = await uploadFile(profilePicture, "userImages");
+  console.log(uploadedImage);
   User.findByIdAndUpdate(
     user_id,
     { profilePicture: uploadedImage.url },
     { new: true },
     (error, data) => {
       if (error) {
+        console.log("sending errror", error);
         return res.status(400).json({
           error,
         });
       }
       if (data) {
+        console.log("sending ok response");
         return res.status(200).json({
-          ...data,
+          message: "User Profile picture has been updated sucessfully",
         });
       }
     }
@@ -336,6 +431,7 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.updateUserInfo = (req, res) => {
+  console.log("firstname: ", req.body.data.firstname);
   User.updateOne(
     { _id: req.body.data._id },
     { $set: req.body.data },
@@ -360,54 +456,60 @@ exports.updateUserInfo = (req, res) => {
 };
 
 exports.deleteUser = async (req, res) => {
-  const response = await user.findByIdAndDelete(req.body.id);
-  if (response) {
-    return res
-      .status(200)
-      .json({ message: "The user has been successfully deleted" });
-  } else {
-    return res.status(400).json({ message: "Something went wrong" });
-  }
+  const { usersToDelete } = req.body;
+  const response = await user.deleteMany(
+    { _id: usersToDelete },
+    (error, data) => {
+      if (error) {
+        return res.status(400).json({
+          message: "There was some error deleteing the users",
+          error,
+        });
+      }
+      if (data) {
+        return res.status(200).json({
+          message: "Users delete successfully",
+        });
+      }
+    }
+  );
 };
 
 exports.addUser = async (req, res) => {
-  const {
-    firstname,
-    lastname,
-    email,
-    password,
-    permissions,
-    profile_picture,
-  } = req.body;
-  // const profile_picture = req.file;
-  // console.log(profile_picture);
-
+  let { firstname, lastname, email, password, permissions } = req.body;
+  permissions = JSON.parse(permissions);
+  console.log(permissions);
+  const profilePicture = req.files[0];
+  const uploadedImage = await uploadFile(profilePicture, "userImages");
   User.findOne({ email }).exec(async (error, user) => {
     if (error) {
+      console.log("error: ", error);
       return res.status(400).json({
         message: "There was something wrong",
       });
     }
     if (user) {
-      return res.status(409).json({
+      console.log("found a similar user");
+      return res.status(400).json({
         message: "User with the same email already exists",
       });
     }
 
-    // const uploadedResponse = await cloudinary.uploader.upload(
-    //   { profile_picture },
-    //   {
-    //     upload_preset: "ml_default",
-    //   }
-    // );
-    // console.log(uploadedResponse);
-    // var result = cloudinary.uploader.upload(
-    //   req.file.path,
-    //   function (error, result) {
-    //     console.log(result);
-    //   }
-    // );
-    // const profilePicture = (await result).secure_url;
+    //   // const uploadedResponse = await cloudinary.uploader.upload(
+    //   //   { profile_picture },
+    //   //   {
+    //   //     upload_preset: "ml_default",
+    //   //   }
+    //   // );
+    //   // console.log(uploadedResponse);
+    //   // var result = cloudinary.uploader.upload(
+    //   //   req.file.path,
+    //   //   function (error, result) {
+    //   //     console.log(result);
+    //   //   }
+    //   // );
+    //   // const profilePicture = (await result).secure_url;
+    console.log("hittttttt00");
     const _user = new User({
       firstname,
       lastname,
@@ -415,7 +517,7 @@ exports.addUser = async (req, res) => {
       role: "internal",
       password,
       permissions,
-      profilePicture: profile_picture,
+      profilePicture: uploadedImage.url,
     });
     _user.save((error, data) => {
       if (error) {
@@ -427,6 +529,7 @@ exports.addUser = async (req, res) => {
         });
       }
       if (data) {
+        console.log("user created successfully");
         return res.status(200).json({
           message: "User created successfully",
         });

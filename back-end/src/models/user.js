@@ -63,6 +63,9 @@ const userSchema = mongoose.Schema(
       add_M_Permission: { type: Boolean, default: false },
       view_M_Permission: { type: Boolean, default: true },
       delete_M_Permission: { type: Boolean, default: false },
+      delete_O_Permission: { type: Boolean, default: false },
+      delete_D_Permission: { type: Boolean, default: false },
+      delete_P_Permission: { type: Boolean, default: false },
       update_M_Permission: { type: Boolean, default: false },
       view_U_Permission: { type: Boolean, default: false },
       update_U_Permission: { type: Boolean, default: false },
@@ -70,12 +73,14 @@ const userSchema = mongoose.Schema(
       view_O_Permission: { type: Boolean, default: false },
       view_D_Permission: { type: Boolean, default: false },
       view_P_Permission: { type: Boolean, default: false },
+      add_U_Permission: { type: Boolean, default: false },
     },
   },
   { timestamp: true }
 );
 
 //Virtual password hashing method
+
 userSchema.virtual("password").set(function (password) {
   this.hash_password = bcrypt.hashSync(password, 10);
 });

@@ -1,17 +1,17 @@
-import { authConstants } from '../actions/constants';
+import { authConstants } from "../actions/constants";
 
 const initialState = {
-  cartData  : [],
-  size      : 0,
+  cartData: [],
+  size: 0,
   submitting: false,
-  submitted : false,
-  error     : {
-    code   : 0,
-    message: '',
+  submitted: false,
+  error: {
+    code: 0,
+    message: "",
   },
 };
 
-export default (state = initialState, action) => {
+const cart = (state = initialState, action) => {
   switch (action.type) {
     case authConstants.CART_ITEM_ADD:
       let item_exists = state.cartData.find(
@@ -30,8 +30,7 @@ export default (state = initialState, action) => {
             return item;
           }),
         };
-      }
-      else {
+      } else {
         state = {
           ...state,
           cartData: [
@@ -41,7 +40,7 @@ export default (state = initialState, action) => {
               qty: 1,
             },
           ],
-          size    : state.size + 1,
+          size: state.size + 1,
         };
       }
       break;
@@ -51,7 +50,22 @@ export default (state = initialState, action) => {
         cartData: state.cartData.filter((item) => {
           return item.id !== action.payload.id;
         }),
-        size    : state.size - 1,
+        size: state.size - 1,
+      };
+      break;
+    case authConstants.CART_ITEM_QUANTITY_CHANGE:
+      state = {
+        ...state,
+        cartData: state.cartData.map((item) => {
+          console.log(action.payload.id);
+          if (item.id === action.payload.id) {
+            return {
+              ...item,
+              qty: action.payload.quantity,
+            };
+          }
+          return item;
+        }),
       };
       break;
     case authConstants.CART_ITEM_QUANTITY_INCREASE:
@@ -88,24 +102,24 @@ export default (state = initialState, action) => {
       state = {
         ...state,
         submitting: true,
-        submitted : false,
+        submitted: false,
       };
       break;
     case authConstants.CART_SUBMIT_SUCCESS:
       state = {
         ...state,
-        submitted : true,
+        submitted: true,
         submitting: false,
-        size      : 0,
+        size: 0,
       };
       break;
     case authConstants.CART_SUBMIT_FAILURE:
       state = {
         ...state,
         submitting: false,
-        submitted : true,
-        error     : {
-          code   : action.payload.code,
+        submitted: true,
+        error: {
+          code: action.payload.code,
           message: action.payload.message,
         },
       };
@@ -118,3 +132,4 @@ export default (state = initialState, action) => {
   }
   return state;
 };
+export default cart;

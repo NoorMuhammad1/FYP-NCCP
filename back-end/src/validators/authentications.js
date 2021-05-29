@@ -3,7 +3,8 @@ const env = require("dotenv");
 const fetch = require("node-fetch");
 const { permissionsArray } = require("../common-used");
 
-const validEmailExpression = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const validEmailExpression =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const validPasswordExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
 exports.validateSignin = (req, res, next) => {
@@ -37,15 +38,8 @@ exports.isHuman = async (req, res, next) => {
 };
 
 exports.validateSignup = (req, res, next) => {
-  const {
-    firstname,
-    lastname,
-    email,
-    type,
-    role,
-    affiliation,
-    password,
-  } = req.body;
+  const { firstname, lastname, email, type, role, affiliation, password } =
+    req.body;
   if (
     !firstname.trim() ||
     !lastname.trim() ||
