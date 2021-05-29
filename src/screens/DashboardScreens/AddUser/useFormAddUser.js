@@ -9,7 +9,7 @@ const useFormAddUser = (handleSubmission, SignInValidator) => {
     confirm_password: "",
     role: "internal",
     profile_picture: "null",
-    preview_Image: "",
+    preview_Image: null,
     permissions: {
       view_microorganism_permission: false,
       add_microorganism_permission: false,
@@ -48,7 +48,6 @@ const useFormAddUser = (handleSubmission, SignInValidator) => {
   };
 
   useEffect(() => {
-    console.log(addUserErrors);
     if (Object.keys(addUserErrors).length === 0 && isSubmitting) {
       handleSubmission();
     }
@@ -56,21 +55,17 @@ const useFormAddUser = (handleSubmission, SignInValidator) => {
 
   const updateAddUser = (name, value, type) => {
     if (type === "text" || type === "password") {
-      console.log(name, " ", value, " ", type);
       setAddUserValue({
         ...addUserValue,
         [name]: value,
       });
     } else if (type === "file") {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onloadend = () => {
-        setAddUserValue({
-          ...addUserValue,
-          profile_picture: e.target.files[0],
-          preview_Image: reader.result,
-        });
-      };
+      setAddUserValue({
+        ...addUserValue,
+        profile_picture: value,
+        preview_Image: value.uri,
+      });
+      // };
     } else if (type === "checkbox") {
       setAddUserValue({
         ...addUserValue,

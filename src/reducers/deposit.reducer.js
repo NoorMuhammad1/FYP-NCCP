@@ -180,7 +180,7 @@ const depositReducer = (state = initialState, action) => {
         },
       };
       break;
-    case authConstants.ADMIN_APPROVE_DEPOSIT_REQUEST:
+    case authConstants.ADMIN_APPROVE_DEPOSIT_FAILURE:
       state = {
         ...state,
         depositDetails: {
@@ -442,7 +442,7 @@ const depositReducer = (state = initialState, action) => {
       };
       break;
     default:
-      state = initialState;
+      state = state;
   }
   return state;
 };

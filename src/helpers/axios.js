@@ -4,7 +4,7 @@ import store from "../store";
 
 // const token = AsyncStorage.getItem("token");
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.8.100:2000/api",
+  baseURL: "http://192.168.8.101:2000/api",
   headers: {
     "Content-Type": "application/json",
     // authorization: token ? `${token}` : ``,

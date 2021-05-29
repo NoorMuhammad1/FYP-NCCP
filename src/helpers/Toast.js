@@ -68,36 +68,35 @@ export default Toast = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    // console.log("adding message to toast: ", toast.messages);
     setMessages(toast.messages);
   }, [toast]);
   return (
-    <>
-      <View
-        style={{
-          position: "absolute",
-          top: 45,
-          left: 0,
-          right: 0,
-        }}
-      >
-        {messages.map((message, index) => (
-          <Message
-            key={message}
-            message={message}
-            onHide={() => {
-              const filteredMessages = messages.filter(
-                (currentMessage) => currentMessage !== message
-              );
-              setMessages(filteredMessages);
-              dispatch({
-                type: authConstants.TOAST_REMOVE,
-                payload: { messages: filteredMessages },
-              });
-              setMessages(filteredMessages);
-            }}
-          />
-        ))}
-      </View>
-    </>
+    <View
+      style={{
+        position: "absolute",
+        top: 45,
+        left: 0,
+        right: 0,
+      }}
+    >
+      {messages.map((message) => (
+        <Message
+          key={message}
+          message={message}
+          onHide={() => {
+            const filteredMessages = messages.filter(
+              (currentMessage) => currentMessage !== message
+            );
+            setMessages(filteredMessages);
+            dispatch({
+              type: authConstants.TOAST_REMOVE,
+              payload: { messages: filteredMessages },
+            });
+            setMessages(filteredMessages);
+          }}
+        />
+      ))}
+    </View>
   );
 };

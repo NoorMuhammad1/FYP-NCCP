@@ -45,10 +45,8 @@ const Header = ({ title, navigation }) => {
             <TouchableOpacity
               style={styles.modalOption}
               onPress={() => {
-                console.log("Logout");
                 setModalVisible(false);
                 dispatch({ type: authConstants.LOGOUT });
-                navigation.navigate("SignIn");
               }}
             >
               <Text style={styles.modalOptionText}>Logout</Text>

@@ -73,3 +73,35 @@ export const depositFilters = [
     value: "Cancelled",
   },
 ];
+
+export const catalogueFilter = [
+  { title: "None", value: "" },
+  {
+    title: "Bacteria",
+    value: "bacteria",
+  },
+  {
+    title: "Fungi",
+    value: "fungi",
+  },
+  {
+    title: "Yeast",
+    value: "yeast",
+  },
+  {
+    title: "Phage",
+    value: "phage",
+  },
+  {
+    title: "Virus",
+    value: "virus",
+  },
+  {
+    title: "Algae",
+    value: "Algae",
+  },
+  {
+    title: "Micro-Algae",
+    value: "Micro-Algae",
+  },
+];

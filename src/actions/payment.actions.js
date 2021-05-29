@@ -58,3 +58,32 @@ export const deletePayment = (data) => {
     }
   };
 };
+
+export const getPaymentDetails = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: authConstants.GET_PAYMENT_DETAILS_REQUEST });
+      const res = await axios.post("/paymentDetails", { ...data });
+      if (res.status === 200) {
+        dispatch({
+          type: authConstants.GET_PAYMENT_DETAILS_SUCCESS,
+          payload: { data: res.data },
+        });
+      }
+    } catch (error) {
+      if (error.response.data) {
+        console.log(error.response.data);
+        dispatch({
+          type: authConstants.TOAST_ADD,
+          payload: { message: error.response.data.message },
+        });
+        dispatch({
+          type: authConstants.GET_PAYMENT_DETAILS_FAILURE,
+          payload: { status: res.status, message: error.data.message },
+        });
+      } else {
+        console.log(error);
+      }
+    }
+  };
+};

@@ -106,7 +106,9 @@ const Users = (props) => {
         renderItem={({ item }) => (
           <Card
             key={item.user_id}
-            onPress={() => {}}
+            onPress={() => {
+              props.navigation.navigate("UserDetails", { id: item.user_id });
+            }}
             onLongPress={() => handleDeleteUser(item.user_id)}
           >
             <UserInfo>

@@ -110,7 +110,11 @@ const Deposits = (props) => {
           keyExtractor={(item) => item.deposit_id.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => console.log(item.deposit_id)}
+              onPress={() =>
+                props.navigation.navigate("Deposit Details", {
+                  id: item.deposit_id,
+                })
+              }
               onLongPress={() => handleDeleteDeposit(item.deposit_id)}
               key={item.deposit_id}
               style={styles.Card}

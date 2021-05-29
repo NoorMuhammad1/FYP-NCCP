@@ -31,7 +31,16 @@ const initialState = {
     },
   },
   delete_user: {},
-  user_data: {},
+  user_data: {
+    data: {},
+    fetching: false,
+    fetched: false,
+    error: {
+      found: false,
+      status_code: 0,
+      message: "",
+    },
+  },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -109,20 +118,42 @@ const userReducer = (state = initialState, action) => {
     case authConstants.USER_DATA_REQUEST:
       state = {
         ...state,
-        fetching: true,
+        user_data: {
+          ...state.user_data,
+          fetching: true,
+          fetched: false,
+          error: {
+            found: false,
+            status_code: 0,
+            message: "",
+          },
+        },
       };
       break;
     case authConstants.USER_DATA_SUCCESS:
       state = {
         ...state,
-        fetched: true,
-        fetching: false,
-        user: action.payload.user,
+        user_data: {
+          ...state.user_data,
+          data: action.payload.user,
+          fetching: false,
+          fetched: true,
+        },
       };
       break;
     case authConstants.USER_DATA_FAILURE:
       state = {
-        ...initialState,
+        ...state,
+        user_data: {
+          ...state.user_data,
+          fetching: false,
+          fetched: false,
+          error: {
+            found: true,
+            status_code: action.payload.status,
+            message: action.payload.message,
+          },
+        },
       };
       break;
     case authConstants.USER_DELETE_REQUEST:

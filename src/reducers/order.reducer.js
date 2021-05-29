@@ -564,7 +564,7 @@ const orderReducer = (state = initialState, action) => {
       };
       break;
     default:
-      state = initialState;
+      state = state;
   }
   return state;
 };

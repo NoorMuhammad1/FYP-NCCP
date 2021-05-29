@@ -21,6 +21,17 @@ const initialState = {
       message: "",
     },
   },
+
+  getPaymentDetails: {
+    payment: {},
+    fetching: false,
+    fetched: false,
+    error: {
+      found: false,
+      code: 0,
+      message: "",
+    },
+  },
   items: [],
   response: {
     message: "",
@@ -106,6 +117,48 @@ const paymentReducer = (state = initialState, action) => {
         },
       };
       break;
+    case authConstants.GET_PAYMENT_DETAILS_REQUEST:
+      state = {
+        ...state,
+        getPaymentDetails: {
+          ...state.getPaymentDetails,
+          payment: {},
+          fetched: false,
+          fetching: true,
+          error: {
+            found: false,
+            code: 0,
+            message: "",
+          },
+        },
+      };
+      break;
+    case authConstants.GET_PAYMENT_DETAILS_SUCCESS:
+      state = {
+        ...state,
+        getPaymentDetails: {
+          ...state.getPaymentDetails,
+          payment: action.payload.data,
+          fetched: true,
+          fetching: false,
+        },
+      };
+      break;
+    case authConstants.GET_PAYMENT_DETAILS_FAILURE:
+      state = {
+        ...state,
+        getPaymentDetails: {
+          ...state.getPaymentDetails,
+          fetching: false,
+          fetched: false,
+          error: {
+            found: true,
+            code: action.payload.status_code,
+            message: action.payload.message,
+          },
+        },
+      };
+      break;
     case authConstants.PAYMENT_DELETE_REQUEST:
       state = {
         ...state,
@@ -152,6 +205,7 @@ const paymentReducer = (state = initialState, action) => {
       };
       break;
     default:
+      state = state;
       break;
   }
   return state;

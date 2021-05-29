@@ -111,7 +111,11 @@ const Orders = (props) => {
           keyExtractor={(item) => item.order_id.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => console.log(item.order_id)}
+              onPress={() =>
+                props.navigation.navigate("Order Details", {
+                  id: item.order_id,
+                })
+              }
               onLongPress={() => handleDeleteOrder(item.order_id)}
               key={item.order_id}
               style={styles.Card}

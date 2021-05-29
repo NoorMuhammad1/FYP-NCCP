@@ -71,6 +71,11 @@ const Payments = (props) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             key={item.payment_id}
+            onPress={() =>
+              props.navigation.navigate("Payment Details", {
+                id: item.payment_id,
+              })
+            }
             onLongPress={() => handleDeletePayment(item.payment_id)}
             style={{
               flex: 1,

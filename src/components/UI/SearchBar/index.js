@@ -15,7 +15,7 @@ const SearchBar = ({ query, setQuery, ...rest }) => {
         onChangeText={(value) => setQuery(value)}
         style={styles.input}
         numberOfLines={1}
-        placeholder={"Search Users"}
+        placeholder={"Search"}
         placeholderTextColor="#666"
         {...rest}
       />
