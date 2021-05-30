@@ -14,13 +14,13 @@ import Deposits from "../screens/DashboardScreens/Deposits";
 import EditMicroorganism from "../screens/DashboardScreens/EditMicroorganism";
 import EditUser from "../screens/DashboardScreens/EditUser";
 import Logs from "../screens/DashboardScreens/Logs";
-import Main from "../screens/DashboardScreens/Main";
+// import Main from "../screens/DashboardScreens/Main";
 import MicroorganismDetails from "../screens/DashboardScreens/MicroorganismDetails";
 import OrderDetails from "../screens/DashboardScreens/OrderDetails";
 import Orders from "../screens/DashboardScreens/Orders";
 import PaymentDetails from "../screens/DashboardScreens/Payment Details";
 import Payments from "../screens/DashboardScreens/Payments";
-import Reports from "../screens/DashboardScreens/Reports";
+// import Reports from "../screens/DashboardScreens/Reports";
 import UserDetails from "../screens/DashboardScreens/UserDetails";
 import Users from "../screens/DashboardScreens/Users";
 import Settings from "../screens/Settings";
@@ -47,7 +47,7 @@ const Navigation = () => {
           },
         }}
       >
-        <TopTabs.Screen name="Main" component={Main} />
+        {/* <TopTabs.Screen name="Main" component={Main} /> */}
         <TopTabs.Screen name="Catalogue" component={Catalogue} />
         <TopTabs.Screen name="Users" component={Users} />
         <TopTabs.Screen name="Orders" component={Orders} />
